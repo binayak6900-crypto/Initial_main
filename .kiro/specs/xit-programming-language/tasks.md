@@ -55,42 +55,42 @@ The plan focuses on incremental development with early validation to avoid the p
     - Test function parameter parsing and code emission
     - _Requirements: 8.1_
 
-- [ ] 4. Implement memory safety system in assembly
-  - [ ] 4.1 Create safe memory allocation system
+- [x] 4. Implement memory safety system in assembly
+  - [x] 4.1 Create safe memory allocation system
     - Implement memory header structure with size and magic number
     - Write safe_malloc with bounds tracking and corruption detection
     - Write safe_free with double-free protection
     - Add memory leak detection and reporting
     - _Requirements: 14.1, 14.6, 18.1, 18.2, 18.6, 20.6_
   
-  - [ ] 4.2 Write property test for memory safety
+  - [x] 4.2 Write property test for memory safety
     - **Property 4: Memory Safety Guarantee**
     - **Validates: Requirements 14.1, 14.5, 14.6, 18.1, 18.2, 18.3, 18.6, 18.7**
   
-  - [ ] 4.3 Implement bounds checking for array operations
+  - [x] 4.3 Implement bounds checking for array operations
     - Add bounds_check function for array access validation
     - Implement stack overflow detection and protection
     - Add null pointer dereference prevention
     - _Requirements: 14.5, 18.3, 18.5, 18.7_
 
-- [ ] 5. Checkpoint - Verify bootstrap lexer and direct binary generation parser
+- [x] 5. Checkpoint - Verify bootstrap lexer and direct binary generation parser
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 6. Implement executable file generation in assembly
-  - [ ] 6.1 Create Windows PE executable format generation
+- [x] 6. Implement executable file generation in assembly
+  - [x] 6.1 Create Windows PE executable format generation
     - Implement PE header creation and section management directly from parser
     - Add symbol table and relocation handling during parsing
     - Create executable file writing without external linkers
     - Integrate with direct code generation from parser
     - _Requirements: 3.2, 3.3, 16.1, 16.5_
   
-  - [ ] 6.2 Add entry point and runtime initialization
+  - [x] 6.2 Add entry point and runtime initialization
     - Generate program entry point and initialization code
     - Set up stack and heap management for generated programs
     - Add program termination and cleanup code
     - _Requirements: 1.4, 3.1_
   
-  - [ ] 6.3 Write property test for code generation
+  - [x] 6.3 Write property test for code generation
     - **Property 3: Cross-Platform Binary Generation**
     - **Validates: Requirements 16.1, 16.2, 16.3, 16.4, 16.5, 16.6**
 

@@ -24,26 +24,26 @@ section .data
         db "false", 0
         db 0                        ; End marker
 
-section .bss
-    ; Token structure (32 bytes total)
-    ; Layout: type(4) + value_ptr(8) + value_len(4) + line(4) + column(4) + padding(8)
-    current_token:
-        .type           resd 1      ; Token type (4 bytes)
-        .value_ptr      resq 1      ; Pointer to token value string (8 bytes)
-        .value_len      resd 1      ; Length of token value (4 bytes)
-        .line           resd 1      ; Line number (4 bytes)
-        .column         resd 1      ; Column number (4 bytes)
-        .padding        resq 1      ; Padding for alignment (8 bytes)
-
-    ; Lexer state structure
+section .data
+    ; Lexer state structure (initialized to zero)
     lexer_state:
-        .source_ptr     resq 1      ; Pointer to current position in source
-        .source_end     resq 1      ; Pointer to end of source
-        .source_start   resq 1      ; Pointer to start of source (for value extraction)
-        .line_number    resd 1      ; Current line number
-        .column_number  resd 1      ; Current column number
-        .current_char   resb 1      ; Current character being processed
-        .padding        resb 3      ; Padding for alignment
+        .source_ptr     dq 0        ; Pointer to current position in source
+        .source_end     dq 0        ; Pointer to end of source
+        .source_start   dq 0        ; Pointer to start of source (for value extraction)
+        .line_number    dd 0        ; Current line number
+        .column_number  dd 0        ; Current column number
+        .current_char   db 0        ; Current character being processed
+        .padding        db 0, 0, 0  ; Padding for alignment
+
+    ; Token structure (initialized to zero)
+    current_token:
+        .type           dd 0        ; Token type (4 bytes)
+        .padding1       dd 0        ; Padding for pointer alignment
+        .value_ptr      dq 0        ; Pointer to token value string (8 bytes)
+        .value_len      dd 0        ; Length of token value (4 bytes)
+        .line           dd 0        ; Line number (4 bytes)
+        .column         dd 0        ; Column number (4 bytes)
+        .padding2       dd 0        ; Padding to make 32 bytes total
 
 section .text
     global lexer_init
@@ -380,7 +380,7 @@ read_identifier:
 .loop:
     mov al, byte [rel lexer_state.current_char]
     call is_identifier_char
-    jnz .end_identifier
+    jnz .end_identifier             ; jnz means NOT zero flag, so NOT valid identifier char
     
     inc rcx
     call advance_char

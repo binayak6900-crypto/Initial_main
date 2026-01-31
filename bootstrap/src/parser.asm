@@ -67,6 +67,23 @@ section .text
     global symbol_table_lookup
     global scope_enter
     global scope_exit
+    
+    ; PE generator functions
+    extern pe_init
+    extern pe_set_code
+    extern pe_add_symbol
+    extern pe_generate_executable
+    extern pe_destroy
+    
+    ; Runtime generator functions
+    extern runtime_init_generator
+    extern runtime_generate_entry_point
+    extern runtime_generate_init_code
+    extern runtime_generate_cleanup_code
+    extern runtime_set_main_function
+    extern runtime_get_entry_point
+    extern runtime_get_total_runtime_size
+    extern runtime_destroy_generator
 
 ; Initialize parser with token array
 ; Parameters: rdi = tokens pointer
@@ -1293,20 +1310,73 @@ string_to_int:
 parser_emit_executable:
     push rbp
     mov rbp, rsp
+    push rbx
+    push r12
+    sub rsp, 32         ; Shadow space
     
-    ; For now, just write raw machine code to file
-    ; In a complete implementation, this would generate PE/ELF/Mach-O format
+    ; Store filename
+    mov r12, rdi
     
-    ; TODO: Implement proper executable format generation
-    ; This is a placeholder that would:
-    ; 1. Create appropriate executable header (PE/ELF/Mach-O)
-    ; 2. Add code section with generated machine code
-    ; 3. Add data section if needed
-    ; 4. Set up entry point
-    ; 5. Write to file
+    ; Initialize runtime generator
+    call runtime_init_generator
+    test eax, eax
+    jz .error
     
-    mov eax, 1                      ; success for now
+    ; Set main function RVA (assume main is at offset 0x1000 for now)
+    mov rdi, 0x1000
+    call runtime_set_main_function
     
+    ; Generate runtime code
+    call runtime_generate_entry_point
+    test eax, eax
+    jz .error
+    
+    call runtime_generate_init_code
+    test eax, eax
+    jz .error
+    
+    call runtime_generate_cleanup_code
+    test eax, eax
+    jz .error
+    
+    ; Get entry point code to prepend to user code
+    call runtime_get_entry_point
+    mov rbx, rax        ; Entry point code
+    ; rdx already contains entry point size
+    
+    ; Initialize PE generator
+    mov rdi, r12
+    call pe_init
+    test eax, eax
+    jz .error
+    
+    ; Combine runtime code with user code
+    ; For now, just use the user code
+    mov rdi, qword [rel parser_state.code_buffer]
+    mov esi, dword [rel parser_state.code_size]
+    call pe_set_code
+    
+    ; Generate PE executable
+    call pe_generate_executable
+    test eax, eax
+    jz .error
+    
+    ; Cleanup
+    call pe_destroy
+    call runtime_destroy_generator
+    
+    mov eax, 1                      ; success
+    jmp .done
+    
+.error:
+    call pe_destroy
+    call runtime_destroy_generator
+    xor eax, eax                    ; failure
+    
+.done:
+    add rsp, 32
+    pop r12
+    pop rbx
     pop rbp
     ret
 

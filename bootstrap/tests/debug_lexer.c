@@ -8,13 +8,14 @@
 #include <stddef.h>
 
 // Token structure (must match lexer.asm layout exactly)
-typedef struct __attribute__((packed)) {
-    int type;           // 4 bytes
-    char* value_ptr;    // 8 bytes  
-    int value_len;      // 4 bytes
-    int line;           // 4 bytes
-    int column;         // 4 bytes
-    long padding;       // 8 bytes for alignment
+typedef struct {
+    int type;           // 4 bytes at offset 0
+    int padding1;       // 4 bytes padding to align pointer
+    char* value_ptr;    // 8 bytes at offset 8
+    int value_len;      // 4 bytes at offset 16
+    int line;           // 4 bytes at offset 20
+    int column;         // 4 bytes at offset 24
+    int padding2;       // 4 bytes padding to make 32 bytes total
 } Token;
 
 // External functions from lexer.asm

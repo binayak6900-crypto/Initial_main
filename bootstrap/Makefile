@@ -47,12 +47,16 @@ uninstall:
 	rm -f /usr/local/bin/xit-bootstrap
 
 # Test the bootstrap compiler
-test: $(TARGET) test-lexer-property test-parser-unit
+test: $(TARGET) test-lexer-property test-parser-unit test-memory-safety test-bounds-checking
 	@echo "Testing bootstrap compiler..."
 	@echo "Running lexer property tests..."
 	./$(BUILDDIR)/test_lexer_property
 	@echo "Running parser unit tests..."
 	./$(BUILDDIR)/test_parser_unit
+	@echo "Running memory safety property tests..."
+	./$(BUILDDIR)/test_memory_safety_property
+	@echo "Running bounds checking tests..."
+	./$(BUILDDIR)/test_bounds_checking
 
 # Build and run lexer property test
 test-lexer-property: $(BUILDDIR)/test_lexer_property
@@ -70,6 +74,24 @@ test-parser-unit: $(BUILDDIR)/test_parser_unit
 
 # Build parser unit test
 $(BUILDDIR)/test_parser_unit: tests/test_parser_unit.c $(BUILDDIR)/lexer.o $(BUILDDIR)/parser.o | $(BUILDDIR)
+	$(LD) $(LDFLAGS) -o $@ $^
+
+# Build and run memory safety property test
+test-memory-safety: $(BUILDDIR)/test_memory_safety_property
+	@echo "Running memory safety property-based test..."
+	./$(BUILDDIR)/test_memory_safety_property
+
+# Build memory safety property test
+$(BUILDDIR)/test_memory_safety_property: tests/test_memory_safety_property.c $(BUILDDIR)/memory.o | $(BUILDDIR)
+	$(LD) $(LDFLAGS) -o $@ $^
+
+# Build and run bounds checking test
+test-bounds-checking: $(BUILDDIR)/test_bounds_checking
+	@echo "Running bounds checking test..."
+	./$(BUILDDIR)/test_bounds_checking
+
+# Build bounds checking test
+$(BUILDDIR)/test_bounds_checking: tests/test_bounds_checking.c $(BUILDDIR)/memory.o | $(BUILDDIR)
 	$(LD) $(LDFLAGS) -o $@ $^
 
 # Build debug lexer test
@@ -133,5 +155,7 @@ help:
 # Dependencies (assembly files don't have complex dependencies for bootstrap)
 $(BUILDDIR)/main.o: $(SRCDIR)/main.asm
 $(BUILDDIR)/lexer.o: $(SRCDIR)/lexer.asm
-$(BUILDDIR)/parser.o: $(SRCDIR)/parser.asm
+$(BUILDDIR)/parser.o: $(SRCDIR)/parser.asm $(SRCDIR)/pe_generator.asm $(SRCDIR)/runtime.asm
 $(BUILDDIR)/memory.o: $(SRCDIR)/memory.asm
+$(BUILDDIR)/pe_generator.o: $(SRCDIR)/pe_generator.asm
+$(BUILDDIR)/runtime.o: $(SRCDIR)/runtime.asm
