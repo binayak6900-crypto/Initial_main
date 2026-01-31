@@ -47,10 +47,12 @@ uninstall:
 	rm -f /usr/local/bin/xit-bootstrap
 
 # Test the bootstrap compiler
-test: $(TARGET) test-lexer-property
+test: $(TARGET) test-lexer-property test-parser-unit
 	@echo "Testing bootstrap compiler..."
 	@echo "Running lexer property tests..."
 	./$(BUILDDIR)/test_lexer_property
+	@echo "Running parser unit tests..."
+	./$(BUILDDIR)/test_parser_unit
 
 # Build and run lexer property test
 test-lexer-property: $(BUILDDIR)/test_lexer_property
@@ -59,6 +61,15 @@ test-lexer-property: $(BUILDDIR)/test_lexer_property
 
 # Build lexer property test
 $(BUILDDIR)/test_lexer_property: tests/test_lexer_property.c $(BUILDDIR)/lexer.o | $(BUILDDIR)
+	$(LD) $(LDFLAGS) -o $@ $^
+
+# Build and run parser unit tests
+test-parser-unit: $(BUILDDIR)/test_parser_unit
+	@echo "Running parser unit tests..."
+	./$(BUILDDIR)/test_parser_unit
+
+# Build parser unit test
+$(BUILDDIR)/test_parser_unit: tests/test_parser_unit.c $(BUILDDIR)/lexer.o $(BUILDDIR)/parser.o | $(BUILDDIR)
 	$(LD) $(LDFLAGS) -o $@ $^
 
 # Build debug lexer test
@@ -77,13 +88,29 @@ simple-lexer-test: $(BUILDDIR)/simple_lexer_test
 $(BUILDDIR)/test_char_functions: tests/test_char_functions.c $(BUILDDIR)/lexer.o | $(BUILDDIR)
 	$(LD) $(LDFLAGS) -o $@ $^
 
-# Build debug tokenization test
-$(BUILDDIR)/debug_tokenization: tests/debug_tokenization.c $(BUILDDIR)/lexer.o | $(BUILDDIR)
+# Build debug parser test
+$(BUILDDIR)/debug_parser: tests/debug_parser.c $(BUILDDIR)/lexer.o $(BUILDDIR)/parser.o | $(BUILDDIR)
 	$(LD) $(LDFLAGS) -o $@ $^
 
-# Run debug tokenization test
-debug-tokenization: $(BUILDDIR)/debug_tokenization
-	./$(BUILDDIR)/debug_tokenization
+# Run debug parser test
+debug-parser: $(BUILDDIR)/debug_parser
+	./$(BUILDDIR)/debug_parser
+
+# Build detailed debug parser test
+$(BUILDDIR)/debug_parser_detailed: tests/debug_parser_detailed.c $(BUILDDIR)/lexer.o $(BUILDDIR)/parser.o | $(BUILDDIR)
+	$(LD) $(LDFLAGS) -o $@ $^
+
+# Build minimal parser test
+$(BUILDDIR)/minimal_parser_test: tests/minimal_parser_test.c $(BUILDDIR)/lexer.o | $(BUILDDIR)
+	$(LD) $(LDFLAGS) -o $@ $^
+
+# Build step by step parser test
+$(BUILDDIR)/step_by_step_parser: tests/step_by_step_parser.c $(BUILDDIR)/lexer.o $(BUILDDIR)/parser.o | $(BUILDDIR)
+	$(LD) $(LDFLAGS) -o $@ $^
+
+# Run step by step parser test
+step-by-step-parser: $(BUILDDIR)/step_by_step_parser
+	./$(BUILDDIR)/step_by_step_parser
 
 # Debug build with symbols
 debug: ASMFLAGS += -g -F dwarf

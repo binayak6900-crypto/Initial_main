@@ -287,7 +287,8 @@ lexer_next_token:
     test al, al
     jz .eof_token
     
-    ; Store current position for token value
+    ; Store current position for token value (preserve al in bl)
+    mov bl, al                      ; Save character
     mov rdi, qword [rel lexer_state.source_ptr]
     mov qword [rel current_token.value_ptr], rdi
     mov eax, dword [rel lexer_state.line_number]
@@ -301,17 +302,33 @@ lexer_next_token:
     mov dword [rel current_token.column], 1
 .column_ok:
     
-    ; Check token type
-    mov bl, al                      ; Save character in bl
-    call is_identifier_start_alt
-    cmp al, 1
-    mov al, bl                      ; Restore character
-    jne .not_identifier
-    jmp .identifier_token
-.not_identifier:
+    ; Restore character
+    mov al, bl
     
-    call is_digit
-    jz .number_token
+    ; Check token type - proper character classification
+    ; Check for letters (a-z, A-Z) and underscore
+    cmp al, 'a'
+    jb .check_uppercase
+    cmp al, 'z'
+    jbe .identifier_token
+    
+.check_uppercase:
+    cmp al, 'A'
+    jb .check_underscore
+    cmp al, 'Z'
+    jbe .identifier_token
+    
+.check_underscore:
+    cmp al, '_'
+    je .identifier_token
+    
+    ; Check for digits (0-9)
+    cmp al, '0'
+    jb .check_string
+    cmp al, '9'
+    jbe .number_token
+    
+.check_string:
     
     cmp al, '"'
     je .string_token

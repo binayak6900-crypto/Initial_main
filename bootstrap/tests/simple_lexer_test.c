@@ -36,36 +36,47 @@ const char* token_type_names[] = {
 };
 
 int main() {
-    char* program = "f";  // Test with just one character
+    char* programs[] = {
+        "func",
+        "var",
+        "123",
+        "hello",
+        "func main() { return 0 }",
+        NULL
+    };
     
-    printf("Testing simple program: '%s'\n", program);
-    
-    lexer_init(program, strlen(program));
-    
-    Token* token;
-    int token_count = 0;
-    
-    do {
-        token = lexer_next_token();
-        if (!token) break;
+    for (int i = 0; programs[i] != NULL; i++) {
+        printf("\nTesting program: '%s'\n", programs[i]);
+        printf("===================\n");
         
-        printf("Token %d: type=%s (%d), line=%d, column=%d, len=%d", 
-               token_count, token_type_names[token->type], token->type, 
-               token->line, token->column, token->value_len);
+        lexer_init(programs[i], strlen(programs[i]));
         
-        if (token->type != TOKEN_EOF && token->value_ptr && token->value_len > 0) {
-            printf(", value='");
-            for (int i = 0; i < token->value_len; i++) {
-                printf("%c", token->value_ptr[i]);
+        Token* token;
+        int token_count = 0;
+        
+        do {
+            token = lexer_next_token();
+            if (!token) break;
+            
+            printf("Token %d: type=%s (%d), line=%d, column=%d, len=%d", 
+                   token_count, token_type_names[token->type], token->type, 
+                   token->line, token->column, token->value_len);
+            
+            if (token->type != TOKEN_EOF && token->value_ptr && token->value_len > 0) {
+                printf(", value='");
+                for (int j = 0; j < token->value_len; j++) {
+                    printf("%c", token->value_ptr[j]);
+                }
+                printf("'");
             }
-            printf("'");
-        }
-        printf("\n");
+            printf("\n");
+            
+            token_count++;
+            
+        } while (token && token->type != TOKEN_EOF && token_count < 20);
         
-        token_count++;
-        
-    } while (token && token->type != TOKEN_EOF && token_count < 10);
+        lexer_destroy();
+    }
     
-    lexer_destroy();
     return 0;
 }

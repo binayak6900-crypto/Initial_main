@@ -35,21 +35,21 @@ The plan focuses on incremental development with early validation to avoid the p
     - Handle whitespace and comments
     - _Requirements: 20.1_
 
-- [ ] 3. Implement bootstrap parser with direct binary generation in assembly
-  - [ ] 3.1 Create parser state structures for direct code generation
+- [x] 3. Implement bootstrap parser with direct binary generation in assembly
+  - [x] 3.1 Create parser state structures for direct code generation
     - Define parser state structure for tracking current position
     - Create symbol table for variable and function tracking
     - Implement scope management for nested contexts
     - _Requirements: 7.2, 20.2_
   
-  - [ ] 3.2 Implement recursive descent parser with direct x86-64 code emission
+  - [x] 3.2 Implement recursive descent parser with direct x86-64 code emission
     - Parse function definitions and immediately emit function prologue/epilogue
     - Parse statements and directly generate corresponding machine code
     - Parse expressions and emit arithmetic/logical operations
     - Handle variable declarations with direct stack allocation
     - _Requirements: 1.1, 1.3, 1.4, 5.1, 20.2_
   
-  - [ ] 3.3 Write unit tests for parser edge cases
+  - [x] 3.3 Write unit tests for parser edge cases
     - Test malformed syntax error handling
     - Test nested expression parsing with direct code generation
     - Test function parameter parsing and code emission
