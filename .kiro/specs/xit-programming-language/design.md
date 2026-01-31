@@ -887,6 +887,271 @@ var upper_text = text.string::upper()  // "HELLO WORLD"
 var title_text = text.string::title()  // "Hello World"
 ```
 
+### 15. Internet Access and Network Operations System
+
+**Purpose**: Provide comprehensive internet and networking capabilities
+
+**Network Data Structures**:
+```c
+typedef enum {
+    HTTP_GET,
+    HTTP_POST,
+    HTTP_PUT,
+    HTTP_DELETE,
+    HTTP_PATCH
+} HttpMethod;
+
+typedef struct {
+    char* key;
+    char* value;
+} HttpHeader;
+
+typedef struct {
+    HttpMethod method;
+    char* url;
+    HttpHeader* headers;
+    int header_count;
+    char* body;
+    int timeout;
+    int follow_redirects;
+} HttpRequest;
+
+typedef struct {
+    int status_code;
+    char* status_message;
+    HttpHeader* headers;
+    int header_count;
+    char* body;
+    size_t body_size;
+    double response_time;
+} HttpResponse;
+
+typedef struct {
+    char* url;
+    int is_connected;
+    void* socket_handle;
+    void (*on_message)(char* message);
+    void (*on_error)(char* error);
+    void (*on_close)();
+} WebSocket;
+```
+
+**Internet Interface**:
+```c
+// HTTP operations
+HttpResponse* internet_http_request(HttpRequest* request);
+HttpResponse* internet_get(char* url);
+HttpResponse* internet_post(char* url, char* data);
+HttpResponse* internet_put(char* url, char* data);
+HttpResponse* internet_delete(char* url);
+
+// Async HTTP operations
+void internet_get_async(char* url, void (*callback)(HttpResponse*));
+void internet_post_async(char* url, char* data, void (*callback)(HttpResponse*));
+
+// WebSocket operations
+WebSocket* internet_websocket_connect(char* url);
+void internet_websocket_send(WebSocket* ws, char* message);
+void internet_websocket_close(WebSocket* ws);
+
+// JSON operations
+char* internet_json_stringify(void* object);
+void* internet_json_parse(char* json_string);
+int internet_json_validate(char* json_string);
+
+// File transfer operations
+int internet_download_file(char* url, char* local_path);
+int internet_upload_file(char* url, char* file_path);
+
+// URL utilities
+char* internet_url_encode(char* string);
+char* internet_url_decode(char* string);
+void* internet_parse_url(char* url);
+```
+
+**Example Usage**:
+```xit
+// HTTP requests
+var response = internet.get("https://api.example.com/data")
+io.print(response.body)
+
+// JSON handling
+var data = {"name": "John", "age": 30}
+var json_string = internet.json_stringify(data)
+var parsed_data = internet.json_parse(json_string)
+
+// WebSocket
+var ws = internet.websocket_connect("wss://example.com/socket")
+ws.on_message = (message) => { io.print("Received: " + message) }
+internet.websocket_send(ws, "Hello Server!")
+```
+
+### 16. Flexible Coding Style Support System
+
+**Purpose**: Support multiple coding styles in the same language
+
+**Style Detection System**:
+```c
+typedef enum {
+    STYLE_JSON,
+    STYLE_GSON,
+    STYLE_C_STYLE,
+    STYLE_INDENTED,
+    STYLE_MIXED
+} CodingStyle;
+
+typedef struct {
+    CodingStyle detected_style;
+    int confidence_level;
+    int line_number;
+    int column_number;
+} StyleInfo;
+```
+
+**Style Parser Interface**:
+```c
+// Style detection
+CodingStyle detect_coding_style(char* code_block);
+StyleInfo* analyze_style_context(char* code, int position);
+
+// Multi-style parsing
+ASTNode* parse_multi_style(char* source_code);
+ASTNode* parse_json_style(char* code);
+ASTNode* parse_gson_style(char* code);
+ASTNode* parse_c_style(char* code);
+ASTNode* parse_indented_style(char* code);
+
+// Style conversion
+char* convert_to_style(char* source_code, CodingStyle target_style);
+char* format_code(char* source_code, CodingStyle style);
+```
+
+**Example Coding Styles**:
+```xit
+// JSON Style
+{
+  "function": "main",
+  "parameters": [],
+  "body": [
+    {"call": "io.print", "args": ["Hello World"]},
+    {"return": 0}
+  ]
+}
+
+// GSON Style
+function main(): int {
+  "statements": [
+    io.print("Hello World"),
+    return 0
+  ]
+}
+
+// C Style
+function main() {
+    io.print("Hello World")
+    return 0
+}
+
+// Indented Style (Python-like)
+function main():
+    io.print("Hello World")
+    return 0
+
+// Mixed Style (all in one file)
+function main() {
+    var data = {
+        "name": "John",
+        "age": 30
+    }
+    
+    if data.age > 18:
+        io.print("Adult")
+    else {
+        io.print("Minor")
+    }
+}
+```
+
+### 17. Comprehensive Error Handling and Warning System
+
+**Purpose**: Detect and report all problems without ignoring any issues
+
+**Error Classification System**:
+```c
+typedef enum {
+    ERROR_LEVEL_INFO,
+    ERROR_LEVEL_WARNING,
+    ERROR_LEVEL_ERROR,
+    ERROR_LEVEL_CRITICAL
+} ErrorLevel;
+
+typedef enum {
+    ERROR_SYNTAX,
+    ERROR_TYPE_MISMATCH,
+    ERROR_UNDEFINED_VARIABLE,
+    ERROR_MEMORY_VIOLATION,
+    ERROR_RUNTIME_EXCEPTION,
+    WARNING_UNUSED_VARIABLE,
+    WARNING_UNREACHABLE_CODE,
+    WARNING_POTENTIAL_NULL_ACCESS,
+    WARNING_PERFORMANCE_ISSUE,
+    INFO_STYLE_SUGGESTION,
+    INFO_OPTIMIZATION_HINT
+} ErrorType;
+
+typedef struct {
+    ErrorLevel level;
+    ErrorType type;
+    char* message;
+    char* suggestion;
+    char* filename;
+    int line_number;
+    int column_number;
+    char* code_context;
+} ErrorReport;
+```
+
+**Error Handling Interface**:
+```c
+// Error detection
+void error_check_syntax(char* source_code);
+void error_check_types(ASTNode* ast);
+void error_check_memory_safety(ASTNode* ast);
+void error_check_logic(ASTNode* ast);
+
+// Warning detection
+void warning_check_unused_variables(ASTNode* ast);
+void warning_check_unreachable_code(ASTNode* ast);
+void warning_check_performance_issues(ASTNode* ast);
+
+// Error reporting
+void error_report(ErrorReport* error);
+void error_set_level(ErrorLevel min_level);
+ErrorReport** error_get_all_reports();
+void error_clear_reports();
+
+// Error suggestions
+char* error_suggest_fix(ErrorReport* error);
+char* error_get_help_url(ErrorType type);
+```
+
+**Example Error Handling**:
+```xit
+// The compiler will catch ALL of these issues:
+
+var unused_var = 42        // WARNING: Unused variable 'unused_var'
+var x = undeclared_var     // ERROR: Undefined variable 'undeclared_var'
+
+function test() {
+    var arr = [1, 2, 3]
+    io.print(arr[10])      // ERROR: Array index out of bounds
+    return "string"        // WARNING: Function should return int based on usage
+    io.print("unreachable") // WARNING: Unreachable code after return
+}
+
+var result = test() + 5    // ERROR: Cannot add string and int
+```
+
 ## Data Models
 
 ### 1. Type System
@@ -1108,6 +1373,18 @@ typedef struct {
 ### Property 24: Namespace-Style Function Calls and Method Chaining
 *For any* function call (io.print, string.upper, chaining with ::), the system should provide clear namespace organization and method chaining capabilities.
 **Validates: Requirements 31.1, 31.2, 31.3, 31.4, 31.5, 31.6, 31.7, 31.8**
+
+### Property 25: Internet Access and Network Operations
+*For any* network operation (HTTP requests, WebSocket connections, JSON parsing, file transfers), the internet library should provide comprehensive functionality without external dependencies.
+**Validates: Requirements 32.1, 32.2, 32.3, 32.4, 32.5, 32.6, 32.7, 32.8, 32.9, 32.10**
+
+### Property 26: Flexible Coding Style Support
+*For any* coding style (JSON, GSON, normal C-style, indented Python-style), the parser should correctly interpret and maintain semantic equivalence across all styles.
+**Validates: Requirements 33.1, 33.2, 33.3, 33.4, 33.5, 33.6, 33.7, 33.8**
+
+### Property 27: Comprehensive Error Handling and Warning System
+*For any* error or warning condition (compilation errors, runtime issues, memory violations, unused variables), the system should detect, report, and provide helpful suggestions without ignoring any problems.
+**Validates: Requirements 34.1, 34.2, 34.3, 34.4, 34.5, 34.6, 34.7, 34.8**
 
 ### Property 21: Standard I/O Library
 *For any* I/O operation (console input/output, file operations, formatting), the IO library should provide comprehensive functionality through io.xhi/.xll interface.

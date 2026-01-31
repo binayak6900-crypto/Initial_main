@@ -382,14 +382,72 @@ The plan focuses on incremental development with early validation to avoid the p
     - Design namespace-style function organization (guio.create_window, guio.render_mesh)
     - _Requirements: 23.1, 23.2, 23.3, 23.8, 24.1, 24.2, 25.1, 25.2, 26.1, 26.2, 31.1_
   
-  - [ ] 20.2 Write property test specifications for GUIO library
+- [ ] 20.2 Write property test specifications for GUIO library
     - **Property 16: Complete GUI Library Functionality**
     - **Property 17: 3D Rendering and Mesh Manipulation**
     - **Property 18: Runtime Loop System and FPS Control**
     - **Property 19: Dynamic Data Structures**
     - **Validates: Requirements 23.1-23.8, 24.1-24.8, 25.1-25.7, 26.1-26.8**
 
-- [ ] 21. Implement INFINITY global variable and division by zero handling
+- [ ] 21. Design Internet library interface (internet.xhi specification only)
+  - [ ] 21.1 Design internet.xhi header interface specification
+    - Define HTTP/HTTPS request functions (GET, POST, PUT, DELETE)
+    - Add WebSocket connection and real-time communication support
+    - Include JSON parsing and generation capabilities
+    - Add file download and upload operations
+    - Define SSL/TLS encryption without external dependencies
+    - Include URL parsing and manipulation functions
+    - Add REST API client functionality and async/await patterns
+    - Design namespace-style function organization (internet.get, internet.websocket_connect)
+    - _Requirements: 32.1, 32.2, 32.3, 32.4, 32.5, 32.6, 32.7, 32.8, 32.9, 32.10, 31.1_
+  
+  - [ ] 21.2 Write property test specifications for Internet library
+    - **Property 25: Internet Access and Network Operations**
+    - **Validates: Requirements 32.1, 32.2, 32.3, 32.4, 32.5, 32.6, 32.7, 32.8, 32.9, 32.10**
+
+- [ ] 22. Implement flexible coding style support
+  - [ ] 22.1 Add multi-style parser support
+    - Implement JSON-style syntax parser for object and function definitions
+    - Add GSON-style syntax parser with type annotations
+    - Support normal C-style syntax with braces
+    - Add Python-style indented syntax parser as alternative
+    - _Requirements: 33.1, 33.2, 33.3, 33.4_
+  
+  - [ ] 22.2 Implement style mixing and detection
+    - Allow mixing of all coding styles within the same file
+    - Add automatic style detection and parsing
+    - Maintain semantic equivalence across all coding styles
+    - _Requirements: 33.5, 33.6, 33.7_
+  
+  - [ ] 22.3 Add style conversion tools
+    - Provide style conversion tools for code formatting
+    - Add code beautification and standardization features
+    - _Requirements: 33.8_
+  
+  - [ ] 22.4 Write property test for flexible coding styles
+    - **Property 26: Flexible Coding Style Support**
+    - **Validates: Requirements 33.1, 33.2, 33.3, 33.4, 33.5, 33.6, 33.7, 33.8**
+
+- [ ] 23. Implement comprehensive error handling and warning system
+  - [ ] 23.1 Add complete error detection system
+    - Detect and report all compilation errors, no matter how small
+    - Provide detailed warnings for potential issues
+    - Catch runtime errors with full stack traces
+    - Validate all memory operations and report violations
+    - _Requirements: 34.1, 34.2, 34.3, 34.4_
+  
+  - [ ] 23.2 Add comprehensive warning system
+    - Check for unused variables, unreachable code, and logic errors
+    - Provide suggestions for fixing common problems
+    - Support different error reporting levels (error, warning, info)
+    - Never ignore any problems or warnings during compilation or runtime
+    - _Requirements: 34.5, 34.6, 34.7, 34.8_
+  
+  - [ ] 23.3 Write property test for error handling system
+    - **Property 27: Comprehensive Error Handling and Warning System**
+    - **Validates: Requirements 34.1, 34.2, 34.3, 34.4, 34.5, 34.6, 34.7, 34.8**
+
+- [ ] 24. Implement INFINITY global variable and division by zero handling
   - [ ] 21.1 Add INFINITY global constants to compiler
     - Define INFINITY, NEG_INFINITY, and NaN as global constants
     - Integrate infinity constants into type system
@@ -561,8 +619,11 @@ The plan focuses on incremental development with early validation to avoid the p
 - Python-like features are implemented with C-style syntax (no semicolons required)
 - No pointers or const char* - automatic string handling instead
 - var keyword provides automatic type detection (var a = 459, var a = "asd")
-- Namespace-style function calls (io.print, guio.create_window)
+- Namespace-style function calls (io.print, guio.create_window, internet.get)
 - Method chaining with :: operator (something.io::function())
-- GUIO and IO libraries are designed as specifications first, implemented after compiler
+- Multiple coding styles supported (JSON, GSON, C-style, indented, mixed)
+- Comprehensive error handling - no problems or warnings ignored
+- Internet access with HTTP/HTTPS, WebSocket, JSON, and file transfer
+- GUIO, IO, and Internet libraries are designed as specifications first
 - INFINITY global variable handles division by zero gracefully
 - Library files (.xhi/.xll) are created only after the compiler is functional

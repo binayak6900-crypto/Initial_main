@@ -418,6 +418,53 @@ The "xit" programming language is a self-hosting, performance-focused programmin
 7. THE Xit_Language SHALL organize all library functions under appropriate namespaces
 8. THE Xit_Language SHALL provide clear namespace documentation and auto-completion
 
+### Requirement 32: Internet Access and Network Operations
+
+**User Story:** As a developer, I want comprehensive internet access capabilities, so that I can build networked applications and web services.
+
+#### Acceptance Criteria
+
+1. THE Internet_Library SHALL provide HTTP/HTTPS request functions (GET, POST, PUT, DELETE)
+2. THE Internet_Library SHALL support WebSocket connections for real-time communication
+3. THE Internet_Library SHALL provide JSON parsing and generation capabilities
+4. THE Internet_Library SHALL support file download and upload operations
+5. THE Internet_Library SHALL handle SSL/TLS encryption without external dependencies
+6. THE Internet_Library SHALL provide URL parsing and manipulation functions
+7. THE Internet_Library SHALL support REST API client functionality
+8. THE Internet_Library SHALL be distributed as internet.xhi header file and internet.xll shared library
+9. THE Internet_Library SHALL provide async/await patterns for non-blocking operations
+10. THE Internet_Library SHALL support custom headers, cookies, and authentication
+
+### Requirement 33: Flexible Coding Style Support
+
+**User Story:** As a developer, I want to write code in multiple styles (JSON/GSON, normal, indented), so that I can use the coding style I'm most comfortable with.
+
+#### Acceptance Criteria
+
+1. THE Xit_Language SHALL support JSON-style syntax for object and function definitions
+2. THE Xit_Language SHALL support GSON-style syntax with type annotations
+3. THE Xit_Language SHALL support normal C-style syntax with braces
+4. THE Xit_Language SHALL support Python-style indented syntax as an alternative
+5. THE Xit_Language SHALL allow mixing of all coding styles within the same file
+6. THE Xit_Language SHALL provide automatic style detection and parsing
+7. THE Xit_Language SHALL maintain semantic equivalence across all coding styles
+8. THE Xit_Language SHALL provide style conversion tools for code formatting
+
+### Requirement 34: Comprehensive Error Handling and Warning System
+
+**User Story:** As a developer, I want comprehensive error handling that catches all problems and warnings, so that I can write robust, bug-free code.
+
+#### Acceptance Criteria
+
+1. THE Xit_Language SHALL detect and report all compilation errors, no matter how small
+2. THE Xit_Language SHALL provide detailed warnings for potential issues
+3. THE Xit_Language SHALL catch runtime errors with full stack traces
+4. THE Xit_Language SHALL validate all memory operations and report violations
+5. THE Xit_Language SHALL check for unused variables, unreachable code, and logic errors
+6. THE Xit_Language SHALL provide suggestions for fixing common problems
+7. THE Xit_Language SHALL support different error reporting levels (error, warning, info)
+8. THE Xit_Language SHALL never ignore any problems or warnings during compilation or runtime
+
 ### Requirement 28: Standard I/O Library System
 
 **User Story:** As a developer, I want a standard I/O library for input/output operations, so that I can handle console and file I/O efficiently.
