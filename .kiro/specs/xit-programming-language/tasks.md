@@ -302,100 +302,118 @@ The plan focuses on incremental development with early validation to avoid the p
     - **Validates: Requirements 26.1, 26.2, 26.3, 26.4, 26.5, 26.6, 26.7, 26.8**
 
 - [ ] 18. Implement Python-like language features with C-style syntax
-  - [ ] 18.1 Remove semicolon requirements and enhance syntax parser
+  - [ ] 18.1 Remove semicolon requirements and eliminate pointers
     - Modify parser to not require semicolons at end of statements
+    - Remove all pointer syntax (char*, const char*) in favor of automatic string handling
     - Keep C-style braces {} and parentheses () syntax
     - Add automatic statement termination detection
-    - _Requirements: 27.1_
+    - _Requirements: 27.1, 27.4_
   
-  - [ ] 18.2 Add Python-like built-in data structures
+  - [ ] 18.2 Implement automatic variable declaration with var keyword
+    - Add var keyword for automatic type detection (var a = 459, var a = "asd")
+    - Implement type detection from assigned values
+    - Support array/string indexing with bounds checking (a[2])
+    - Add automatic string-to-number conversion when appropriate
+    - Support dynamic type changes during runtime
+    - _Requirements: 30.1, 30.2, 30.3, 30.4, 30.6_
+  
+  - [ ] 18.3 Add namespace-style function calls and method chaining
+    - Implement namespace-style function calls (io.print, guio.create_window)
+    - Add method chaining with :: operator (something.io::function())
+    - Support Python-like string methods (string.upper(), string.lower())
+    - Create automatic library namespace resolution
+    - _Requirements: 31.1, 31.2, 31.3, 31.5_
+  
+  - [ ] 18.4 Add Python-like built-in data structures
     - Implement lists with Python-like methods (append, extend, pop, etc.)
     - Add sets with set operations (union, intersection, difference)
     - Create tuples with immutability and unpacking support
     - Add list comprehensions and generator expressions
-    - _Requirements: 27.4, 27.7_
+    - _Requirements: 27.5, 27.7_
   
-  - [ ] 18.3 Implement dynamic typing with optional static annotations
-    - Add runtime type checking and conversion
-    - Support optional type hints for better performance
-    - Implement automatic type inference
-    - _Requirements: 27.3_
-  
-  - [ ] 18.4 Add functional programming features
+  - [ ] 18.5 Implement functional programming features
     - Implement lambda functions and closures
     - Add map, filter, reduce built-in functions
     - Support decorators for function modification
-    - _Requirements: 27.5_
+    - _Requirements: 27.6_
   
-  - [ ] 18.5 Implement automatic memory management
+  - [ ] 18.6 Implement automatic memory management
     - Add garbage collection system
     - Implement reference counting for immediate cleanup
     - Add context managers for resource management
-    - _Requirements: 27.6_
+    - _Requirements: 27.8_
   
-  - [ ] 18.6 Add string interpolation and formatting
+  - [ ] 18.7 Add string interpolation and formatting
     - Implement f-string style formatting
     - Add string template substitution
     - Support multiple formatting styles
-    - _Requirements: 27.8_
+    - _Requirements: 27.9_
   
-  - [ ] 18.7 Write property test for Python-like features
+  - [ ] 18.8 Write property tests for Python-like features
     - **Property 20: Python-like Language Features**
-    - **Validates: Requirements 27.1, 27.2, 27.3, 27.4, 27.5, 27.6, 27.7, 27.8**
+    - **Property 23: Automatic Variable Declaration and Type Detection**
+    - **Property 24: Namespace-Style Function Calls and Method Chaining**
+    - **Validates: Requirements 27.1-27.11, 30.1-30.8, 31.1-31.8**
 
-- [ ] 19. Create IO library (io.xhi and io.xll)
-  - [ ] 19.1 Design and implement io.xhi header file
+- [ ] 19. Design IO library interface (io.xhi specification only)
+  - [ ] 19.1 Design io.xhi header interface specification
     - Define console input/output functions (input, print, print_f)
     - Add file I/O operations with context manager support
     - Include string formatting and interpolation functions
     - Define INFINITY, NEG_INFINITY, and NaN global constants
     - Add infinity and NaN utility functions
     - Include error handling and advanced I/O features
-    - _Requirements: 28.1, 28.2, 28.3, 28.4, 28.8, 29.1, 29.3, 29.4_
+    - Design namespace-style function organization (io.print, io.input)
+    - _Requirements: 28.1, 28.2, 28.3, 28.4, 28.8, 29.1, 29.3, 29.4, 31.1_
   
-  - [ ] 19.2 Implement io.xll shared library - Console I/O
-    - Create input() and input_prompt() functions
-    - Implement print() functions with automatic type handling
-    - Add formatted printing (printf_xit, print_f)
-    - Build multiple value printing functions
-    - _Requirements: 28.1, 28.2, 28.4, 28.5_
-  
-  - [ ] 19.3 Implement io.xll shared library - File I/O
-    - Create file operations (open, close, read, write)
-    - Add context manager support for automatic file closing
-    - Implement binary and text file modes
-    - Build file utility functions (exists, size, copy, move)
-    - _Requirements: 28.3, 28.6, 28.7_
-  
-  - [ ] 19.4 Write property test for I/O library
+  - [ ] 19.2 Write property test specifications for I/O library
     - **Property 21: Standard I/O Library**
     - **Validates: Requirements 28.1, 28.2, 28.3, 28.4, 28.5, 28.6, 28.7, 28.8**
 
-- [ ] 20. Implement INFINITY global variable and division by zero handling
-  - [ ] 20.1 Add INFINITY global constants to compiler
+- [ ] 20. Design GUIO library interface (guio.xhi specification only)
+  - [ ] 20.1 Design guio.xhi header interface specification
+    - Define complete window management interface
+    - Add comprehensive event handling structures
+    - Include rendering context and drawing utility declarations
+    - Create window decoration function declarations
+    - Add 3D rendering system interface (meshes, cameras, matrices)
+    - Include runtime loop system and FPS control declarations
+    - Define dynamic data structures system (Dict, DataValue, etc.)
+    - Design namespace-style function organization (guio.create_window, guio.render_mesh)
+    - _Requirements: 23.1, 23.2, 23.3, 23.8, 24.1, 24.2, 25.1, 25.2, 26.1, 26.2, 31.1_
+  
+  - [ ] 20.2 Write property test specifications for GUIO library
+    - **Property 16: Complete GUI Library Functionality**
+    - **Property 17: 3D Rendering and Mesh Manipulation**
+    - **Property 18: Runtime Loop System and FPS Control**
+    - **Property 19: Dynamic Data Structures**
+    - **Validates: Requirements 23.1-23.8, 24.1-24.8, 25.1-25.7, 26.1-26.8**
+
+- [ ] 21. Implement INFINITY global variable and division by zero handling
+  - [ ] 21.1 Add INFINITY global constants to compiler
     - Define INFINITY, NEG_INFINITY, and NaN as global constants
     - Integrate infinity constants into type system
     - Add infinity arithmetic operations
     - _Requirements: 29.1, 29.3, 29.5_
   
-  - [ ] 20.2 Implement division by zero handling
+  - [ ] 21.2 Implement division by zero handling
     - Modify division operations to return INFINITY or default to 0
     - Add context-aware division by zero behavior
     - Implement safe_divide functions with custom defaults
     - Add compiler warnings that mention INFINITY global variable
     - _Requirements: 29.2, 29.6_
   
-  - [ ] 20.3 Add infinity utility functions
+  - [ ] 21.3 Add infinity utility functions
     - Implement is_infinite(), is_nan(), is_finite() functions
     - Add infinity comparison and arithmetic operations
     - Handle floating-point edge cases gracefully
     - _Requirements: 29.4, 29.7, 29.8_
   
-  - [ ] 20.4 Write property test for infinity handling
+  - [ ] 21.4 Write property test for infinity handling
     - **Property 22: INFINITY and Division by Zero Handling**
     - **Validates: Requirements 29.1, 29.2, 29.3, 29.4, 29.5, 29.6, 29.7, 29.8**
 
-- [ ] 21. Implement taskbar and system UI control
+- [ ] 22. Implement taskbar and system UI control
   - [ ] 18.1 Create taskbar manipulation system
     - Implement taskbar appearance and behavior control
     - Add custom taskbar icon creation from raw pixel data
@@ -541,5 +559,10 @@ The plan focuses on incremental development with early validation to avoid the p
 - Self-hosting phase eliminates all external dependencies
 - Cross-platform support is implemented after core functionality is complete
 - Python-like features are implemented with C-style syntax (no semicolons required)
-- GUIO library provides complete GUI, 3D rendering, runtime loops, and dynamic data structures
-- IO library provides comprehensive I/O operations with INFINITY handling
+- No pointers or const char* - automatic string handling instead
+- var keyword provides automatic type detection (var a = 459, var a = "asd")
+- Namespace-style function calls (io.print, guio.create_window)
+- Method chaining with :: operator (something.io::function())
+- GUIO and IO libraries are designed as specifications first, implemented after compiler
+- INFINITY global variable handles division by zero gracefully
+- Library files (.xhi/.xll) are created only after the compiler is functional

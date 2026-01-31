@@ -778,6 +778,115 @@ DataValue* dict_refer_runtime(Dict* dict, char* key);
 void dict_delete_runtime(Dict* dict, char* key);
 ```
 
+### 13. Automatic Variable Declaration and Type Detection System
+
+**Purpose**: Provide Python-like variable declarations with automatic type detection
+
+**Variable System**:
+```c
+typedef enum {
+    VAR_TYPE_AUTO,
+    VAR_TYPE_INT,
+    VAR_TYPE_FLOAT,
+    VAR_TYPE_STRING,
+    VAR_TYPE_BOOL,
+    VAR_TYPE_LIST,
+    VAR_TYPE_DICT
+} VarType;
+
+typedef struct {
+    char* name;
+    VarType type;
+    DataValue* value;
+    int is_mutable;
+} Variable;
+```
+
+**Variable Declaration Interface**:
+```c
+// Automatic type detection
+Variable* var_create_auto(char* name, char* value_str); // var a = "459" or var a = "asd"
+Variable* var_create_from_literal(char* name, void* value, VarType hint);
+
+// Type detection utilities
+VarType detect_type_from_string(char* str);
+int is_numeric_string(char* str);
+int is_float_string(char* str);
+
+// Variable operations
+void* var_get_value(Variable* var);
+void var_set_value(Variable* var, void* value);
+VarType var_get_type(Variable* var);
+void var_change_type(Variable* var, VarType new_type);
+
+// Array/string indexing
+void* var_get_index(Variable* var, int index); // a[2]
+void var_set_index(Variable* var, int index, void* value);
+int var_get_length(Variable* var);
+```
+
+**Example Usage**:
+```xit
+var a = 459        // Automatically detected as int
+var b = "asd"      // Automatically detected as string
+io.print(a[2])     // Error: int not indexable, suggests using string conversion
+io.print(b[2])     // Outputs: 'd'
+```
+
+### 14. Namespace-Style Function Calls and Method Chaining
+
+**Purpose**: Provide clear library organization and method chaining
+
+**Namespace System**:
+```c
+typedef struct {
+    char* namespace_name;
+    void** functions;
+    char** function_names;
+    int function_count;
+} Namespace;
+
+typedef struct {
+    void* object;
+    Namespace* current_namespace;
+    void* last_result;
+} ChainContext;
+```
+
+**Namespace Interface**:
+```c
+// Namespace management
+Namespace* namespace_create(char* name);
+void namespace_add_function(Namespace* ns, char* name, void* function);
+void* namespace_call_function(Namespace* ns, char* function_name, void** args);
+
+// Method chaining
+ChainContext* chain_start(void* object);
+ChainContext* chain_call(ChainContext* ctx, char* namespace_name, char* function_name, void** args);
+void* chain_end(ChainContext* ctx);
+
+// Built-in namespaces
+extern Namespace* io_namespace;
+extern Namespace* guio_namespace;
+extern Namespace* string_namespace;
+extern Namespace* math_namespace;
+```
+
+**Example Usage**:
+```xit
+// Namespace-style calls
+io.print("Hello World")
+guio.create_window("My App", 100, 100, 800, 600)
+
+// Method chaining with :: operator
+var result = something.io::function().guio::render().string::upper()
+
+// String methods (Python-like)
+var text = "hello world"
+var upper_text = text.string::upper()  // "HELLO WORLD"
+var title_text = text.string::title()  // "Hello World"
+```
+
 ## Data Models
 
 ### 1. Type System
@@ -989,8 +1098,16 @@ typedef struct {
 **Validates: Requirements 26.1, 26.2, 26.3, 26.4, 26.5, 26.6, 26.7, 26.8**
 
 ### Property 20: Python-like Language Features
-*For any* Python-like language feature (list comprehensions, dynamic typing, lambda functions, automatic memory management), the system should provide expressive programming capabilities with C-style syntax.
-**Validates: Requirements 27.1, 27.2, 27.3, 27.4, 27.5, 27.6, 27.7, 27.8**
+*For any* Python-like language feature (list comprehensions, dynamic typing, lambda functions, automatic memory management), the system should provide expressive programming capabilities with C-style syntax and no pointers.
+**Validates: Requirements 27.1, 27.2, 27.3, 27.4, 27.5, 27.6, 27.7, 27.8, 27.9, 27.10, 27.11**
+
+### Property 23: Automatic Variable Declaration and Type Detection
+*For any* variable declaration (var a = value), the system should automatically detect and assign the correct type, handle indexing, and support dynamic type changes.
+**Validates: Requirements 30.1, 30.2, 30.3, 30.4, 30.5, 30.6, 30.7, 30.8**
+
+### Property 24: Namespace-Style Function Calls and Method Chaining
+*For any* function call (io.print, string.upper, chaining with ::), the system should provide clear namespace organization and method chaining capabilities.
+**Validates: Requirements 31.1, 31.2, 31.3, 31.4, 31.5, 31.6, 31.7, 31.8**
 
 ### Property 21: Standard I/O Library
 *For any* I/O operation (console input/output, file operations, formatting), the IO library should provide comprehensive functionality through io.xhi/.xll interface.

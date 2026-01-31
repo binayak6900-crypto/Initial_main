@@ -378,12 +378,45 @@ The "xit" programming language is a self-hosting, performance-focused programmin
 
 1. THE Xit_Language SHALL use C-style syntax with braces {} and parentheses () but no semicolons required
 2. THE Xit_Language SHALL provide Python-like features (list comprehensions, generators, decorators, context managers)
-3. THE Xit_Language SHALL support dynamic typing with optional static typing annotations
-4. THE Xit_Language SHALL provide built-in data structures (lists, sets, tuples) with Python-like methods
-5. THE Xit_Language SHALL support lambda functions and functional programming features
-6. THE Xit_Language SHALL provide automatic memory management with garbage collection
-7. THE Xit_Language SHALL support multiple assignment and tuple unpacking
-8. THE Xit_Language SHALL provide string interpolation and formatting similar to Python f-strings
+3. THE Xit_Language SHALL support dynamic typing with var keyword for automatic type detection
+4. THE Xit_Language SHALL eliminate pointers and const char* in favor of automatic string handling
+5. THE Xit_Language SHALL provide built-in data structures (lists, sets, tuples) with Python-like methods
+6. THE Xit_Language SHALL support lambda functions and functional programming features
+7. THE Xit_Language SHALL provide automatic memory management with garbage collection
+8. THE Xit_Language SHALL support multiple assignment and tuple unpacking
+9. THE Xit_Language SHALL provide string interpolation and formatting similar to Python f-strings
+10. THE Xit_Language SHALL support namespace-style function calls (io.print, string.upper, etc.)
+11. THE Xit_Language SHALL allow method chaining with :: operator (something.io::function())
+
+### Requirement 30: Automatic Variable Declaration and Type Detection
+
+**User Story:** As a developer, I want automatic variable declaration with type detection, so that I can write code without explicit type declarations.
+
+#### Acceptance Criteria
+
+1. THE Xit_Language SHALL support var keyword for automatic type detection
+2. THE Xit_Language SHALL detect types from assigned values (var a = 459 -> int, var a = "asd" -> string)
+3. THE Xit_Language SHALL support array/string indexing with automatic bounds checking (a[2])
+4. THE Xit_Language SHALL provide automatic string-to-number conversion when appropriate
+5. THE Xit_Language SHALL eliminate need for explicit type declarations in most cases
+6. THE Xit_Language SHALL support dynamic type changes during runtime
+7. THE Xit_Language SHALL provide type inference for function return types
+8. THE Xit_Language SHALL handle mixed-type operations automatically
+
+### Requirement 31: Namespace-Style Function Calls and Method Chaining
+
+**User Story:** As a developer, I want namespace-style function calls and method chaining, so that I can write clear, readable code with library organization.
+
+#### Acceptance Criteria
+
+1. THE Xit_Language SHALL support namespace-style function calls (io.print, guio.create_window)
+2. THE Xit_Language SHALL provide method chaining with :: operator for library functions
+3. THE Xit_Language SHALL support Python-like string methods (string.upper(), string.lower())
+4. THE Xit_Language SHALL allow chaining library calls (something.io::function().guio::render())
+5. THE Xit_Language SHALL provide automatic library namespace resolution
+6. THE Xit_Language SHALL support both dot notation and :: chaining syntax
+7. THE Xit_Language SHALL organize all library functions under appropriate namespaces
+8. THE Xit_Language SHALL provide clear namespace documentation and auto-completion
 
 ### Requirement 28: Standard I/O Library System
 
