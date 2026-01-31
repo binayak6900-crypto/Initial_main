@@ -11,24 +11,24 @@ The plan focuses on incremental development with early validation to avoid the p
 
 ## Tasks
 
-- [ ] 1. Set up bootstrap development environment
+- [x] 1. Set up bootstrap development environment
   - Create directory structure for assembly source files
   - Set up build scripts using nasm, gcc, and ld
   - Create basic Makefile for bootstrap compilation
   - _Requirements: 1.2_
 
-- [ ] 2. Implement core bootstrap lexer in assembly
-  - [ ] 2.1 Create lexer data structures and token definitions
+- [-] 2. Implement core bootstrap lexer in assembly
+  - [x] 2.1 Create lexer data structures and token definitions
     - Define token types (identifier, number, string, keyword, operator, delimiter)
     - Implement token structure with type, value, line, and column
     - Create lexer state structure for source code processing
     - _Requirements: 7.1, 20.1_
   
-  - [ ] 2.2 Write property test for lexer tokenization
+  - [x] 2.2 Write property test for lexer tokenization
     - **Property 1: Bootstrap Compilation Round-Trip**
     - **Validates: Requirements 1.1, 1.3, 1.4**
   
-  - [ ] 2.3 Implement character-by-character tokenization
+  - [-] 2.3 Implement character-by-character tokenization
     - Write assembly code for reading source characters
     - Implement keyword recognition and operator parsing
     - Add string and number literal parsing

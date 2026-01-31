@@ -1,0 +1,6 @@
+// Simple test program for bootstrap compiler
+// This will be used to test the bootstrap compiler once implemented
+
+func main() {
+    return 0
+}

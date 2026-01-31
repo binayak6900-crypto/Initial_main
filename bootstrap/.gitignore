@@ -1,0 +1,18 @@
+# Build artifacts
+build/
+*.o
+*.obj
+*.exe
+
+# Debug files
+*.dwarf
+*.debug
+
+# Temporary files
+*~
+*.tmp
+*.bak
+
+# OS specific
+.DS_Store
+Thumbs.db
