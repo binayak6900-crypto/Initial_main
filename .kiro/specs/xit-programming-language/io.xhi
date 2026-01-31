@@ -1,0 +1,209 @@
+#ifndef IO_H
+#define IO_H
+
+// IO - Standard Input/Output Library for Xit Programming Language
+// Header file (.xhi) defining the complete I/O interface
+// Companion shared library: io.xll
+
+// ============================================================================
+// GLOBAL CONSTANTS
+// ============================================================================
+
+// INFINITY global variable - represents positive infinity
+extern const float INFINITY;
+extern const float NEG_INFINITY; // Negative infinity
+extern const float NAN; // Not a Number
+
+// ============================================================================
+// CORE I/O DATA TYPES
+// ============================================================================
+
+typedef enum {
+    FILE_MODE_READ,
+    FILE_MODE_WRITE,
+    FILE_MODE_APPEND,
+    FILE_MODE_READ_BINARY,
+    FILE_MODE_WRITE_BINARY,
+    FILE_MODE_APPEND_BINARY
+} FileMode;
+
+typedef struct {
+    void* handle;
+    char* filename;
+    FileMode mode;
+    int is_open;
+    int error_code;
+} File;
+
+// ============================================================================
+// CONSOLE INPUT/OUTPUT FUNCTIONS
+// ============================================================================
+
+// Input functions
+char* input(); // Read line from console (Python-like)
+char* input_prompt(char* prompt); // Read with prompt
+int input_int(); // Read integer from console
+float input_float(); // Read float from console
+int input_int_prompt(char* prompt); // Read integer with prompt
+float input_float_prompt(char* prompt); // Read float with prompt
+
+// Print functions (Python-like, no semicolon needed)
+void print(char* text); // Basic print
+void print_line(char* text); // Print with newline
+void print_int(int value);
+void print_float(float value);
+void print_bool(int value); // Prints "True" or "False"
+
+// Formatted print functions
+void printf_xit(char* format, ...); // C-style printf
+void print_f(char* format, ...); // Python f-string style: print_f("Hello {name}, you are {age} years old", name, age)
+
+// Multiple value printing (Python-like)
+void print_values(int count, ...); // print_values(3, "Hello", 42, 3.14)
+void print_sep(char* separator, int count, ...); // print_sep(", ", 3, "a", "b", "c")
+
+// ============================================================================
+// FILE I/O FUNCTIONS
+// ============================================================================
+
+// File operations
+File* file_open(char* filename, FileMode mode);
+void file_close(File* file);
+int file_is_open(File* file);
+
+// Reading functions
+char* file_read_all(File* file); // Read entire file as string
+char* file_read_line(File* file); // Read single line
+char** file_read_lines(File* file); // Read all lines as array
+int file_read_bytes(File* file, unsigned char* buffer, int size);
+
+// Writing functions
+void file_write(File* file, char* text);
+void file_write_line(File* file, char* text);
+void file_write_lines(File* file, char** lines, int count);
+int file_write_bytes(File* file, unsigned char* data, int size);
+
+// File utilities
+int file_exists(char* filename);
+long file_size(char* filename);
+void file_delete(char* filename);
+void file_copy(char* source, char* destination);
+void file_move(char* source, char* destination);
+
+// ============================================================================
+// CONTEXT MANAGER SUPPORT (Python-like with statement)
+// ============================================================================
+
+// Context manager for automatic file closing
+typedef struct {
+    File* file;
+    int auto_close;
+} FileContext;
+
+FileContext* with_file(char* filename, FileMode mode); // with_file("data.txt", FILE_MODE_READ)
+void end_with(FileContext* context); // Automatically called at end of scope
+
+// ============================================================================
+// STRING FORMATTING AND INTERPOLATION
+// ============================================================================
+
+// String formatting (Python-like)
+char* format_string(char* template, ...); // format_string("Hello {}, you are {} years old", name, age)
+char* format_f(char* f_string, ...); // f-string style formatting
+
+// String interpolation utilities
+char* interpolate(char* template, char** keys, char** values, int count);
+char* substitute(char* template, ...); // substitute("Hello $name, age: $age", "name", "John", "age", "25")
+
+// ============================================================================
+// INFINITY AND NAN UTILITIES
+// ============================================================================
+
+// Infinity checking functions
+int is_infinite(float value);
+int is_neg_infinite(float value);
+int is_nan(float value);
+int is_finite(float value);
+
+// Infinity arithmetic
+float add_infinity(float a, float b);
+float multiply_infinity(float a, float b);
+float divide_infinity(float a, float b);
+
+// Division by zero handling
+float safe_divide(float numerator, float denominator); // Returns INFINITY or 0 based on context
+float safe_divide_default(float numerator, float denominator, float default_value);
+
+// ============================================================================
+// ERROR HANDLING
+// ============================================================================
+
+typedef enum {
+    IO_ERROR_NONE,
+    IO_ERROR_FILE_NOT_FOUND,
+    IO_ERROR_PERMISSION_DENIED,
+    IO_ERROR_DISK_FULL,
+    IO_ERROR_INVALID_FORMAT,
+    IO_ERROR_DIVISION_BY_ZERO,
+    IO_ERROR_INFINITY_OPERATION
+} IOError;
+
+// Error handling functions
+IOError get_last_error();
+char* get_error_message(IOError error);
+void clear_error();
+void set_error_handler(void (*handler)(IOError));
+
+// ============================================================================
+// PYTHON-LIKE FEATURES SUPPORT
+// ============================================================================
+
+// List-like operations for arrays
+void print_list(void** items, int count, char* (*to_string)(void*));
+void print_dict(void* dict); // Print dictionary contents
+
+// Range function (Python-like)
+int* range(int start, int stop, int step);
+int* range_simple(int stop); // range(10) -> [0, 1, 2, ..., 9]
+
+// Enumerate function (Python-like)
+typedef struct {
+    int index;
+    void* value;
+} EnumerateItem;
+
+EnumerateItem* enumerate(void** items, int count);
+
+// ============================================================================
+// ADVANCED I/O FEATURES
+// ============================================================================
+
+// Buffered I/O
+void set_buffer_size(int size);
+void flush_output();
+void flush_input();
+
+// Stream redirection
+void redirect_stdout(char* filename);
+void redirect_stderr(char* filename);
+void redirect_stdin(char* filename);
+void restore_streams();
+
+// Binary I/O utilities
+void write_int_binary(File* file, int value);
+void write_float_binary(File* file, float value);
+int read_int_binary(File* file);
+float read_float_binary(File* file);
+
+// ============================================================================
+// INITIALIZATION AND CLEANUP
+// ============================================================================
+
+// Library initialization
+int io_init();
+void io_cleanup();
+
+// Version information
+char* io_get_version();
+
+#endif // IO_H
