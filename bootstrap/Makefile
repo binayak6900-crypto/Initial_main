@@ -77,9 +77,13 @@ simple-lexer-test: $(BUILDDIR)/simple_lexer_test
 $(BUILDDIR)/test_char_functions: tests/test_char_functions.c $(BUILDDIR)/lexer.o | $(BUILDDIR)
 	$(LD) $(LDFLAGS) -o $@ $^
 
-# Run character function test
-test-char-functions: $(BUILDDIR)/test_char_functions
-	./$(BUILDDIR)/test_char_functions
+# Build debug tokenization test
+$(BUILDDIR)/debug_tokenization: tests/debug_tokenization.c $(BUILDDIR)/lexer.o | $(BUILDDIR)
+	$(LD) $(LDFLAGS) -o $@ $^
+
+# Run debug tokenization test
+debug-tokenization: $(BUILDDIR)/debug_tokenization
+	./$(BUILDDIR)/debug_tokenization
 
 # Debug build with symbols
 debug: ASMFLAGS += -g -F dwarf

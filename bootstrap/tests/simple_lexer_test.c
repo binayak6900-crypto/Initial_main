@@ -36,7 +36,7 @@ const char* token_type_names[] = {
 };
 
 int main() {
-    char* program = "func";
+    char* program = "f";  // Test with just one character
     
     printf("Testing simple program: '%s'\n", program);
     

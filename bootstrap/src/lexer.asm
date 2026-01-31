@@ -168,11 +168,8 @@ skip_whitespace:
 
 ; Check if character is alphabetic or underscore (valid identifier start)
 ; Parameters: al = character
-; Returns: ZF set if valid identifier start
-is_identifier_start:
-    push rbx
-    mov bl, al                      ; Save original character
-    
+; Returns: al = 1 if valid identifier start, 0 if not
+is_identifier_start_alt:
     ; Check for underscore
     cmp al, '_'
     je .valid
@@ -190,17 +187,11 @@ is_identifier_start:
     jbe .valid
     
 .invalid:
-    ; Clear zero flag (set ZF=0)
-    mov al, bl                      ; Restore original character
-    or al, 1                        ; This clears ZF
-    pop rbx
+    mov al, 0
     ret
     
 .valid:
-    ; Set zero flag (set ZF=1)
-    mov al, bl                      ; Restore original character
-    cmp al, al                      ; This sets ZF
-    pop rbx
+    mov al, 1
     ret
 
 ; Check if character is alphanumeric or underscore (valid identifier continuation)
@@ -209,9 +200,10 @@ is_identifier_start:
 is_identifier_char:
     ; Check identifier start characters first
     push rax
-    call is_identifier_start
+    call is_identifier_start_alt
+    cmp al, 1
     pop rax
-    jz .valid
+    je .valid
     
     ; Check for digits (0-9)
     cmp al, '0'
@@ -309,13 +301,14 @@ lexer_next_token:
     mov dword [rel current_token.column], 1
 .column_ok:
     
-    ; Check token type - explicit test
-    push rax
-    call is_identifier_start
-    pop rax
-    pushf                           ; Save flags
-    popf                            ; Restore flags
-    jz .identifier_token
+    ; Check token type
+    mov bl, al                      ; Save character in bl
+    call is_identifier_start_alt
+    cmp al, 1
+    mov al, bl                      ; Restore character
+    jne .not_identifier
+    jmp .identifier_token
+.not_identifier:
     
     call is_digit
     jz .number_token
@@ -333,9 +326,7 @@ lexer_next_token:
     jmp .done
     
 .identifier_token:
-    ; Set a distinctive type to see if we reach here
-    mov dword [rel current_token.type], 99  ; Use 99 as a test value
-    mov dword [rel current_token.value_len], 1
+    call read_identifier
     jmp .done
     
 .number_token:
@@ -686,17 +677,9 @@ test_is_identifier_start:
     mov rbp, rsp
     
     mov al, cl                      ; Get character from parameter
-    call is_identifier_start
-    jz .valid
+    call is_identifier_start_alt
+    movzx rax, al                   ; Zero-extend al to rax
     
-    ; Not valid
-    xor rax, rax
-    jmp .done
-    
-.valid:
-    mov rax, 1
-    
-.done:
     pop rbp
     ret
 

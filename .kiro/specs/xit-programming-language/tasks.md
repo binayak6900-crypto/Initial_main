@@ -17,7 +17,7 @@ The plan focuses on incremental development with early validation to avoid the p
   - Create basic Makefile for bootstrap compilation
   - _Requirements: 1.2_
 
-- [-] 2. Implement core bootstrap lexer in assembly
+- [x] 2. Implement core bootstrap lexer in assembly
   - [x] 2.1 Create lexer data structures and token definitions
     - Define token types (identifier, number, string, keyword, operator, delimiter)
     - Implement token structure with type, value, line, and column
@@ -28,7 +28,7 @@ The plan focuses on incremental development with early validation to avoid the p
     - **Property 1: Bootstrap Compilation Round-Trip**
     - **Validates: Requirements 1.1, 1.3, 1.4**
   
-  - [-] 2.3 Implement character-by-character tokenization
+  - [x] 2.3 Implement character-by-character tokenization
     - Write assembly code for reading source characters
     - Implement keyword recognition and operator parsing
     - Add string and number literal parsing
