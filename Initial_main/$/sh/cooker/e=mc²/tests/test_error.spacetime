@@ -1,0 +1,5 @@
+-(Test error handling)
+
+@main:
+    load.const << 42 >> -> %r0
+    -(Missing :: prefix - should error)

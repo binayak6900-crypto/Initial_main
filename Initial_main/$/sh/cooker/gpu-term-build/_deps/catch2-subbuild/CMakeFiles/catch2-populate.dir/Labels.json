@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/d/$/sh/cooker/gpu-term-build/_deps/catch2-subbuild/CMakeFiles/catch2-populate"
+		},
+		{
+			"file" : "/d/$/sh/cooker/gpu-term-build/_deps/catch2-subbuild/CMakeFiles/catch2-populate.rule"
+		},
+		{
+			"file" : "/d/$/sh/cooker/gpu-term-build/_deps/catch2-subbuild/CMakeFiles/catch2-populate-complete.rule"
+		},
+		{
+			"file" : "/d/$/sh/cooker/gpu-term-build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-build.rule"
+		},
+		{
+			"file" : "/d/$/sh/cooker/gpu-term-build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-configure.rule"
+		},
+		{
+			"file" : "/d/$/sh/cooker/gpu-term-build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-download.rule"
+		},
+		{
+			"file" : "/d/$/sh/cooker/gpu-term-build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-install.rule"
+		},
+		{
+			"file" : "/d/$/sh/cooker/gpu-term-build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-mkdir.rule"
+		},
+		{
+			"file" : "/d/$/sh/cooker/gpu-term-build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-patch.rule"
+		},
+		{
+			"file" : "/d/$/sh/cooker/gpu-term-build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-test.rule"
+		},
+		{
+			"file" : "/d/$/sh/cooker/gpu-term-build/_deps/catch2-subbuild/catch2-populate-prefix/src/catch2-populate-stamp/catch2-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"catch2-populate"
+		],
+		"name" : "catch2-populate"
+	}
+}

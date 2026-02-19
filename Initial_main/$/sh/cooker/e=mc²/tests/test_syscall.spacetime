@@ -1,0 +1,7 @@
+-(Test syscall)
+
+@main:
+    :: load.const << 42 >> -> %r0
+    :: syscall << io_write >> << %r0 >>
+    :: return
+

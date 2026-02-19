@@ -1,0 +1,20 @@
+-(Test all basic opcodes)
+
+@main:
+    -(Test load and store)
+    :: load.const << 42 >> -> %r0
+    :: load.const << 10 >> -> %r1
+    
+    -(Test arithmetic)
+    :: add << %r0, %r1 >> -> %r2
+    :: sub << %r0, %r1 >> -> %r3
+    :: mul << %r0, %r1 >> -> %r4
+    
+    -(Test call and return)
+    :: call << helper >> << %r2 >>
+    :: return << %r0 >>
+
+@helper:
+    :: load.const << 1 >> -> %r5
+    :: return
+

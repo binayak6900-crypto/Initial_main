@@ -1,0 +1,18 @@
+-(Test jumps and labels)
+
+@main:
+    :: load.const << 5 >> -> %r0
+    :: load.const << 10 >> -> %r1
+    
+    -(Test comparison and conditional jumps)
+    :: cmp << %r0, %r1 >>
+    :: jlt << @less_than >>
+    :: jump << @end >>
+
+@less_than:
+    :: load.const << 1 >> -> %r2
+    :: jump << @end >>
+
+@end:
+    :: return << %r2 >>
+

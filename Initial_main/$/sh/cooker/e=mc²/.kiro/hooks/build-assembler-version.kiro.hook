@@ -1,0 +1,21 @@
+{
+  "enabled": true,
+  "name": "Build Assembler Version",
+  "description": "Reminds to build new assembler versions using Makefile with proper naming format: <name>-<version>-TEST (optional) in bin folder with version.txt",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "src/assembler.cpp",
+      "src/assembler.hpp",
+      "src/main.cpp",
+      "src/runtime.cpp",
+      "src/runtime.hpp",
+      "Makefile"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Check if this change requires a new assembler version. If so, remind to: 1) Update Makefile to build with naming format: <name>-<version_prefix>-TEST(optional) in bin folder, 2) Create/update version.txt, 3) Run the build using make"
+  }
+}

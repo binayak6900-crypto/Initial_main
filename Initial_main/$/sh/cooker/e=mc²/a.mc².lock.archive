@@ -1,0 +1,44 @@
+type :: << state <:: define ::> :> set.type.setname.typename -> ::< -(!no space here)<name> -(!no space here)>{<yor job>}
+namespace :: <name e.g class>{<functions,glb variables,!charset etc..>}
+classdef :: class.for<for something like function or a type idk you set this up>
+section :: #<section name> :: << {}
+function :: <type> :: <name> << (arg1,arg2,_optional_arg_ arg3) >> {<content>} -( << >> similar to what to you will know later)
+:: import file.mc² _Optional_arg_ _optional_arg_ -(e.g import math.mc²/math as m)
+:: from file.mc² import * -(* = all, $ all glb variables, % functions)
+$(<global variable name>) :: <type> -(str,int,float,void,Null)
+$(<global variable name>) :: <type>.let <value>
+:: X -(a variable)
+:: x = 0 -(a localscope int variable)
+!charset :: macro.setmacro(the macro value) << macro name
+$(!charset.macroset(value) << name) -(optional) :: __ANY_ARG__
+-(__Comment)
+-{
+    -(multilne)
+    -(comment)
+    - Everything ignored
+}
+__ARGS_
+_Get_space_
+_fragment_possible_args_
+from loading.mc² import||get all||* as load -(|| used here to say you can use import or get and say import all or import * smae goes with $ = global and % being functions)
+load :: <variable name> = load.<glb var name>||load.<function(__ARGS_)>
+$(@assign.symboliccharset :: !charset.define :: <symbols e.g **>) :: file -> math :: file.#math -(math section) :: universalroot(_arg >> <symbol e.g **> << arg_) -(from file.mc² it gets the math namespace under which is #math section under which lives universalroot() function and _arg << ** >> arg_ defines how to handle args for the function for dunctions with 3 args we can do something like (_arg << -(relative to) ** -(position) >> arg_ -- arg_ + _arg -(for more args) -- -(continue with -- or use more relatives like << >> <+ >+ >- <- -(specific features under this kind of system))) )
+@include header.<header.e4²> -(similar to cxx type headers)
+:: if << <condition> :: True  && -(and) || -(or)>> {
+
+
+
+} -(same for other kinds of operators)
+-{
+    -(arent optional)
+    -(:: also arent optional)
+    -(improvements -> including a .mc² will do same thing as including a dll or compiling with a .o file in c)
+    -(compiler can run in any os)
+    -(compiler is selfhosted)
+    -(language is as absurd as physics make it more absurd)
+    -(also make it an assembler or .spacetime assembly)
+    -(make it extendable)
+    -(add .mc_sup2 as a secondary extenshion for .mc² since not everyone can figure out ²)
+    -(make it scaleable)
+    -(make sure you do everything that its also having thoose jumbled shit something.something.something.something type shit from the ts/js/jsx)
+}

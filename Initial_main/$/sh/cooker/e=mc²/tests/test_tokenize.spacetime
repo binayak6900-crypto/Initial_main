@@ -1,0 +1,58 @@
+-(Test Tokenization Implementation)
+-(Tests lexer functionality for mc² syntax)
+-(Requirements: 5.1, 5.2, 1.1-1.25)
+
+-(Test source code)
+$TEST_SOURCE :: str
+
+@init_test_source:
+    :: load.const << ":: x = 42\n:: y = 3.14\n:: name = \"hello\"\nif << x > 10 :: True && || >> {\n    :: call << print >> << x >>\n}" >> -> %r0
+    :: store.global << %r0 >> -> $TEST_SOURCE
+    :: return
+
+-(Main test function)
+:: func test_tokenize >> -> void {
+    -(initialize systems)
+    :: call << lexer_init >>
+    :: call << init_test_source >>
+    
+    -(create lexer)
+    :: load.global << $TEST_SOURCE >> -> %r0
+    :: load.const << "test.mc²" >> -> %r1
+    :: call << lexer_create >> << %r0, %r1 >> -> %r2  -(lexer in %r2)
+    
+    -(print header)
+    :: call << print >> << _possible_args_ >> {
+        :: load.const << "=== Tokenization Test ===" >> -> %r0
+    }
+    
+    -(tokenize loop)
+@test_loop:
+    :: call << lexer_next_token >> << %r2 >> -> %r3
+    
+    -(check if null (end of tokens))
+    :: test << %r3 >>
+    :: jz << @test_done >>
+    
+    -(print token)
+    :: call << token_print >> << %r3 >>
+    
+    -(free token)
+    :: call << token_free >> << %r3 >>
+    
+    :: jump << @test_loop >>
+    
+@test_done:
+    -(print footer)
+    :: call << print >> << _possible_args_ >> {
+        :: load.const << "=== Test Complete ===" >> -> %r0
+    }
+    
+    :: return
+}
+
+-(Entry point)
+@main:
+    :: call << test_tokenize >>
+    :: return
+

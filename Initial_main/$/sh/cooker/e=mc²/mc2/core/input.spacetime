@@ -1,0 +1,49 @@
+-(Core Function: input)
+-(Implements input function with optional prompt parameter)
+-(Validates: Requirements 13.2, 13.5, 13.6)
+
+-(Input function with optional prompt parameter)
+-(Reads from standard input via syscall)
+-(Returns string value in %r0)
+
+@input:
+    -(Check if prompt parameter was provided in %r0)
+    -(If %r0 is non-zero, it contains the prompt string)
+    :: load.const << 0 >> -> %r10
+    :: cmp << %r0, %r10 >>
+    :: je << @input_no_prompt >>
+    
+@input_with_prompt:
+    -(Display the prompt by calling print)
+    -(Save %r0 (prompt) to %r8 temporarily)
+    :: load.const << 0 >> -> %r8
+    :: add << %r0, %r8 >> -> %r8
+    
+    -(Call print with prompt in %r0)
+    :: load.const << 0 >> -> %r1  -(null terminator for print)
+    :: call << @print >>
+    
+    -(Restore and continue to read input)
+    :: jump << @input_read >>
+    
+@input_no_prompt:
+    -(No prompt provided, just read input)
+    :: jump << @input_read >>
+    
+@input_read:
+    -(Read from standard input via hardware I/O syscall)
+    -(io_read syscall reads user input and returns it in %r0)
+    :: syscall << io_read >> -> %r0
+    
+    -(Return the input string in %r0)
+    :: return << %r0 >>
+
+-(Example usage:)
+-(With prompt:)
+-(  :: load.const << "Enter your name: " >> -> %r0)
+-(  :: call << @input >>)
+-(  -(result is now in %r0))
+-(Without prompt:)
+-(  :: load.const << 0 >> -> %r0)
+-(  :: call << @input >>)
+-(  -(result is now in %r0))

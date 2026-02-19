@@ -1,0 +1,19 @@
+-(Comprehensive test for .e² binary format)
+-(Tests: magic number, version, header, metadata, code section, data section)
+
+@start:
+    :: load.const << 100 >> -> %r0
+    :: load.const << 200 >> -> %r1
+    :: add << %r0, %r1 >> -> %r2
+    :: call << compute >> << %r2 >>
+    :: return << %r0 >>
+
+@compute:
+    :: load.const << 5 >> -> %r3
+    :: mul << %r0, %r3 >> -> %r4
+    :: sub << %r4, %r1 >> -> %r5
+    :: return << %r5 >>
+
+@print_result:
+    :: syscall << io_write >> << %r0 >>
+    :: return

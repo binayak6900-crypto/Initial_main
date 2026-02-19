@@ -1,0 +1,9 @@
+-(Test runtime executor with syscalls)
+
+@main:
+    :: load.const << 42 >> -> %r0
+    :: syscall << io_write >> << %r0 >>
+    :: syscall << io_read >> -> %r1
+    :: syscall << malloc >> << 1024 >> -> %r2
+    :: syscall << free >> << %r2 >>
+    :: return

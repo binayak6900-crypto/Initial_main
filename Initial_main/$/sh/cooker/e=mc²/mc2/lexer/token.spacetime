@@ -1,0 +1,329 @@
+-(Token Types and Structures for mc² Lexer)
+-(Implements token representation for lexical analysis)
+-(Requirements: 5.1, 5.2)
+
+-(Token Type Enumeration)
+-(Each token type is represented as an integer constant)
+$TOKEN_TYPE_KEYWORD :: int
+$TOKEN_TYPE_IDENTIFIER :: int
+$TOKEN_TYPE_OPERATOR :: int
+$TOKEN_TYPE_LITERAL :: int
+$TOKEN_TYPE_SYMBOL :: int
+$TOKEN_TYPE_DELIMITER :: int
+$TOKEN_TYPE_COMMENT :: int
+
+-(Initialize token type constants)
+@init_token_types:
+    :: load.const << 0 >> -> %r0
+    :: store.global << %r0 >> -> $TOKEN_TYPE_KEYWORD
+    
+    :: load.const << 1 >> -> %r0
+    :: store.global << %r0 >> -> $TOKEN_TYPE_IDENTIFIER
+    
+    :: load.const << 2 >> -> %r0
+    :: store.global << %r0 >> -> $TOKEN_TYPE_OPERATOR
+    
+    :: load.const << 3 >> -> %r0
+    :: store.global << %r0 >> -> $TOKEN_TYPE_LITERAL
+    
+    :: load.const << 4 >> -> %r0
+    :: store.global << %r0 >> -> $TOKEN_TYPE_SYMBOL
+    
+    :: load.const << 5 >> -> %r0
+    :: store.global << %r0 >> -> $TOKEN_TYPE_DELIMITER
+    
+    :: load.const << 6 >> -> %r0
+    :: store.global << %r0 >> -> $TOKEN_TYPE_COMMENT
+    
+    :: return
+
+-(Token Structure Layout in Memory)
+-(Offset 0: type - int (4 bytes))
+-(Offset 4: lexeme_ptr - pointer to string (8 bytes))
+-(Offset 12: lexeme_len - length of string (4 bytes))
+-(Offset 16: line - int (4 bytes))
+-(Offset 20: column - int (4 bytes))
+-(Offset 24: file_ptr - pointer to filename string (8 bytes))
+-(Offset 32: file_len - length of filename (4 bytes))
+-(Total size: 36 bytes)
+
+$TOKEN_SIZE :: int
+
+@init_token_size:
+    :: load.const << 36 >> -> %r0
+    :: store.global << %r0 >> -> $TOKEN_SIZE
+    :: return
+
+-(Create a new token)
+-(Parameters: type:int, lexeme:str, line:int, column:int, file:str)
+-(Returns: pointer to token structure)
+:: func token_create << type:int, lexeme:str, line:int, column:int, file:str >> -> ptr {
+    -(allocate memory for token structure)
+    :: load.global << $TOKEN_SIZE >> -> %r0
+    :: syscall << malloc >> << %r0 >> -> %r1  -(token pointer in %r1)
+    
+    -(store type at offset 0)
+    :: load.local << -8 >> -> %r0  -(load type parameter)
+    :: store << %r0 >> -> %r1[0]
+    
+    -(store lexeme pointer and length)
+    :: load.local << -16 >> -> %r2  -(load lexeme parameter)
+    :: call << string_ptr >> << %r2 >> -> %r3
+    :: store << %r3 >> -> %r1[4]  -(store lexeme pointer)
+    
+    :: call << string_len >> << %r2 >> -> %r3
+    :: store << %r3 >> -> %r1[12]  -(store lexeme length)
+    
+    -(store line at offset 16)
+    :: load.local << -24 >> -> %r0  -(load line parameter)
+    :: store << %r0 >> -> %r1[16]
+    
+    -(store column at offset 20)
+    :: load.local << -32 >> -> %r0  -(load column parameter)
+    :: store << %r0 >> -> %r1[20]
+    
+    -(store file pointer and length)
+    :: load.local << -40 >> -> %r2  -(load file parameter)
+    :: call << string_ptr >> << %r2 >> -> %r3
+    :: store << %r3 >> -> %r1[24]  -(store file pointer)
+    
+    :: call << string_len >> << %r2 >> -> %r3
+    :: store << %r3 >> -> %r1[32]  -(store file length)
+    
+    :: return << %r1 >>
+}
+
+-(Get token type)
+-(Parameters: token:ptr)
+-(Returns: type:int)
+:: func token_get_type << token:ptr >> -> int {
+    :: load.local << -8 >> -> %r0  -(load token pointer)
+    :: load << %r0[0] >> -> %r1  -(load type from offset 0)
+    :: return << %r1 >>
+}
+
+-(Get token lexeme)
+-(Parameters: token:ptr)
+-(Returns: lexeme:str)
+:: func token_get_lexeme << token:ptr >> -> str {
+    :: load.local << -8 >> -> %r0  -(load token pointer)
+    :: load << %r0[4] >> -> %r1  -(load lexeme pointer)
+    :: load << %r0[12] >> -> %r2  -(load lexeme length)
+    :: call << string_from_ptr >> << %r1, %r2 >> -> %r3
+    :: return << %r3 >>
+}
+
+-(Get token line)
+-(Parameters: token:ptr)
+-(Returns: line:int)
+:: func token_get_line << token:ptr >> -> int {
+    :: load.local << -8 >> -> %r0  -(load token pointer)
+    :: load << %r0[16] >> -> %r1  -(load line from offset 16)
+    :: return << %r1 >>
+}
+
+-(Get token column)
+-(Parameters: token:ptr)
+-(Returns: column:int)
+:: func token_get_column << token:ptr >> -> int {
+    :: load.local << -8 >> -> %r0  -(load token pointer)
+    :: load << %r0[20] >> -> %r1  -(load column from offset 20)
+    :: return << %r1 >>
+}
+
+-(Get token file)
+-(Parameters: token:ptr)
+-(Returns: file:str)
+:: func token_get_file << token:ptr >> -> str {
+    :: load.local << -8 >> -> %r0  -(load token pointer)
+    :: load << %r0[24] >> -> %r1  -(load file pointer)
+    :: load << %r0[32] >> -> %r2  -(load file length)
+    :: call << string_from_ptr >> << %r1, %r2 >> -> %r3
+    :: return << %r3 >>
+}
+
+-(Free token memory)
+-(Parameters: token:ptr)
+-(Returns: void)
+:: func token_free << token:ptr >> -> void {
+    :: load.local << -8 >> -> %r0  -(load token pointer)
+    
+    -(free lexeme string)
+    :: load << %r0[4] >> -> %r1
+    :: syscall << free >> << %r1 >>
+    
+    -(free file string)
+    :: load << %r0[24] >> -> %r1
+    :: syscall << free >> << %r1 >>
+    
+    -(free token structure)
+    :: syscall << free >> << %r0 >>
+    :: return
+}
+
+-(Get token type name as string)
+-(Parameters: type:int)
+-(Returns: name:str)
+:: func token_type_name << type:int >> -> str {
+    :: load.local << -8 >> -> %r0  -(load type parameter)
+    
+    :: load.global << $TOKEN_TYPE_KEYWORD >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jz << @type_keyword >>
+    
+    :: load.global << $TOKEN_TYPE_IDENTIFIER >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jz << @type_identifier >>
+    
+    :: load.global << $TOKEN_TYPE_OPERATOR >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jz << @type_operator >>
+    
+    :: load.global << $TOKEN_TYPE_LITERAL >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jz << @type_literal >>
+    
+    :: load.global << $TOKEN_TYPE_SYMBOL >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jz << @type_symbol >>
+    
+    :: load.global << $TOKEN_TYPE_DELIMITER >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jz << @type_delimiter >>
+    
+    :: load.global << $TOKEN_TYPE_COMMENT >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jz << @type_comment >>
+    
+    -(unknown type)
+    :: load.const << "UNKNOWN" >> -> %r0
+    :: return << %r0 >>
+    
+@type_keyword:
+    :: load.const << "KEYWORD" >> -> %r0
+    :: return << %r0 >>
+    
+@type_identifier:
+    :: load.const << "IDENTIFIER" >> -> %r0
+    :: return << %r0 >>
+    
+@type_operator:
+    :: load.const << "OPERATOR" >> -> %r0
+    :: return << %r0 >>
+    
+@type_literal:
+    :: load.const << "LITERAL" >> -> %r0
+    :: return << %r0 >>
+    
+@type_symbol:
+    :: load.const << "SYMBOL" >> -> %r0
+    :: return << %r0 >>
+    
+@type_delimiter:
+    :: load.const << "DELIMITER" >> -> %r0
+    :: return << %r0 >>
+    
+@type_comment:
+    :: load.const << "COMMENT" >> -> %r0
+    :: return << %r0 >>
+}
+
+-(Print token for debugging)
+-(Parameters: token:ptr)
+-(Returns: void)
+:: func token_print << token:ptr >> -> void {
+    :: load.local << -8 >> -> %r0  -(load token pointer)
+    
+    -(get token type)
+    :: call << token_get_type >> << %r0 >> -> %r1
+    :: call << token_type_name >> << %r1 >> -> %r2
+    
+    -(get token lexeme)
+    :: call << token_get_lexeme >> << %r0 >> -> %r3
+    
+    -(get token line and column)
+    :: call << token_get_line >> << %r0 >> -> %r4
+    :: call << token_get_column >> << %r0 >> -> %r5
+    
+    -(get token file)
+    :: call << token_get_file >> << %r0 >> -> %r6
+    
+    -(print token information)
+    :: call << print >> << _possible_args_ >> {
+        :: load.const << "Token(" >> -> %r0
+        :: load << %r2 >> -> %r0  -(type name)
+        :: load.const << ", '" >> -> %r0
+        :: load << %r3 >> -> %r0  -(lexeme)
+        :: load.const << "', " >> -> %r0
+        :: load << %r6 >> -> %r0  -(file)
+        :: load.const << ":" >> -> %r0
+        :: load << %r4 >> -> %r0  -(line)
+        :: load.const << ":" >> -> %r0
+        :: load << %r5 >> -> %r0  -(column)
+        :: load.const << ")" >> -> %r0
+    }
+    
+    :: return
+}
+
+-(String utility functions - these will be implemented in string.spacetime)
+-(For now, we provide stubs that will be linked later)
+
+-(Get pointer to string data)
+:: func string_ptr << str:str >> -> ptr {
+    :: load.local << -8 >> -> %r0
+    :: return << %r0 >>  -(for now, assume string is already a pointer)
+}
+
+-(Get length of string)
+:: func string_len << str:str >> -> int {
+    :: load.local << -8 >> -> %r0  -(string pointer)
+    :: load.const << 0 >> -> %r1  -(counter)
+    
+@string_len_loop:
+    :: load << %r0[%r1] >> -> %r2  -(load byte at offset)
+    :: test << %r2 >>
+    :: jz << @string_len_end >>  -(null terminator found)
+    
+    :: add << %r1, 1 >> -> %r1  -(increment counter)
+    :: jump << @string_len_loop >>
+    
+@string_len_end:
+    :: return << %r1 >>
+}
+
+-(Create string from pointer and length)
+:: func string_from_ptr << ptr:ptr, len:int >> -> str {
+    :: load.local << -8 >> -> %r0  -(pointer)
+    :: load.local << -16 >> -> %r1  -(length)
+    
+    -(allocate new string buffer)
+    :: add << %r1, 1 >> -> %r2  -(length + 1 for null terminator)
+    :: syscall << malloc >> << %r2 >> -> %r3
+    
+    -(copy bytes)
+    :: load.const << 0 >> -> %r4  -(counter)
+    
+@string_copy_loop:
+    :: cmp << %r4, %r1 >>
+    :: jge << @string_copy_end >>
+    
+    :: load << %r0[%r4] >> -> %r5
+    :: store << %r5 >> -> %r3[%r4]
+    
+    :: add << %r4, 1 >> -> %r4
+    :: jump << @string_copy_loop >>
+    
+@string_copy_end:
+    -(add null terminator)
+    :: load.const << 0 >> -> %r5
+    :: store << %r5 >> -> %r3[%r1]
+    
+    :: return << %r3 >>
+}
+
+-(Initialize token system)
+@token_init:
+    :: call << init_token_types >>
+    :: call << init_token_size >>
+    :: return

@@ -1,0 +1,127 @@
+-(Core Function: print)
+-(Implements variadic print function with hardware I/O support)
+-(Validates: Requirements 13.1, 13.4)
+
+-(Print function with variadic arguments via _possible_args_)
+-(Supports multiple types: int, float, str)
+-(Outputs to standard output via syscall)
+
+@print:
+    -(Initialize argument counter)
+    :: load.const << 0 >> -> %r10
+    
+@print_loop:
+    -(Load argument at current index)
+    -(Arguments are passed in registers %r0, %r1, %r2, etc.)
+    -(We need to check which register to load based on counter)
+    
+    -(Check counter value to determine which register to use)
+    :: load.const << 0 >> -> %r11
+    :: cmp << %r10, %r11 >>
+    :: je << @print_arg_r0 >>
+    
+    :: load.const << 1 >> -> %r11
+    :: cmp << %r10, %r11 >>
+    :: je << @print_arg_r1 >>
+    
+    :: load.const << 2 >> -> %r11
+    :: cmp << %r10, %r11 >>
+    :: je << @print_arg_r2 >>
+    
+    :: load.const << 3 >> -> %r11
+    :: cmp << %r10, %r11 >>
+    :: je << @print_arg_r3 >>
+    
+    :: load.const << 4 >> -> %r11
+    :: cmp << %r10, %r11 >>
+    :: je << @print_arg_r4 >>
+    
+    :: load.const << 5 >> -> %r11
+    :: cmp << %r10, %r11 >>
+    :: je << @print_arg_r5 >>
+    
+    :: load.const << 6 >> -> %r11
+    :: cmp << %r10, %r11 >>
+    :: je << @print_arg_r6 >>
+    
+    :: load.const << 7 >> -> %r11
+    :: cmp << %r10, %r11 >>
+    :: je << @print_arg_r7 >>
+    
+    -(If we've checked all possible argument registers, end)
+    :: jump << @print_end >>
+    
+@print_arg_r0:
+    -(Check if %r0 is null/zero - indicates no more arguments)
+    :: load.const << 0 >> -> %r12
+    :: cmp << %r0, %r12 >>
+    :: je << @print_end >>
+    -(Output %r0 to stdout via hardware I/O syscall)
+    :: syscall << io_write >> << %r0 >>
+    :: jump << @print_next >>
+    
+@print_arg_r1:
+    -(Check if %r1 is null/zero)
+    :: load.const << 0 >> -> %r12
+    :: cmp << %r1, %r12 >>
+    :: je << @print_end >>
+    :: syscall << io_write >> << %r1 >>
+    :: jump << @print_next >>
+    
+@print_arg_r2:
+    :: load.const << 0 >> -> %r12
+    :: cmp << %r2, %r12 >>
+    :: je << @print_end >>
+    :: syscall << io_write >> << %r2 >>
+    :: jump << @print_next >>
+    
+@print_arg_r3:
+    :: load.const << 0 >> -> %r12
+    :: cmp << %r3, %r12 >>
+    :: je << @print_end >>
+    :: syscall << io_write >> << %r3 >>
+    :: jump << @print_next >>
+    
+@print_arg_r4:
+    :: load.const << 0 >> -> %r12
+    :: cmp << %r4, %r12 >>
+    :: je << @print_end >>
+    :: syscall << io_write >> << %r4 >>
+    :: jump << @print_next >>
+    
+@print_arg_r5:
+    :: load.const << 0 >> -> %r12
+    :: cmp << %r5, %r12 >>
+    :: je << @print_end >>
+    :: syscall << io_write >> << %r5 >>
+    :: jump << @print_next >>
+    
+@print_arg_r6:
+    :: load.const << 0 >> -> %r12
+    :: cmp << %r6, %r12 >>
+    :: je << @print_end >>
+    :: syscall << io_write >> << %r6 >>
+    :: jump << @print_next >>
+    
+@print_arg_r7:
+    :: load.const << 0 >> -> %r12
+    :: cmp << %r7, %r12 >>
+    :: je << @print_end >>
+    :: syscall << io_write >> << %r7 >>
+    :: jump << @print_next >>
+    
+@print_next:
+    -(Increment counter and continue)
+    :: add << %r10, 1 >> -> %r10
+    :: jump << @print_loop >>
+    
+@print_end:
+    :: return
+
+-(Example usage:)
+-(To call print with multiple arguments:)
+-(  :: load.const << "Hello, " >> -> %r0)
+-(  :: load.const << "world" >> -> %r1)
+-(  :: load.const << "!" >> -> %r2)
+-(  :: load.const << 0 >> -> %r3  -(null terminator))
+-(  :: call << @print >>)

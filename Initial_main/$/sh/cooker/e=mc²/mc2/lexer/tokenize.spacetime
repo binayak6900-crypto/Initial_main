@@ -1,0 +1,584 @@
+-(Tokenization Functions for mc² Lexer)
+-(Implements token recognition for all mc² syntax elements)
+-(Requirements: 5.1, 5.2, 1.1-1.25)
+
+-(Tokenize identifier or keyword)
+-(Parameters: lexer:ptr)
+-(Returns: token:ptr)
+:: func lexer_tokenize_identifier << lexer:ptr >> -> ptr {
+    :: load.local << -8 >> -> %r0  -(lexer pointer)
+    
+    -(save start position, line, column)
+    :: load << %r0[12] >> -> %r1  -(start position)
+    :: load << %r0[16] >> -> %r2  -(line)
+    :: load << %r0[20] >> -> %r3  -(column)
+    
+    -(read identifier characters)
+@ident_loop:
+    :: call << lexer_peek >> << %r0 >> -> %r4
+    :: call << is_alnum >> << %r4 >> -> %r5
+    :: test << %r5 >>
+    :: jz << @ident_done >>
+    
+    :: call << lexer_advance >> << %r0 >>
+    :: jump << @ident_loop >>
+    
+@ident_done:
+    -(extract lexeme)
+    :: load << %r0[12] >> -> %r6  -(end position)
+    :: sub << %r6, %r1 >> -> %r7  -(length)
+    :: load << %r0[0] >> -> %r8  -(source pointer)
+    :: add << %r8, %r1 >> -> %r9  -(start of lexeme)
+    
+    :: call << string_from_ptr >> << %r9, %r7 >> -> %r10  -(lexeme string)
+    
+    -(check if keyword)
+    :: call << is_keyword >> << %r10 >> -> %r11
+    :: test << %r11 >>
+    :: jnz << @ident_keyword >>
+    
+    -(create identifier token with hash-based name)
+    :: call << create_hash_variable >> << %r10 >> -> %r12
+    :: load << %r0[24] >> -> %r13  -(filename pointer)
+    :: load << %r0[32] >> -> %r14  -(filename length)
+    :: call << string_from_ptr >> << %r13, %r14 >> -> %r15
+    
+    :: load.global << $TOKEN_TYPE_IDENTIFIER >> -> %r16
+    :: call << token_create >> << %r16, %r12, %r2, %r3, %r15 >> -> %r17
+    :: return << %r17 >>
+    
+@ident_keyword:
+    -(create keyword token)
+    :: load << %r0[24] >> -> %r13
+    :: load << %r0[32] >> -> %r14
+    :: call << string_from_ptr >> << %r13, %r14 >> -> %r15
+    
+    :: load.global << $TOKEN_TYPE_KEYWORD >> -> %r16
+    :: call << token_create >> << %r16, %r10, %r2, %r3, %r15 >> -> %r17
+    :: return << %r17 >>
+}
+
+-(Tokenize number literal)
+-(Parameters: lexer:ptr)
+-(Returns: token:ptr)
+:: func lexer_tokenize_number << lexer:ptr >> -> ptr {
+    :: load.local << -8 >> -> %r0  -(lexer pointer)
+    
+    -(save start position, line, column)
+    :: load << %r0[12] >> -> %r1
+    :: load << %r0[16] >> -> %r2
+    :: load << %r0[20] >> -> %r3
+    
+    -(read digits)
+@num_loop:
+    :: call << lexer_peek >> << %r0 >> -> %r4
+    :: call << is_digit >> << %r4 >> -> %r5
+    :: test << %r5 >>
+    :: jz << @num_check_dot >>
+    
+    :: call << lexer_advance >> << %r0 >>
+    :: jump << @num_loop >>
+    
+@num_check_dot:
+    -(check for decimal point)
+    :: load.const << 46 >> -> %r6  -(dot)
+    :: cmp << %r4, %r6 >>
+    :: jnz << @num_done >>
+    
+    -(advance past dot)
+    :: call << lexer_advance >> << %r0 >>
+    
+    -(read fractional digits)
+@num_frac_loop:
+    :: call << lexer_peek >> << %r0 >> -> %r4
+    :: call << is_digit >> << %r4 >> -> %r5
+    :: test << %r5 >>
+    :: jz << @num_done >>
+    
+    :: call << lexer_advance >> << %r0 >>
+    :: jump << @num_frac_loop >>
+    
+@num_done:
+    -(extract lexeme)
+    :: load << %r0[12] >> -> %r6
+    :: sub << %r6, %r1 >> -> %r7
+    :: load << %r0[0] >> -> %r8
+    :: add << %r8, %r1 >> -> %r9
+    
+    :: call << string_from_ptr >> << %r9, %r7 >> -> %r10
+    
+    -(create literal token)
+    :: load << %r0[24] >> -> %r11
+    :: load << %r0[32] >> -> %r12
+    :: call << string_from_ptr >> << %r11, %r12 >> -> %r13
+    
+    :: load.global << $TOKEN_TYPE_LITERAL >> -> %r14
+    :: call << token_create >> << %r14, %r10, %r2, %r3, %r13 >> -> %r15
+    :: return << %r15 >>
+}
+
+
+-(Tokenize string literal)
+-(Parameters: lexer:ptr)
+-(Returns: token:ptr)
+:: func lexer_tokenize_string << lexer:ptr >> -> ptr {
+    :: load.local << -8 >> -> %r0  -(lexer pointer)
+    
+    -(save start position, line, column)
+    :: load << %r0[12] >> -> %r1
+    :: load << %r0[16] >> -> %r2
+    :: load << %r0[20] >> -> %r3
+    
+    -(advance past opening quote)
+    :: call << lexer_advance >> << %r0 >>
+    
+    -(read until closing quote)
+@str_loop:
+    :: call << lexer_peek >> << %r0 >> -> %r4
+    
+    -(check for end of file)
+    :: load.const << -1 >> -> %r5
+    :: cmp << %r4, %r5 >>
+    :: jz << @str_error >>
+    
+    -(check for closing quote)
+    :: load.const << 34 >> -> %r5  -(double quote)
+    :: cmp << %r4, %r5 >>
+    :: jz << @str_done >>
+    
+    -(check for escape sequence)
+    :: load.const << 92 >> -> %r5  -(backslash)
+    :: cmp << %r4, %r5 >>
+    :: jz << @str_escape >>
+    
+    :: call << lexer_advance >> << %r0 >>
+    :: jump << @str_loop >>
+    
+@str_escape:
+    -(skip backslash and next character)
+    :: call << lexer_advance >> << %r0 >>
+    :: call << lexer_advance >> << %r0 >>
+    :: jump << @str_loop >>
+    
+@str_done:
+    -(advance past closing quote)
+    :: call << lexer_advance >> << %r0 >>
+    
+    -(extract lexeme including quotes)
+    :: load << %r0[12] >> -> %r6
+    :: sub << %r6, %r1 >> -> %r7
+    :: load << %r0[0] >> -> %r8
+    :: add << %r8, %r1 >> -> %r9
+    
+    :: call << string_from_ptr >> << %r9, %r7 >> -> %r10
+    
+    -(create literal token)
+    :: load << %r0[24] >> -> %r11
+    :: load << %r0[32] >> -> %r12
+    :: call << string_from_ptr >> << %r11, %r12 >> -> %r13
+    
+    :: load.global << $TOKEN_TYPE_LITERAL >> -> %r14
+    :: call << token_create >> << %r14, %r10, %r2, %r3, %r13 >> -> %r15
+    :: return << %r15 >>
+    
+@str_error:
+    -(unterminated string - return error token)
+    :: load.const << "UNTERMINATED_STRING" >> -> %r10
+    :: load << %r0[24] >> -> %r11
+    :: load << %r0[32] >> -> %r12
+    :: call << string_from_ptr >> << %r11, %r12 >> -> %r13
+    
+    :: load.global << $TOKEN_TYPE_LITERAL >> -> %r14
+    :: call << token_create >> << %r14, %r10, %r2, %r3, %r13 >> -> %r15
+    :: return << %r15 >>
+}
+
+
+-(Tokenize operator or symbol)
+-(Parameters: lexer:ptr)
+-(Returns: token:ptr)
+:: func lexer_tokenize_operator << lexer:ptr >> -> ptr {
+    :: load.local << -8 >> -> %r0  -(lexer pointer)
+    
+    -(save start position, line, column)
+    :: load << %r0[12] >> -> %r1
+    :: load << %r0[16] >> -> %r2
+    :: load << %r0[20] >> -> %r3
+    
+    :: call << lexer_peek >> << %r0 >> -> %r4
+    
+    -(check for :: (double colon - line start marker))
+    :: load.const << 58 >> -> %r5  -(colon)
+    :: cmp << %r4, %r5 >>
+    :: jnz << @op_check_lt >>
+    
+    :: call << lexer_advance >> << %r0 >>
+    :: call << lexer_peek >> << %r0 >> -> %r6
+    :: cmp << %r6, %r5 >>
+    :: jz << @op_double_colon >>
+    
+    -(single colon)
+    :: load.const << ":" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_double_colon:
+    :: call << lexer_advance >> << %r0 >>
+    :: load.const << "::" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_check_lt:
+    -(check for << (left angle brackets))
+    :: load.const << 60 >> -> %r5  -(less than)
+    :: cmp << %r4, %r5 >>
+    :: jnz << @op_check_gt >>
+    
+    :: call << lexer_advance >> << %r0 >>
+    :: call << lexer_peek >> << %r0 >> -> %r6
+    :: cmp << %r6, %r5 >>
+    :: jz << @op_double_lt >>
+    
+    -(check for <=)
+    :: load.const << 61 >> -> %r7  -(equals)
+    :: cmp << %r6, %r7 >>
+    :: jz << @op_lte >>
+    
+    -(single <)
+    :: load.const << "<" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_double_lt:
+    :: call << lexer_advance >> << %r0 >>
+    :: load.const << "<<" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_lte:
+    :: call << lexer_advance >> << %r0 >>
+    :: load.const << "<=" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_check_gt:
+    -(check for >> (right angle brackets))
+    :: load.const << 62 >> -> %r5  -(greater than)
+    :: cmp << %r4, %r5 >>
+    :: jnz << @op_check_amp >>
+    
+    :: call << lexer_advance >> << %r0 >>
+    :: call << lexer_peek >> << %r0 >> -> %r6
+    :: cmp << %r6, %r5 >>
+    :: jz << @op_double_gt >>
+    
+    -(check for >=)
+    :: load.const << 61 >> -> %r7
+    :: cmp << %r6, %r7 >>
+    :: jz << @op_gte >>
+    
+    -(single >)
+    :: load.const << ">" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_double_gt:
+    :: call << lexer_advance >> << %r0 >>
+    :: load.const << ">>" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_gte:
+    :: call << lexer_advance >> << %r0 >>
+    :: load.const << ">=" >> -> %r10
+    :: jump << @op_create_token >>
+
+
+@op_check_amp:
+    -(check for && (logical AND))
+    :: load.const << 38 >> -> %r5  -(ampersand)
+    :: cmp << %r4, %r5 >>
+    :: jnz << @op_check_pipe >>
+    
+    :: call << lexer_advance >> << %r0 >>
+    :: call << lexer_peek >> << %r0 >> -> %r6
+    :: cmp << %r6, %r5 >>
+    :: jz << @op_double_amp >>
+    
+    -(single &)
+    :: load.const << "&" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_double_amp:
+    :: call << lexer_advance >> << %r0 >>
+    :: load.const << "&&" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_check_pipe:
+    -(check for || (logical OR))
+    :: load.const << 124 >> -> %r5  -(pipe)
+    :: cmp << %r4, %r5 >>
+    :: jnz << @op_check_star >>
+    
+    :: call << lexer_advance >> << %r0 >>
+    :: call << lexer_peek >> << %r0 >> -> %r6
+    :: cmp << %r6, %r5 >>
+    :: jz << @op_double_pipe >>
+    
+    -(single |)
+    :: load.const << "|" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_double_pipe:
+    :: call << lexer_advance >> << %r0 >>
+    :: load.const << "||" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_check_star:
+    -(check for ** (exponentiation))
+    :: load.const << 42 >> -> %r5  -(asterisk)
+    :: cmp << %r4, %r5 >>
+    :: jnz << @op_check_eq >>
+    
+    :: call << lexer_advance >> << %r0 >>
+    :: call << lexer_peek >> << %r0 >> -> %r6
+    :: cmp << %r6, %r5 >>
+    :: jz << @op_double_star >>
+    
+    -(single *)
+    :: load.const << "*" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_double_star:
+    :: call << lexer_advance >> << %r0 >>
+    :: load.const << "**" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_check_eq:
+    -(check for == (equality))
+    :: load.const << 61 >> -> %r5  -(equals)
+    :: cmp << %r4, %r5 >>
+    :: jnz << @op_check_bang >>
+    
+    :: call << lexer_advance >> << %r0 >>
+    :: call << lexer_peek >> << %r0 >> -> %r6
+    :: cmp << %r6, %r5 >>
+    :: jz << @op_double_eq >>
+    
+    -(single =)
+    :: load.const << "=" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_double_eq:
+    :: call << lexer_advance >> << %r0 >>
+    :: load.const << "==" >> -> %r10
+    :: jump << @op_create_token >>
+
+
+@op_check_bang:
+    -(check for != (not equal))
+    :: load.const << 33 >> -> %r5  -(exclamation)
+    :: cmp << %r4, %r5 >>
+    :: jnz << @op_single_char >>
+    
+    :: call << lexer_advance >> << %r0 >>
+    :: call << lexer_peek >> << %r0 >> -> %r6
+    :: load.const << 61 >> -> %r7  -(equals)
+    :: cmp << %r6, %r7 >>
+    :: jz << @op_not_eq >>
+    
+    -(single !)
+    :: load.const << "!" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_not_eq:
+    :: call << lexer_advance >> << %r0 >>
+    :: load.const << "!=" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_single_char:
+    -(single character operators: + - / % @ # $ - )
+    :: call << lexer_advance >> << %r0 >>
+    
+    :: load.const << 43 >> -> %r5  -(plus)
+    :: cmp << %r4, %r5 >>
+    :: jz << @op_plus >>
+    
+    :: load.const << 45 >> -> %r5  -(minus/dash)
+    :: cmp << %r4, %r5 >>
+    :: jz << @op_minus >>
+    
+    :: load.const << 47 >> -> %r5  -(slash)
+    :: cmp << %r4, %r5 >>
+    :: jz << @op_slash >>
+    
+    :: load.const << 37 >> -> %r5  -(percent)
+    :: cmp << %r4, %r5 >>
+    :: jz << @op_percent >>
+    
+    :: load.const << 64 >> -> %r5  -(at)
+    :: cmp << %r4, %r5 >>
+    :: jz << @op_at >>
+    
+    :: load.const << 35 >> -> %r5  -(hash)
+    :: cmp << %r4, %r5 >>
+    :: jz << @op_hash >>
+    
+    :: load.const << 36 >> -> %r5  -(dollar)
+    :: cmp << %r4, %r5 >>
+    :: jz << @op_dollar >>
+    
+    -(unknown operator)
+    :: load.const << "?" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_plus:
+    :: load.const << "+" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_minus:
+    :: load.const << "-" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_slash:
+    :: load.const << "/" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_percent:
+    :: load.const << "%" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_at:
+    :: load.const << "@" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_hash:
+    :: load.const << "#" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_dollar:
+    :: load.const << "$" >> -> %r10
+    :: jump << @op_create_token >>
+    
+@op_create_token:
+    -(create operator token)
+    :: load << %r0[24] >> -> %r11
+    :: load << %r0[32] >> -> %r12
+    :: call << string_from_ptr >> << %r11, %r12 >> -> %r13
+    
+    :: load.global << $TOKEN_TYPE_OPERATOR >> -> %r14
+    :: call << token_create >> << %r14, %r10, %r2, %r3, %r13 >> -> %r15
+    :: return << %r15 >>
+}
+
+
+-(Tokenize delimiter)
+-(Parameters: lexer:ptr)
+-(Returns: token:ptr)
+:: func lexer_tokenize_delimiter << lexer:ptr >> -> ptr {
+    :: load.local << -8 >> -> %r0  -(lexer pointer)
+    
+    -(save start position, line, column)
+    :: load << %r0[12] >> -> %r1
+    :: load << %r0[16] >> -> %r2
+    :: load << %r0[20] >> -> %r3
+    
+    :: call << lexer_advance >> << %r0 >> -> %r4
+    
+    -(create single character lexeme)
+    :: syscall << malloc >> << 2 >> -> %r10
+    :: store << %r4 >> -> %r10[0]
+    :: load.const << 0 >> -> %r5
+    :: store << %r5 >> -> %r10[1]
+    
+    -(create delimiter token)
+    :: load << %r0[24] >> -> %r11
+    :: load << %r0[32] >> -> %r12
+    :: call << string_from_ptr >> << %r11, %r12 >> -> %r13
+    
+    :: load.global << $TOKEN_TYPE_DELIMITER >> -> %r14
+    :: call << token_create >> << %r14, %r10, %r2, %r3, %r13 >> -> %r15
+    :: return << %r15 >>
+}
+
+-(Main tokenization function - get next token)
+-(Parameters: lexer:ptr)
+-(Returns: token:ptr (or null if at end))
+:: func lexer_next_token << lexer:ptr >> -> ptr {
+    :: load.local << -8 >> -> %r0  -(lexer pointer)
+    
+    -(skip whitespace)
+    :: call << lexer_skip_whitespace >> << %r0 >>
+    
+    -(check if at end)
+    :: call << lexer_at_end >> << %r0 >> -> %r1
+    :: test << %r1 >>
+    :: jnz << @token_end >>
+    
+    -(peek current character)
+    :: call << lexer_peek >> << %r0 >> -> %r2
+    
+    -(check for identifier/keyword)
+    :: call << is_alpha >> << %r2 >> -> %r3
+    :: test << %r3 >>
+    :: jnz << @token_identifier >>
+    
+    -(check for number)
+    :: call << is_digit >> << %r2 >> -> %r3
+    :: test << %r3 >>
+    :: jnz << @token_number >>
+    
+    -(check for string literal)
+    :: load.const << 34 >> -> %r4  -(double quote)
+    :: cmp << %r2, %r4 >>
+    :: jz << @token_string >>
+    
+    -(check for delimiters)
+    :: load.const << 40 >> -> %r4  -(left paren)
+    :: cmp << %r2, %r4 >>
+    :: jz << @token_delimiter >>
+    
+    :: load.const << 41 >> -> %r4  -(right paren)
+    :: cmp << %r2, %r4 >>
+    :: jz << @token_delimiter >>
+    
+    :: load.const << 123 >> -> %r4  -(left brace)
+    :: cmp << %r2, %r4 >>
+    :: jz << @token_delimiter >>
+    
+    :: load.const << 125 >> -> %r4  -(right brace)
+    :: cmp << %r2, %r4 >>
+    :: jz << @token_delimiter >>
+    
+    :: load.const << 44 >> -> %r4  -(comma)
+    :: cmp << %r2, %r4 >>
+    :: jz << @token_delimiter >>
+    
+    -(otherwise, it's an operator)
+    :: jump << @token_operator >>
+    
+@token_identifier:
+    :: call << lexer_tokenize_identifier >> << %r0 >> -> %r5
+    :: return << %r5 >>
+    
+@token_number:
+    :: call << lexer_tokenize_number >> << %r0 >> -> %r5
+    :: return << %r5 >>
+    
+@token_string:
+    :: call << lexer_tokenize_string >> << %r0 >> -> %r5
+    :: return << %r5 >>
+    
+@token_delimiter:
+    :: call << lexer_tokenize_delimiter >> << %r0 >> -> %r5
+    :: return << %r5 >>
+    
+@token_operator:
+    :: call << lexer_tokenize_operator >> << %r0 >> -> %r5
+    :: return << %r5 >>
+    
+@token_end:
+    :: load.const << 0 >> -> %r0  -(null pointer)
+    :: return << %r0 >>
+}
+
+-(Initialize lexer system)
+@lexer_init:
+    :: call << init_lexer_size >>
+    :: call << init_keywords >>
+    :: call << token_init >>
+    :: return
+

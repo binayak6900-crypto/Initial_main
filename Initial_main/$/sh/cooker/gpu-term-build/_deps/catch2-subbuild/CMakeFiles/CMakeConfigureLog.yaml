@@ -1,0 +1,86 @@
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
+      - "CMakeLists.txt:16 (project)"
+    mode: "program"
+    variable: "CMAKE_UNAME"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "uname"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/mingw64/bin/"
+      - "/c/Program Files/Common Files/Oracle/Java/javapath/"
+      - "/c/Program Files (x86)/Common Files/Oracle/Java/javapath/"
+      - "/c/WINDOWS/system32/"
+      - "/c/WINDOWS/"
+      - "/c/WINDOWS/System32/Wbem/"
+      - "/c/WINDOWS/System32/WindowsPowerShell/v1.0/"
+      - "/c/WINDOWS/System32/OpenSSH/"
+      - "/c/Program Files/dotnet/"
+      - "/c/Program Files/Neovide/"
+      - "/c/Program Files/Neovim/bin/"
+      - "/c/Program Files/Git/cmd/"
+      - "/c/Program Files/nodejs/"
+      - "/c/Users/binay/"
+      - "/c/Users/binay/AppData/Local/Microsoft/WindowsApps/"
+      - "/c/Users/binay/AppData/Local/Programs/Python/Python314/Scripts/"
+      - "/c/Users/binay/AppData/Local/Programs/Python/Python314/"
+      - "/c/Users/binay/AppData/Roaming/npm/"
+      - "/c/Windows/System32/"
+      - "/c/Windows/"
+      - "/c/Windows/System32/Wbem/"
+      - "/c/Users/binay/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "/c/Users/binay/AppData/Local/Programs/Microsoft VS Code Insiders/bin/"
+      - "/bin/"
+      - "/usr/local/bin/"
+    searched_directories:
+      - "/usr/bin/uname.com"
+    found: "/usr/bin/uname.exe"
+    search_context:
+      ENV{PATH}:
+        - "/usr/bin"
+        - "/mingw64/bin"
+        - "/c/Program Files/Common Files/Oracle/Java/javapath"
+        - "/c/Program Files (x86)/Common Files/Oracle/Java/javapath"
+        - "/c/WINDOWS/system32"
+        - "/c/WINDOWS"
+        - "/c/WINDOWS/System32/Wbem"
+        - "/c/WINDOWS/System32/WindowsPowerShell/v1.0"
+        - "/c/WINDOWS/System32/OpenSSH"
+        - "/c/Program Files/dotnet"
+        - "/c/Program Files/Neovide"
+        - "/c/Program Files/Neovim/bin"
+        - "/c/Program Files/Git/cmd"
+        - "/c/Program Files/nodejs"
+        - "/c/Users/binay"
+        - "/c/Users/binay/AppData/Local/Microsoft/WindowsApps"
+        - "/c/Users/binay/AppData/Local/Programs/Python/Python314/Scripts"
+        - "/c/Users/binay/AppData/Local/Programs/Python/Python314"
+        - "/c/Users/binay/AppData/Roaming/npm"
+        - "/c/Windows/System32"
+        - "/c/Windows"
+        - "/c/Windows/System32/Wbem"
+        - "/c/WINDOWS"
+        - "/c/Users/binay/AppData/Local/Programs/Microsoft VS Code/bin"
+        - "/c/Users/binay/AppData/Local/Programs/Microsoft VS Code Insiders/bin"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "CMakeLists.txt:16 (project)"
+    message: |
+      The system is: MSYS - 3.6.6-2369286a.x86_64 - x86_64
+...

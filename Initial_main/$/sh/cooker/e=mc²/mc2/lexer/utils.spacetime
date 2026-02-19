@@ -1,0 +1,147 @@
+-(Utility Functions for mc² Lexer)
+-(String comparison and conversion utilities)
+-(Requirements: 5.1, 5.2)
+
+-(Compare two strings for equality)
+-(Parameters: str1:str, str2:str)
+-(Returns: bool:int (1 if equal, 0 otherwise))
+:: func string_equals << str1:str, str2:str >> -> int {
+    :: load.local << -8 >> -> %r0  -(str1)
+    :: load.local << -16 >> -> %r1  -(str2)
+    
+    -(get lengths)
+    :: call << string_len >> << %r0 >> -> %r2
+    :: call << string_len >> << %r1 >> -> %r3
+    
+    -(compare lengths)
+    :: cmp << %r2, %r3 >>
+    :: jnz << @str_not_equal >>
+    
+    -(compare characters)
+    :: call << string_ptr >> << %r0 >> -> %r4
+    :: call << string_ptr >> << %r1 >> -> %r5
+    
+    :: load.const << 0 >> -> %r6  -(index)
+    
+@str_cmp_loop:
+    :: cmp << %r6, %r2 >>
+    :: jge << @str_equal >>
+    
+    :: load << %r4[%r6] >> -> %r7
+    :: load << %r5[%r6] >> -> %r8
+    
+    :: cmp << %r7, %r8 >>
+    :: jnz << @str_not_equal >>
+    
+    :: add << %r6, 1 >> -> %r6
+    :: jump << @str_cmp_loop >>
+    
+@str_equal:
+    :: load.const << 1 >> -> %r0
+    :: return << %r0 >>
+    
+@str_not_equal:
+    :: load.const << 0 >> -> %r0
+    :: return << %r0 >>
+}
+
+-(Convert integer to hexadecimal string)
+-(Parameters: value:int)
+-(Returns: hex_str:str)
+:: func int_to_hex << value:int >> -> str {
+    :: load.local << -8 >> -> %r0  -(value)
+    
+    -(allocate buffer for hex string (max 16 chars + null))
+    :: syscall << malloc >> << 17 >> -> %r1
+    
+    -(hex digits)
+    :: load.const << "0123456789abcdef" >> -> %r2
+    :: call << string_ptr >> << %r2 >> -> %r3
+    
+    -(convert to hex)
+    :: load.const << 15 >> -> %r4  -(index from end)
+    
+@hex_loop:
+    -(get lowest 4 bits)
+    :: and << %r0, 15 >> -> %r5
+    
+    -(get hex digit)
+    :: load << %r3[%r5] >> -> %r6
+    :: store << %r6 >> -> %r1[%r4]
+    
+    -(shift right by 4 bits)
+    :: shr << %r0, 4 >> -> %r0
+    
+    -(check if done)
+    :: test << %r0 >>
+    :: jz << @hex_done >>
+    
+    -(next digit)
+    :: sub << %r4, 1 >> -> %r4
+    :: jump << @hex_loop >>
+    
+@hex_done:
+    -(add null terminator)
+    :: load.const << 0 >> -> %r5
+    :: store << %r5 >> -> %r1[16]
+    
+    -(return pointer to first non-zero digit)
+    :: add << %r1, %r4 >> -> %r7
+    :: return << %r7 >>
+}
+
+-(Concatenate two strings)
+-(Parameters: str1:str, str2:str)
+-(Returns: result:str)
+:: func string_concat << str1:str, str2:str >> -> str {
+    :: load.local << -8 >> -> %r0  -(str1)
+    :: load.local << -16 >> -> %r1  -(str2)
+    
+    -(get lengths)
+    :: call << string_len >> << %r0 >> -> %r2
+    :: call << string_len >> << %r1 >> -> %r3
+    
+    -(allocate buffer)
+    :: add << %r2, %r3 >> -> %r4
+    :: add << %r4, 1 >> -> %r4  -(+1 for null)
+    :: syscall << malloc >> << %r4 >> -> %r5
+    
+    -(copy first string)
+    :: call << string_ptr >> << %r0 >> -> %r6
+    :: load.const << 0 >> -> %r7
+    
+@concat_loop1:
+    :: cmp << %r7, %r2 >>
+    :: jge << @concat_loop2_start >>
+    
+    :: load << %r6[%r7] >> -> %r8
+    :: store << %r8 >> -> %r5[%r7]
+    
+    :: add << %r7, 1 >> -> %r7
+    :: jump << @concat_loop1 >>
+    
+@concat_loop2_start:
+    -(copy second string)
+    :: call << string_ptr >> << %r1 >> -> %r6
+    :: load.const << 0 >> -> %r8
+    
+@concat_loop2:
+    :: cmp << %r8, %r3 >>
+    :: jge << @concat_done >>
+    
+    :: load << %r6[%r8] >> -> %r9
+    :: add << %r7, %r8 >> -> %r10
+    :: store << %r9 >> -> %r5[%r10]
+    
+    :: add << %r8, 1 >> -> %r8
+    :: jump << @concat_loop2 >>
+    
+@concat_done:
+    -(add null terminator)
+    :: add << %r2, %r3 >> -> %r10
+    :: load.const << 0 >> -> %r9
+    :: store << %r9 >> -> %r5[%r10]
+    
+    :: return << %r5 >>
+}
+

@@ -1,0 +1,12 @@
+-(Simple test program for the assembler)
+
+@main:
+    :: load.const << 42 >> -> %r0
+    :: load.const << 10 >> -> %r1
+    :: add << %r0, %r1 >> -> %r2
+    :: call << print >> << %r2 >>
+    :: return << %r2 >>
+
+@print:
+    :: syscall << io_write >> << %r0 >>
+    :: return

@@ -1,0 +1,504 @@
+-(Lexer Implementation for mc² Programming Language)
+-(Implements tokenization with hash-based variable names)
+-(Requirements: 5.1, 5.2, 1.1-1.25)
+
+-(Lexer State Structure)
+-(Offset 0: source_ptr - pointer to source code (8 bytes))
+-(Offset 8: source_len - length of source (4 bytes))
+-(Offset 12: position - current position in source (4 bytes))
+-(Offset 16: line - current line number (4 bytes))
+-(Offset 20: column - current column number (4 bytes))
+-(Offset 24: file_ptr - pointer to filename (8 bytes))
+-(Offset 32: file_len - length of filename (4 bytes))
+-(Total size: 36 bytes)
+
+$LEXER_SIZE :: int
+
+@init_lexer_size:
+    :: load.const << 36 >> -> %r0
+    :: store.global << %r0 >> -> $LEXER_SIZE
+    :: return
+
+-(Keywords array - stored as global)
+$KEYWORDS :: ptr
+$KEYWORDS_COUNT :: int
+
+@init_keywords:
+    -(allocate array for 20 keywords)
+    :: load.const << 20 >> -> %r0
+    :: mul << %r0, 8 >> -> %r1  -(20 * 8 bytes for pointers)
+    :: syscall << malloc >> << %r1 >> -> %r2
+    :: store.global << %r2 >> -> $KEYWORDS
+    
+    -(store keyword strings)
+    :: load.const << "type" >> -> %r3
+    :: store << %r3 >> -> %r2[0]
+    
+    :: load.const << "namespace" >> -> %r3
+    :: store << %r3 >> -> %r2[8]
+    
+    :: load.const << "classdef" >> -> %r3
+    :: store << %r3 >> -> %r2[16]
+    
+    :: load.const << "function" >> -> %r3
+    :: store << %r3 >> -> %r2[24]
+    
+    :: load.const << "if" >> -> %r3
+    :: store << %r3 >> -> %r2[32]
+    
+    :: load.const << "else" >> -> %r3
+    :: store << %r3 >> -> %r2[40]
+    
+    :: load.const << "while" >> -> %r3
+    :: store << %r3 >> -> %r2[48]
+    
+    :: load.const << "for" >> -> %r3
+    :: store << %r3 >> -> %r2[56]
+    
+    :: load.const << "import" >> -> %r3
+    :: store << %r3 >> -> %r2[64]
+    
+    :: load.const << "from" >> -> %r3
+    :: store << %r3 >> -> %r2[72]
+    
+    :: load.const << "get" >> -> %r3
+    :: store << %r3 >> -> %r2[80]
+    
+    :: load.const << "return" >> -> %r3
+    :: store << %r3 >> -> %r2[88]
+    
+    :: load.const << "True" >> -> %r3
+    :: store << %r3 >> -> %r2[96]
+    
+    :: load.const << "False" >> -> %r3
+    :: store << %r3 >> -> %r2[104]
+    
+    :: load.const << "Null" >> -> %r3
+    :: store << %r3 >> -> %r2[112]
+    
+    :: load.const << "int" >> -> %r3
+    :: store << %r3 >> -> %r2[120]
+    
+    :: load.const << "float" >> -> %r3
+    :: store << %r3 >> -> %r2[128]
+    
+    :: load.const << "str" >> -> %r3
+    :: store << %r3 >> -> %r2[136]
+    
+    :: load.const << "void" >> -> %r3
+    :: store << %r3 >> -> %r2[144]
+    
+    :: load.const << "ptr" >> -> %r3
+    :: store << %r3 >> -> %r2[152]
+    
+    -(store count)
+    :: load.const << 20 >> -> %r0
+    :: store.global << %r0 >> -> $KEYWORDS_COUNT
+    
+    :: return
+
+-(Create a new lexer)
+-(Parameters: source:str, filename:str)
+-(Returns: pointer to lexer structure)
+:: func lexer_create << source:str, filename:str >> -> ptr {
+    -(allocate memory for lexer structure)
+    :: load.global << $LEXER_SIZE >> -> %r0
+    :: syscall << malloc >> << %r0 >> -> %r1  -(lexer pointer in %r1)
+    
+    -(store source pointer and length)
+    :: load.local << -8 >> -> %r2  -(load source parameter)
+    :: call << string_ptr >> << %r2 >> -> %r3
+    :: store << %r3 >> -> %r1[0]  -(store source pointer)
+    
+    :: call << string_len >> << %r2 >> -> %r3
+    :: store << %r3 >> -> %r1[8]  -(store source length)
+    
+    -(initialize position to 0)
+    :: load.const << 0 >> -> %r0
+    :: store << %r0 >> -> %r1[12]
+    
+    -(initialize line to 1)
+    :: load.const << 1 >> -> %r0
+    :: store << %r0 >> -> %r1[16]
+    
+    -(initialize column to 0)
+    :: load.const << 0 >> -> %r0
+    :: store << %r0 >> -> %r1[20]
+    
+    -(store filename pointer and length)
+    :: load.local << -16 >> -> %r2  -(load filename parameter)
+    :: call << string_ptr >> << %r2 >> -> %r3
+    :: store << %r3 >> -> %r1[24]  -(store filename pointer)
+    
+    :: call << string_len >> << %r2 >> -> %r3
+    :: store << %r3 >> -> %r1[32]  -(store filename length)
+    
+    :: return << %r1 >>
+}
+
+-(Check if at end of source)
+-(Parameters: lexer:ptr)
+-(Returns: bool:int (1 if at end, 0 otherwise))
+:: func lexer_at_end << lexer:ptr >> -> int {
+    :: load.local << -8 >> -> %r0  -(load lexer pointer)
+    :: load << %r0[12] >> -> %r1  -(load position)
+    :: load << %r0[8] >> -> %r2  -(load source length)
+    
+    :: cmp << %r1, %r2 >>
+    :: jge << @at_end_true >>
+    
+    :: load.const << 0 >> -> %r0
+    :: return << %r0 >>
+    
+@at_end_true:
+    :: load.const << 1 >> -> %r0
+    :: return << %r0 >>
+}
+
+-(Peek current character without advancing)
+-(Parameters: lexer:ptr)
+-(Returns: char:int (character code, or -1 if at end))
+:: func lexer_peek << lexer:ptr >> -> int {
+    :: load.local << -8 >> -> %r0  -(load lexer pointer)
+    
+    -(check if at end)
+    :: call << lexer_at_end >> << %r0 >> -> %r1
+    :: test << %r1 >>
+    :: jnz << @peek_end >>
+    
+    -(load current character)
+    :: load << %r0[0] >> -> %r2  -(source pointer)
+    :: load << %r0[12] >> -> %r3  -(position)
+    :: load << %r2[%r3] >> -> %r4  -(character at position)
+    :: return << %r4 >>
+    
+@peek_end:
+    :: load.const << -1 >> -> %r0
+    :: return << %r0 >>
+}
+
+-(Advance to next character)
+-(Parameters: lexer:ptr)
+-(Returns: char:int (character code, or -1 if at end))
+:: func lexer_advance << lexer:ptr >> -> int {
+    :: load.local << -8 >> -> %r0  -(load lexer pointer)
+    
+    -(get current character)
+    :: call << lexer_peek >> << %r0 >> -> %r1
+    
+    -(check if at end)
+    :: load.const << -1 >> -> %r2
+    :: cmp << %r1, %r2 >>
+    :: jz << @advance_end >>
+    
+    -(increment position)
+    :: load << %r0[12] >> -> %r3
+    :: add << %r3, 1 >> -> %r3
+    :: store << %r3 >> -> %r0[12]
+    
+    -(check if newline)
+    :: load.const << 10 >> -> %r4  -(ASCII newline)
+    :: cmp << %r1, %r4 >>
+    :: jz << @advance_newline >>
+    
+    -(increment column)
+    :: load << %r0[20] >> -> %r5
+    :: add << %r5, 1 >> -> %r5
+    :: store << %r5 >> -> %r0[20]
+    
+    :: return << %r1 >>
+    
+@advance_newline:
+    -(increment line, reset column)
+    :: load << %r0[16] >> -> %r5
+    :: add << %r5, 1 >> -> %r5
+    :: store << %r5 >> -> %r0[16]
+    
+    :: load.const << 0 >> -> %r5
+    :: store << %r5 >> -> %r0[20]
+    
+    :: return << %r1 >>
+    
+@advance_end:
+    :: return << %r1 >>
+}
+
+-(Skip whitespace)
+-(Parameters: lexer:ptr)
+-(Returns: void)
+:: func lexer_skip_whitespace << lexer:ptr >> -> void {
+    :: load.local << -8 >> -> %r0  -(load lexer pointer)
+    
+@skip_loop:
+    :: call << lexer_peek >> << %r0 >> -> %r1
+    
+    -(check if space (32))
+    :: load.const << 32 >> -> %r2
+    :: cmp << %r1, %r2 >>
+    :: jz << @skip_advance >>
+    
+    -(check if tab (9))
+    :: load.const << 9 >> -> %r2
+    :: cmp << %r1, %r2 >>
+    :: jz << @skip_advance >>
+    
+    -(check if newline (10))
+    :: load.const << 10 >> -> %r2
+    :: cmp << %r1, %r2 >>
+    :: jz << @skip_advance >>
+    
+    -(check if carriage return (13))
+    :: load.const << 13 >> -> %r2
+    :: cmp << %r1, %r2 >>
+    :: jz << @skip_advance >>
+    
+    -(not whitespace, done)
+    :: return
+    
+@skip_advance:
+    :: call << lexer_advance >> << %r0 >>
+    :: jump << @skip_loop >>
+}
+
+-(Check if character is alphabetic)
+-(Parameters: char:int)
+-(Returns: bool:int)
+:: func is_alpha << char:int >> -> int {
+    :: load.local << -8 >> -> %r0
+    
+    -(check if A-Z (65-90))
+    :: load.const << 65 >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jl << @not_alpha >>
+    
+    :: load.const << 90 >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jle << @is_alpha_true >>
+    
+    -(check if a-z (97-122))
+    :: load.const << 97 >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jl << @not_alpha >>
+    
+    :: load.const << 122 >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jle << @is_alpha_true >>
+    
+    -(check if underscore (95))
+    :: load.const << 95 >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jz << @is_alpha_true >>
+    
+@not_alpha:
+    :: load.const << 0 >> -> %r0
+    :: return << %r0 >>
+    
+@is_alpha_true:
+    :: load.const << 1 >> -> %r0
+    :: return << %r0 >>
+}
+
+-(Check if character is digit)
+-(Parameters: char:int)
+-(Returns: bool:int)
+:: func is_digit << char:int >> -> int {
+    :: load.local << -8 >> -> %r0
+    
+    -(check if 0-9 (48-57))
+    :: load.const << 48 >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jl << @not_digit >>
+    
+    :: load.const << 57 >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: jle << @is_digit_true >>
+    
+@not_digit:
+    :: load.const << 0 >> -> %r0
+    :: return << %r0 >>
+    
+@is_digit_true:
+    :: load.const << 1 >> -> %r0
+    :: return << %r0 >>
+}
+
+-(Check if character is alphanumeric)
+-(Parameters: char:int)
+-(Returns: bool:int)
+:: func is_alnum << char:int >> -> int {
+    :: load.local << -8 >> -> %r0
+    
+    :: call << is_alpha >> << %r0 >> -> %r1
+    :: test << %r1 >>
+    :: jnz << @is_alnum_true >>
+    
+    :: call << is_digit >> << %r0 >> -> %r1
+    :: test << %r1 >>
+    :: jnz << @is_alnum_true >>
+    
+    :: load.const << 0 >> -> %r0
+    :: return << %r0 >>
+    
+@is_alnum_true:
+    :: load.const << 1 >> -> %r0
+    :: return << %r0 >>
+}
+
+-(Check if string is a keyword)
+-(Parameters: str:str)
+-(Returns: bool:int)
+:: func is_keyword << str:str >> -> int {
+    :: load.local << -8 >> -> %r0  -(string to check)
+    :: load.global << $KEYWORDS >> -> %r1  -(keywords array)
+    :: load.global << $KEYWORDS_COUNT >> -> %r2  -(count)
+    
+    :: load.const << 0 >> -> %r3  -(index)
+    
+@keyword_loop:
+    :: cmp << %r3, %r2 >>
+    :: jge << @not_keyword >>
+    
+    -(load keyword at index)
+    :: mul << %r3, 8 >> -> %r4
+    :: load << %r1[%r4] >> -> %r5
+    
+    -(compare strings)
+    :: call << string_equals >> << %r0, %r5 >> -> %r6
+    :: test << %r6 >>
+    :: jnz << @is_keyword_true >>
+    
+    -(next keyword)
+    :: add << %r3, 1 >> -> %r3
+    :: jump << @keyword_loop >>
+    
+@not_keyword:
+    :: load.const << 0 >> -> %r0
+    :: return << %r0 >>
+    
+@is_keyword_true:
+    :: load.const << 1 >> -> %r0
+    :: return << %r0 >>
+}
+
+-(Generate hash for variable name)
+-(Parameters: name:str)
+-(Returns: hash:int)
+:: func hash_variable_name << name:str >> -> int {
+    :: load.local << -8 >> -> %r0  -(name pointer)
+    :: call << string_len >> << %r0 >> -> %r1  -(length)
+    
+    -(simple hash: sum of character codes * prime)
+    :: load.const << 0 >> -> %r2  -(hash accumulator)
+    :: load.const << 0 >> -> %r3  -(index)
+    :: load.const << 31 >> -> %r4  -(prime multiplier)
+    
+@hash_loop:
+    :: cmp << %r3, %r1 >>
+    :: jge << @hash_done >>
+    
+    -(load character)
+    :: call << string_ptr >> << %r0 >> -> %r5
+    :: load << %r5[%r3] >> -> %r6
+    
+    -(hash = hash * 31 + char)
+    :: mul << %r2, %r4 >> -> %r2
+    :: add << %r2, %r6 >> -> %r2
+    
+    :: add << %r3, 1 >> -> %r3
+    :: jump << @hash_loop >>
+    
+@hash_done:
+    -(ensure positive hash)
+    :: test << %r2 >>
+    :: jge << @hash_positive >>
+    
+    :: neg << %r2 >> -> %r2
+    
+@hash_positive:
+    :: return << %r2 >>
+}
+
+-(Create hash-based variable name)
+-(Parameters: name:str)
+-(Returns: hashed_name:str)
+:: func create_hash_variable << name:str >> -> str {
+    :: load.local << -8 >> -> %r0  -(original name)
+    
+    -(generate hash)
+    :: call << hash_variable_name >> << %r0 >> -> %r1
+    
+    -(create string: __var_<name>_<hash>__)
+    -(allocate buffer: 6 + name_len + 1 + 10 + 2 + 1 = 20 + name_len)
+    :: call << string_len >> << %r0 >> -> %r2
+    :: add << %r2, 20 >> -> %r3
+    :: syscall << malloc >> << %r3 >> -> %r4  -(buffer pointer)
+    
+    -(copy "__var_")
+    :: load.const << 95 >> -> %r5  -(underscore)
+    :: store << %r5 >> -> %r4[0]
+    :: store << %r5 >> -> %r4[1]
+    :: load.const << 118 >> -> %r5  -(v)
+    :: store << %r5 >> -> %r4[2]
+    :: load.const << 97 >> -> %r5  -(a)
+    :: store << %r5 >> -> %r4[3]
+    :: load.const << 114 >> -> %r5  -(r)
+    :: store << %r5 >> -> %r4[4]
+    :: load.const << 95 >> -> %r5  -(underscore)
+    :: store << %r5 >> -> %r4[5]
+    
+    -(copy original name)
+    :: call << string_ptr >> << %r0 >> -> %r6
+    :: load.const << 0 >> -> %r7  -(index)
+    
+@copy_name_loop:
+    :: cmp << %r7, %r2 >>
+    :: jge << @copy_name_done >>
+    
+    :: load << %r6[%r7] >> -> %r8
+    :: add << %r7, 6 >> -> %r9
+    :: store << %r8 >> -> %r4[%r9]
+    
+    :: add << %r7, 1 >> -> %r7
+    :: jump << @copy_name_loop >>
+    
+@copy_name_done:
+    -(add underscore)
+    :: add << %r2, 6 >> -> %r9
+    :: load.const << 95 >> -> %r5
+    :: store << %r5 >> -> %r4[%r9]
+    
+    -(convert hash to hex string and append)
+    :: add << %r9, 1 >> -> %r9
+    :: call << int_to_hex >> << %r1 >> -> %r10
+    :: call << string_ptr >> << %r10 >> -> %r11
+    :: call << string_len >> << %r10 >> -> %r12
+    
+    :: load.const << 0 >> -> %r7
+    
+@copy_hash_loop:
+    :: cmp << %r7, %r12 >>
+    :: jge << @copy_hash_done >>
+    
+    :: load << %r11[%r7] >> -> %r8
+    :: add << %r9, %r7 >> -> %r13
+    :: store << %r8 >> -> %r4[%r13]
+    
+    :: add << %r7, 1 >> -> %r7
+    :: jump << @copy_hash_loop >>
+    
+@copy_hash_done:
+    -(add trailing underscores)
+    :: add << %r9, %r12 >> -> %r13
+    :: load.const << 95 >> -> %r5
+    :: store << %r5 >> -> %r4[%r13]
+    :: add << %r13, 1 >> -> %r13
+    :: store << %r5 >> -> %r4[%r13]
+    
+    -(add null terminator)
+    :: add << %r13, 1 >> -> %r13
+    :: load.const << 0 >> -> %r5
+    :: store << %r5 >> -> %r4[%r13]
+    
+    :: return << %r4 >>
+}
+

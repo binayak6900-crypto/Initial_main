@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/d/$/sh/cooker/gpu-term-build/_deps/catch2-subbuild/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

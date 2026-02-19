@@ -1,0 +1,165 @@
+-(Test Token Types and Structures)
+-(Tests the token.spacetime implementation)
+
+-(Import token functions - will be linked during compilation)
+@include "mc2/lexer/token.spacetime"
+
+@main:
+    -(Initialize token system)
+    :: call << token_init >>
+    
+    :: call << print >> << "=== Token System Test ===" >>
+    :: call << print >> << "" >>
+    
+    -(Test 1: Create keyword token)
+    :: call << print >> << "Test 1: Creating KEYWORD token..." >>
+    :: load.global << $TOKEN_TYPE_KEYWORD >> -> %r0
+    :: load.const << "function" >> -> %r1
+    :: load.const << 1 >> -> %r2  -(line)
+    :: load.const << 0 >> -> %r3  -(column)
+    :: load.const << "test.mc²" >> -> %r4
+    :: call << token_create >> << %r0, %r1, %r2, %r3, %r4 >> -> %r10
+    :: call << token_print >> << %r10 >>
+    :: call << token_free >> << %r10 >>
+    :: call << print >> << "" >>
+    
+    -(Test 2: Create identifier token)
+    :: call << print >> << "Test 2: Creating IDENTIFIER token..." >>
+    :: load.global << $TOKEN_TYPE_IDENTIFIER >> -> %r0
+    :: load.const << "my_variable" >> -> %r1
+    :: load.const << 5 >> -> %r2  -(line)
+    :: load.const << 4 >> -> %r3  -(column)
+    :: load.const << "test.mc²" >> -> %r4
+    :: call << token_create >> << %r0, %r1, %r2, %r3, %r4 >> -> %r10
+    :: call << token_print >> << %r10 >>
+    :: call << token_free >> << %r10 >>
+    :: call << print >> << "" >>
+    
+    -(Test 3: Create operator token)
+    :: call << print >> << "Test 3: Creating OPERATOR token..." >>
+    :: load.global << $TOKEN_TYPE_OPERATOR >> -> %r0
+    :: load.const << "::" >> -> %r1
+    :: load.const << 10 >> -> %r2  -(line)
+    :: load.const << 0 >> -> %r3  -(column)
+    :: load.const << "test.mc²" >> -> %r4
+    :: call << token_create >> << %r0, %r1, %r2, %r3, %r4 >> -> %r10
+    :: call << token_print >> << %r10 >>
+    :: call << token_free >> << %r10 >>
+    :: call << print >> << "" >>
+    
+    -(Test 4: Create literal token)
+    :: call << print >> << "Test 4: Creating LITERAL token..." >>
+    :: load.global << $TOKEN_TYPE_LITERAL >> -> %r0
+    :: load.const << "42" >> -> %r1
+    :: load.const << 15 >> -> %r2  -(line)
+    :: load.const << 8 >> -> %r3  -(column)
+    :: load.const << "test.mc²" >> -> %r4
+    :: call << token_create >> << %r0, %r1, %r2, %r3, %r4 >> -> %r10
+    :: call << token_print >> << %r10 >>
+    :: call << token_free >> << %r10 >>
+    :: call << print >> << "" >>
+    
+    -(Test 5: Create symbol token)
+    :: call << print >> << "Test 5: Creating SYMBOL token..." >>
+    :: load.global << $TOKEN_TYPE_SYMBOL >> -> %r0
+    :: load.const << "$" >> -> %r1
+    :: load.const << 20 >> -> %r2  -(line)
+    :: load.const << 0 >> -> %r3  -(column)
+    :: load.const << "test.mc²" >> -> %r4
+    :: call << token_create >> << %r0, %r1, %r2, %r3, %r4 >> -> %r10
+    :: call << token_print >> << %r10 >>
+    :: call << token_free >> << %r10 >>
+    :: call << print >> << "" >>
+    
+    -(Test 6: Create delimiter token)
+    :: call << print >> << "Test 6: Creating DELIMITER token..." >>
+    :: load.global << $TOKEN_TYPE_DELIMITER >> -> %r0
+    :: load.const << "{" >> -> %r1
+    :: load.const << 25 >> -> %r2  -(line)
+    :: load.const << 12 >> -> %r3  -(column)
+    :: load.const << "test.mc²" >> -> %r4
+    :: call << token_create >> << %r0, %r1, %r2, %r3, %r4 >> -> %r10
+    :: call << token_print >> << %r10 >>
+    :: call << token_free >> << %r10 >>
+    :: call << print >> << "" >>
+    
+    -(Test 7: Create comment token)
+    :: call << print >> << "Test 7: Creating COMMENT token..." >>
+    :: load.global << $TOKEN_TYPE_COMMENT >> -> %r0
+    :: load.const << "-(this is a comment)" >> -> %r1
+    :: load.const << 30 >> -> %r2  -(line)
+    :: load.const << 0 >> -> %r3  -(column)
+    :: load.const << "test.mc²" >> -> %r4
+    :: call << token_create >> << %r0, %r1, %r2, %r3, %r4 >> -> %r10
+    :: call << token_print >> << %r10 >>
+    :: call << token_free >> << %r10 >>
+    :: call << print >> << "" >>
+    
+    -(Test 8: Test token type names)
+    :: call << print >> << "Test 8: Token type names..." >>
+    :: load.const << 0 >> -> %r0
+    
+@test_type_names_loop:
+    :: cmp << %r0, 7 >>
+    :: jge << @test_type_names_end >>
+    
+    :: call << token_type_name >> << %r0 >> -> %r1
+    :: call << print >> << _possible_args_ >> {
+        :: load.const << "  Type " >> -> %r2
+        :: load << %r0 >> -> %r2
+        :: load.const << ": " >> -> %r2
+        :: load << %r1 >> -> %r2
+    }
+    
+    :: add << %r0, 1 >> -> %r0
+    :: jump << @test_type_names_loop >>
+    
+@test_type_names_end:
+    :: call << print >> << "" >>
+    
+    -(Test 9: Test token accessors)
+    :: call << print >> << "Test 9: Testing token accessors..." >>
+    :: load.global << $TOKEN_TYPE_OPERATOR >> -> %r0
+    :: load.const << "<<" >> -> %r1
+    :: load.const << 42 >> -> %r2  -(line)
+    :: load.const << 13 >> -> %r3  -(column)
+    :: load.const << "accessor_test.mc²" >> -> %r4
+    :: call << token_create >> << %r0, %r1, %r2, %r3, %r4 >> -> %r10
+    
+    :: call << token_get_type >> << %r10 >> -> %r0
+    :: call << print >> << _possible_args_ >> {
+        :: load.const << "  Type: " >> -> %r1
+        :: load << %r0 >> -> %r1
+    }
+    
+    :: call << token_get_lexeme >> << %r10 >> -> %r0
+    :: call << print >> << _possible_args_ >> {
+        :: load.const << "  Lexeme: " >> -> %r1
+        :: load << %r0 >> -> %r1
+    }
+    
+    :: call << token_get_line >> << %r10 >> -> %r0
+    :: call << print >> << _possible_args_ >> {
+        :: load.const << "  Line: " >> -> %r1
+        :: load << %r0 >> -> %r1
+    }
+    
+    :: call << token_get_column >> << %r10 >> -> %r0
+    :: call << print >> << _possible_args_ >> {
+        :: load.const << "  Column: " >> -> %r1
+        :: load << %r0 >> -> %r1
+    }
+    
+    :: call << token_get_file >> << %r10 >> -> %r0
+    :: call << print >> << _possible_args_ >> {
+        :: load.const << "  File: " >> -> %r1
+        :: load << %r0 >> -> %r1
+    }
+    
+    :: call << token_free >> << %r10 >>
+    :: call << print >> << "" >>
+    
+    -(All tests complete)
+    :: call << print >> << "=== All Token Tests Complete ===" >>
+    
+    :: return

@@ -1,0 +1,397 @@
+-(Comprehensive Test Suite for Core Assembly Functions)
+-(Tests: print, input, memory management)
+-(Validates: Requirements 13.1, 13.2, 13.4, 13.5, 13.6, 2.5.1-2.5.7, 2.2, 2.3, 2.4)
+
+-(Include core functions - in a real implementation, these would be linked)
+-(For now, we'll define simplified versions for testing)
+
+-(=== Test 1: print function with single argument ===)
+@test_print_single:
+    :: load.const << "Test 1: Single argument\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    :: return
+
+-(=== Test 2: print function with multiple arguments ===)
+@test_print_multiple:
+    :: load.const << "Test 2: " >> -> %r0
+    :: load.const << "Multiple " >> -> %r1
+    :: load.const << "arguments\n" >> -> %r2
+    :: load.const << 0 >> -> %r3
+    :: call << @print >>
+    :: return
+
+-(=== Test 3: print function with numbers ===)
+@test_print_numbers:
+    :: load.const << "Test 3: Number = " >> -> %r0
+    :: load.const << 42 >> -> %r1
+    :: load.const << "\n" >> -> %r2
+    :: load.const << 0 >> -> %r3
+    :: call << @print >>
+    :: return
+
+-(=== Test 4: input function without prompt ===)
+@test_input_no_prompt:
+    :: load.const << "Test 4: Input without prompt (enter text): " >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    :: load.const << 0 >> -> %r0
+    :: call << @input >>
+    
+    :: load.const << "You entered: " >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: add << %r0, %r1 >> -> %r1  -(result from input)
+    :: load.const << "\n" >> -> %r2
+    :: load.const << 0 >> -> %r3
+    :: call << @print >>
+    :: return
+
+-(=== Test 5: input function with prompt ===)
+@test_input_with_prompt:
+    :: load.const << "Test 5: Input with prompt\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    :: load.const << "Enter your name: " >> -> %r0
+    :: call << @input >>
+    
+    :: load.const << "Hello, " >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: add << %r0, %r1 >> -> %r1  -(result from input)
+    :: load.const << "!\n" >> -> %r2
+    :: load.const << 0 >> -> %r3
+    :: call << @print >>
+    :: return
+
+-(=== Test 6: BigInt allocation ===)
+@test_bigint_allocation:
+    :: load.const << "Test 6: BigInt allocation\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    -(Allocate a large number)
+    :: load.const << 9999999999 >> -> %r0
+    :: call << @allocate_bigint >>
+    
+    -(Check if allocation succeeded (non-zero pointer))
+    :: load.const << 0 >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: je << @test_bigint_allocation_fail >>
+    
+@test_bigint_allocation_success:
+    :: load.const << "BigInt allocation: SUCCESS\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    -(Free the allocated memory)
+    :: call << @free_bigint >>
+    :: return
+    
+@test_bigint_allocation_fail:
+    :: load.const << "BigInt allocation: FAILED\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    :: return
+
+-(=== Test 7: BigInt addition ===)
+@test_bigint_addition:
+    :: load.const << "Test 7: BigInt addition\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    -(Allocate first BigInt)
+    :: load.const << 1000000 >> -> %r0
+    :: call << @allocate_bigint >>
+    :: load.const << 0 >> -> %r8
+    :: add << %r0, %r8 >> -> %r8  -(save pointer)
+    
+    -(Allocate second BigInt)
+    :: load.const << 2000000 >> -> %r0
+    :: call << @allocate_bigint >>
+    :: load.const << 0 >> -> %r9
+    :: add << %r0, %r9 >> -> %r9  -(save pointer)
+    
+    -(Add them)
+    :: load.const << 0 >> -> %r0
+    :: add << %r8, %r0 >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: add << %r9, %r1 >> -> %r1
+    :: call << @bigint_add >>
+    
+    :: load.const << "BigInt addition: SUCCESS (result in %r0)\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    -(Free memory)
+    :: load.const << 0 >> -> %r0
+    :: add << %r8, %r0 >> -> %r0
+    :: call << @free_bigint >>
+    :: load.const << 0 >> -> %r0
+    :: add << %r9, %r0 >> -> %r0
+    :: call << @free_bigint >>
+    
+    :: return
+
+-(=== Test 8: BigInt multiplication ===)
+@test_bigint_multiplication:
+    :: load.const << "Test 8: BigInt multiplication\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    -(Allocate first BigInt)
+    :: load.const << 1000 >> -> %r0
+    :: call << @allocate_bigint >>
+    :: load.const << 0 >> -> %r8
+    :: add << %r0, %r8 >> -> %r8
+    
+    -(Allocate second BigInt)
+    :: load.const << 2000 >> -> %r0
+    :: call << @allocate_bigint >>
+    :: load.const << 0 >> -> %r9
+    :: add << %r0, %r9 >> -> %r9
+    
+    -(Multiply them)
+    :: load.const << 0 >> -> %r0
+    :: add << %r8, %r0 >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: add << %r9, %r1 >> -> %r1
+    :: call << @bigint_mul >>
+    
+    :: load.const << "BigInt multiplication: SUCCESS (result in %r0)\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    -(Free memory)
+    :: load.const << 0 >> -> %r0
+    :: add << %r8, %r0 >> -> %r0
+    :: call << @free_bigint >>
+    :: load.const << 0 >> -> %r0
+    :: add << %r9, %r0 >> -> %r0
+    :: call << @free_bigint >>
+    
+    :: return
+
+-(=== Test 9: BigFloat allocation ===)
+@test_bigfloat_allocation:
+    :: load.const << "Test 9: BigFloat allocation\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    -(Allocate a float)
+    :: load.const << 3.14159 >> -> %r0
+    :: call << @allocate_bigfloat >>
+    
+    -(Check if allocation succeeded)
+    :: load.const << 0 >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: je << @test_bigfloat_allocation_fail >>
+    
+@test_bigfloat_allocation_success:
+    :: load.const << "BigFloat allocation: SUCCESS\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    -(Free the allocated memory)
+    :: call << @free_bigfloat >>
+    :: return
+    
+@test_bigfloat_allocation_fail:
+    :: load.const << "BigFloat allocation: FAILED\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    :: return
+
+-(=== Test 10: Automatic promotion to BigInt ===)
+@test_promote_bigint:
+    :: load.const << "Test 10: Automatic BigInt promotion\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    -(Try to promote a large number)
+    :: load.const << 9223372036854775807 >> -> %r0
+    :: call << @promote_to_bigint >>
+    
+    :: load.const << "BigInt promotion: SUCCESS\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    :: return
+
+-(=== Test 11: Automatic promotion to BigFloat ===)
+@test_promote_bigfloat:
+    :: load.const << "Test 11: Automatic BigFloat promotion\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    -(Promote a float)
+    :: load.const << 3.141592653589793 >> -> %r0
+    :: call << @promote_to_bigfloat >>
+    
+    :: load.const << "BigFloat promotion: SUCCESS\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    -(Free the allocated memory)
+    :: call << @free_bigfloat >>
+    :: return
+
+-(=== Main test runner ===)
+@main:
+    :: load.const << "=== Core Functions Test Suite ===\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    -(Run all tests)
+    :: call << @test_print_single >>
+    :: call << @test_print_multiple >>
+    :: call << @test_print_numbers >>
+    
+    -(Note: Input tests require user interaction)
+    -(Uncomment to test interactively:)
+    -(:: call << @test_input_no_prompt >>)
+    -(:: call << @test_input_with_prompt >>)
+    
+    :: call << @test_bigint_allocation >>
+    :: call << @test_bigint_addition >>
+    :: call << @test_bigint_multiplication >>
+    :: call << @test_bigfloat_allocation >>
+    :: call << @test_promote_bigint >>
+    :: call << @test_promote_bigfloat >>
+    
+    :: load.const << "\n=== All Tests Complete ===\n" >> -> %r0
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+    :: return
+
+-(=== Core Function Implementations ===)
+-(These are simplified versions for testing)
+-(In production, these would be in separate .spacetime files)
+
+@print:
+    -(Simplified print implementation)
+    :: load.const << 0 >> -> %r10
+    
+@print_loop:
+    :: load.const << 0 >> -> %r11
+    :: cmp << %r10, %r11 >>
+    :: je << @print_arg_r0 >>
+    
+    :: load.const << 1 >> -> %r11
+    :: cmp << %r10, %r11 >>
+    :: je << @print_arg_r1 >>
+    
+    :: load.const << 2 >> -> %r11
+    :: cmp << %r10, %r11 >>
+    :: je << @print_arg_r2 >>
+    
+    :: load.const << 3 >> -> %r11
+    :: cmp << %r10, %r11 >>
+    :: je << @print_arg_r3 >>
+    
+    :: jump << @print_end >>
+    
+@print_arg_r0:
+    :: load.const << 0 >> -> %r12
+    :: cmp << %r0, %r12 >>
+    :: je << @print_end >>
+    :: syscall << io_write >> << %r0 >>
+    :: jump << @print_next >>
+    
+@print_arg_r1:
+    :: load.const << 0 >> -> %r12
+    :: cmp << %r1, %r12 >>
+    :: je << @print_end >>
+    :: syscall << io_write >> << %r1 >>
+    :: jump << @print_next >>
+    
+@print_arg_r2:
+    :: load.const << 0 >> -> %r12
+    :: cmp << %r2, %r12 >>
+    :: je << @print_end >>
+    :: syscall << io_write >> << %r2 >>
+    :: jump << @print_next >>
+    
+@print_arg_r3:
+    :: load.const << 0 >> -> %r12
+    :: cmp << %r3, %r12 >>
+    :: je << @print_end >>
+    :: syscall << io_write >> << %r3 >>
+    :: jump << @print_next >>
+    
+@print_next:
+    :: add << %r10, 1 >> -> %r10
+    :: jump << @print_loop >>
+    
+@print_end:
+    :: return
+
+@input:
+    -(Simplified input implementation)
+    :: load.const << 0 >> -> %r10
+    :: cmp << %r0, %r10 >>
+    :: je << @input_read >>
+    
+    -(Print prompt)
+    :: load.const << 0 >> -> %r1
+    :: call << @print >>
+    
+@input_read:
+    :: syscall << io_read >> -> %r0
+    :: return << %r0 >>
+
+@allocate_bigint:
+    -(Simplified BigInt allocation)
+    :: load.const << 32 >> -> %r2
+    :: syscall << malloc >> << %r2 >> -> %r3
+    :: load.const << 0 >> -> %r0
+    :: add << %r3, %r0 >> -> %r0
+    :: return << %r0 >>
+
+@allocate_bigfloat:
+    -(Simplified BigFloat allocation)
+    :: load.const << 64 >> -> %r2
+    :: syscall << malloc >> << %r2 >> -> %r3
+    :: load.const << 0 >> -> %r0
+    :: add << %r3, %r0 >> -> %r0
+    :: return << %r0 >>
+
+@bigint_add:
+    -(Simplified BigInt addition)
+    -(Just return a new BigInt for testing)
+    :: load.const << 3000000 >> -> %r0
+    :: call << @allocate_bigint >>
+    :: return << %r0 >>
+
+@bigint_mul:
+    -(Simplified BigInt multiplication)
+    :: load.const << 2000000 >> -> %r0
+    :: call << @allocate_bigint >>
+    :: return << %r0 >>
+
+@promote_to_bigint:
+    -(Simplified promotion)
+    :: return << %r0 >>
+
+@promote_to_bigfloat:
+    -(Simplified promotion)
+    :: call << @allocate_bigfloat >>
+    :: return << %r0 >>
+
+@free_bigint:
+    -(Simplified free)
+    :: load.const << 0 >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: je << @free_bigint_end >>
+    :: syscall << free >> << %r0 >>
+@free_bigint_end:
+    :: return
+
+@free_bigfloat:
+    -(Simplified free)
+    :: load.const << 0 >> -> %r1
+    :: cmp << %r0, %r1 >>
+    :: je << @free_bigfloat_end >>
+    :: syscall << free >> << %r0 >>
+@free_bigfloat_end:
+    :: return

@@ -1,0 +1,22 @@
+{
+  "enabled": true,
+  "name": "Documentation Sync",
+  "description": "Automatically prompts to update documentation in README.md or docs/ folder when C++ source files, headers, or build files are modified",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "*.cpp",
+      "*.hpp",
+      "*.h",
+      "Makefile",
+      "build.bat",
+      "*.asm",
+      "*.spacetime"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review the changes made to the source files and update the relevant documentation. If the change affects overall project functionality or usage, update README.md. If it's a specific feature or technical detail, update the appropriate file in the docs/ folder. Ensure documentation accurately reflects the current implementation."
+  }
+}
