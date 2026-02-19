@@ -1,0 +1,1631 @@
+Folder PATH listing for volume New Volume
+Volume serial number is 941E-2739
+D:.
+|   AndroidDevEcosystem.sln
+|   DEPENDENCY_DISCOVERY_IMPLEMENTATION.md
+|   g.txt
+|   MEMORY_MANAGEMENT_DESIGN.md
+|   README.md
+|   SYMBOL_TABLE_IMPLEMENTATION.md
+|   TASK_14.2_SUMMARY.md
+|   TestParserManual.csx
+|   test_increment.adl
+|   test_parser.cs
+|   test_parser_debug.csx
+|   test_parser_simple.adl
+|   test_typechecker.cs
+|   TYPE_CHECKER_IMPLEMENTATION.md
+|   
++---.git
+|   |   COMMIT_EDITMSG
+|   |   config
+|   |   description
+|   |   HEAD
+|   |   index
+|   |   
+|   +---hooks
+|   |       applypatch-msg.sample
+|   |       commit-msg.sample
+|   |       fsmonitor-watchman.sample
+|   |       post-update.sample
+|   |       pre-applypatch.sample
+|   |       pre-commit.sample
+|   |       pre-merge-commit.sample
+|   |       pre-push.sample
+|   |       pre-rebase.sample
+|   |       pre-receive.sample
+|   |       prepare-commit-msg.sample
+|   |       push-to-checkout.sample
+|   |       sendemail-validate.sample
+|   |       update.sample
+|   |       
+|   +---info
+|   |       exclude
+|   |       
+|   +---logs
+|   |   |   HEAD
+|   |   |   
+|   |   \---refs
+|   |       +---heads
+|   |       |       cd
+|   |       |       
+|   |       \---remotes
+|   |           \---origin
+|   |                   cd
+|   |                   
+|   +---objects
+|   |   +---00
+|   |   |       400d62a4114b5c768cd1e52276719d32b2263a
+|   |   |       a6f996af14bbb4459d03115db993cda5f25216
+|   |   |       
+|   |   +---01
+|   |   |       03c7300897cd6a7b39d2cd78c7c36a520ebb62
+|   |   |       14575f1bd75a2c933cbe233dc14ea1e18c3aee
+|   |   |       aa84fabfba7dc5608516c263878da8bf3b3ff8
+|   |   |       
+|   |   +---03
+|   |   |       1cd84be88913d8ae277bcf5c62afd42d9c01df
+|   |   |       a6dc6d6e7993f7f5017fcc801b7738900cf2df
+|   |   |       cd20d8d2fd91ecf2629efbd18eddc5be330c2b
+|   |   |       f57c73c5ea7c885e5e9c078a9ca99227cd2570
+|   |   |       
+|   |   +---04
+|   |   |       3a64227990b8be341d19e22c9e844e7198f879
+|   |   |       
+|   |   +---05
+|   |   |       2b1fac04033aea9e51b4e87c62f5b7d3b4eed9
+|   |   |       35d391b8cfb3fc66374488cf668f95b0204fac
+|   |   |       7f6f4ccf58fc1b801246d1b91cf082df4ad550
+|   |   |       
+|   |   +---06
+|   |   |       8bd51476126c3535c8676eae1601328e87ec3e
+|   |   |       f430609c7ca739d53d1f0983a8ffa18ff8c904
+|   |   |       
+|   |   +---07
+|   |   |       dd90f060aa0cc20b7ace1cbc59262ac0a79a55
+|   |   |       
+|   |   +---08
+|   |   |       3ccf83cefff01c3c242781ea26a6b9fcc788ef
+|   |   |       72ad797ed6ed7d265f2065c1b4f0b7ba4a6b9e
+|   |   |       b5def2c91b6e631fe7d86aeea48dc9d2ac4707
+|   |   |       d86f9301e199a1e29d6b50a2719953ff070aee
+|   |   |       
+|   |   +---09
+|   |   |       9a300b057ea4af7bcea62b18720685b2377954
+|   |   |       e98de1edf98ca4155cff5ca6ef81b7b220e5fa
+|   |   |       fef98d9e66b5e63d7e76fdaa87cc9f29fdc700
+|   |   |       
+|   |   +---0a
+|   |   |       7135f8ad754fdddbd0df166374c3fc75a859a6
+|   |   |       c4929bc496e3763bb48f8ed4932b3f795141ce
+|   |   |       d60980a9ef9d95fbe625da59a4062c23fc4ec5
+|   |   |       
+|   |   +---0b
+|   |   |       0972fa62b1b84f824848f919e9736a5daa72ae
+|   |   |       563d2e9819578cfca6f740fd0b9809166521d9
+|   |   |       69930a28927543fca29f28e7b7b91e9725c09a
+|   |   |       95e98483ffb0bda231fb40f5379368ddc8139c
+|   |   |       c035b7e059a5416dddf09a49ee51d14008e6ef
+|   |   |       
+|   |   +---0c
+|   |   |       29d59fc47b0c4945867edd9a97e7f4831f765a
+|   |   |       9a008729116961502382193dabfa4564e1fadc
+|   |   |       
+|   |   +---0d
+|   |   |       3887a2bf86ed39a5f2ae842a5458f0ed225737
+|   |   |       53bfffff0873d3f952a09d5398c191d44e155c
+|   |   |       5fd5a700eb550686c08944627909c637199f7e
+|   |   |       ad032df3de8d4a6abb8e9d3a40273fc3c222c3
+|   |   |       ae59add3a1cff908e8c6af096ef898b6ba35e5
+|   |   |       
+|   |   +---0e
+|   |   |       b62f67142f625160d7cf571fec6ca925c2b226
+|   |   |       c0993ff9a6db28c2a837fc0adae36d04505ac2
+|   |   |       
+|   |   +---0f
+|   |   |       1cd5b2554449e8d48168cf5e06f6d6a9704145
+|   |   |       abf0c4a29dc341c3281438d398b238352b674b
+|   |   |       
+|   |   +---12
+|   |   |       de2d1438a1cfbbcb7e6cd5abcba9b3fdd5817a
+|   |   |       
+|   |   +---13
+|   |   |       12eda880cc8e2a4ce2144b3e3f7fa389be59dc
+|   |   |       a1c006ff8f258689ae5d39d0c3adaac5ea8bab
+|   |   |       b39ea4ae9c486bf94c78b6fe21cb2528303bfb
+|   |   |       b6daf933efe59c82921682b22c48e801763691
+|   |   |       
+|   |   +---14
+|   |   |       42ee8fc0dfbf19f97707cc81e8f4d1d33a44ff
+|   |   |       
+|   |   +---15
+|   |   |       6e4d050d9ad334ffe30c76b75cafddc8e0cdd7
+|   |   |       7a0b0b3c3cf450ae57a01ff5801f0d6ef1dd98
+|   |   |       8db6d07e2d266a2e525abb6519a711109dacca
+|   |   |       a6f35291ec33db2bc13af052493c701d16f22c
+|   |   |       ce59781fbd07a7594b8712fb8a5af3c5adf61f
+|   |   |       
+|   |   +---16
+|   |   |       68698fd359a4b7ba668227b868cd5b0dfbe98e
+|   |   |       fadc4a2c7ca95fb73cfdeffd481f5a32cccf68
+|   |   |       
+|   |   +---17
+|   |   |       8f47c7761dd2c638edab9cc8e29e393a94bf6c
+|   |   |       
+|   |   +---18
+|   |   |       1377d9629c5bf964a6dc5960c2cc48866ec093
+|   |   |       e380cf66b28f6104f86d27850d2c4bf567c093
+|   |   |       
+|   |   +---19
+|   |   |       11bc81c2a037df39f0ddfb14f4d00e938a9517
+|   |   |       1a6036919e07ae7f13850e18b4c9b5975359fd
+|   |   |       3cfe8b018a3bd9b7d3ce6ff7e447c602cad38e
+|   |   |       
+|   |   +---1a
+|   |   |       b1133fab8aecfd539b3ca18b3f561576e024a8
+|   |   |       dcba18034c7d6e04415d27290748100b011491
+|   |   |       f1a2b484649c38ae8637d25990b496a4e30709
+|   |   |       
+|   |   +---1b
+|   |   |       c4e244f63ce506fdd083501950d4917f41b09d
+|   |   |       
+|   |   +---1c
+|   |   |       bbf84cedd798531d850ec311e984287f62efe8
+|   |   |       
+|   |   +---1d
+|   |   |       bd45e0270fd9c756f1ba0accbe24ac532c346c
+|   |   |       e3a5dbda158234259289f922852fc7288dc2c2
+|   |   |       
+|   |   +---1e
+|   |   |       16dd51be9554941fad93271937c5167e40dcc5
+|   |   |       1fd43b3ae23b0af542bcae6f809936f85dd6bc
+|   |   |       34b7226fa18f7e34f772c8a3c77153b1fb8844
+|   |   |       882b42edaf61efcbc4eae7eaeca41a429a7a03
+|   |   |       
+|   |   +---1f
+|   |   |       feabe658acc1d8a23ac7545ae329814a7e0f2f
+|   |   |       
+|   |   +---20
+|   |   |       af17cac18522c5ab0c26f658be964e67c9af60
+|   |   |       
+|   |   +---22
+|   |   |       0965e28f9e5177ec19d5e197f052c02b903501
+|   |   |       4bb02230521bf861edd7bd8d633e73b8e7e3de
+|   |   |       6b7aad6e7ee9d982ea1e82f18178064a9a4d2b
+|   |   |       
+|   |   +---23
+|   |   |       6d528d6bebdfd51ca9c911bcdd279c4c8728d3
+|   |   |       cec2aab659ad41b6b5277e36ec7395c2c9c9e4
+|   |   |       cf5d81dbf4c4424a4460f57ff675440c2ae07d
+|   |   |       
+|   |   +---24
+|   |   |       b00b579f1a59b28b4b78b4564135078431358b
+|   |   |       
+|   |   +---25
+|   |   |       e297bfa67b0d3393f407062e6b075f9f33ec7e
+|   |   |       
+|   |   +---26
+|   |   |       2ddb21d6e5b3604b56ff35753c7a69f34eaf02
+|   |   |       5315233c70cb12a8489ea3847b1d1ef0ce6420
+|   |   |       6057d06e12326c465b2002b732e44ef0f87661
+|   |   |       
+|   |   +---27
+|   |   |       e97e51b516b495900f14f52f9d0fa3c5765752
+|   |   |       
+|   |   +---28
+|   |   |       2835969cdc7c91bd57cb7df4732f0ecc53b1fc
+|   |   |       
+|   |   +---29
+|   |   |       6254516f4cd3f13a5418b9e3ef43e48805a723
+|   |   |       
+|   |   +---2a
+|   |   |       0e01e2f2436c1fc513868a08ef55b04a3ca7b1
+|   |   |       ca6bcd598a3047c32940c45672278cf5059f40
+|   |   |       e0e6f57615895e51e18aaf2e5c66f0ad547fb6
+|   |   |       e3127d48083e2dbc0bdc596cf502d239612708
+|   |   |       
+|   |   +---2c
+|   |   |       43ab23bb534409d9396596a76414d5bad4122f
+|   |   |       4b812924d5d14b74459b291a0692ed02c845d6
+|   |   |       a31f53f55002825a6a3245d82b982bd74d0dcc
+|   |   |       
+|   |   +---2d
+|   |   |       bca22baa5dc1ec59d579a0978245082754a36d
+|   |   |       e857fd485885f6e329b36590b588353bff4cfd
+|   |   |       
+|   |   +---2e
+|   |   |       5bcb1175d5ff0ded3225ade3b03b9031f6e4e6
+|   |   |       
+|   |   +---30
+|   |   |       6522f027573b2ca93c960e7ddb04417dec622d
+|   |   |       
+|   |   +---32
+|   |   |       066ff16ef49191a16fd10b3909b56ac2db32df
+|   |   |       
+|   |   +---33
+|   |   |       a04f66c971e4ea5719a8e87b59bac254f94ce3
+|   |   |       bd3c4ace9e3d5f40ec35cdf7aa6438e7b79118
+|   |   |       c6db858506a4ea4681d89fa4e36731990c6262
+|   |   |       
+|   |   +---34
+|   |   |       128af508cc83ba66af23add612ad7a657e6acf
+|   |   |       3b4ce1e67c381b8897dc875a70b5469e7b0e02
+|   |   |       
+|   |   +---35
+|   |   |       7b697207804defe91a175e4571ffef7960fcf2
+|   |   |       a7576c5a5ead1cdee2137a1838d11d571c5325
+|   |   |       b191301972286f9c545b9abf09d8049171d49c
+|   |   |       bfb3eaf553ca458a83847f823e3185055b66b8
+|   |   |       
+|   |   +---36
+|   |   |       3b5a86e93b14aa611a8c776944333d575a73d8
+|   |   |       b0f3f56c44d255f50c948fd88be8bf6a9841fd
+|   |   |       b44df588eb9840f7abd542cc5fb22297572b08
+|   |   |       b4ce5ccc18949565db067e1c257127fc2c2465
+|   |   |       c3817a3b4cc74928b7e9346ae9ce37f2bfbb47
+|   |   |       c8cdea62261a07fe1521d293c00965a4f94b89
+|   |   |       
+|   |   +---38
+|   |   |       28d40175b658dcc549bbc7c8c9305614750cb3
+|   |   |       71ccf7fdb05f4a08db815bce303a546b578fba
+|   |   |       
+|   |   +---39
+|   |   |       7f70217d6ed16215739802c242e92facae2be2
+|   |   |       
+|   |   +---3a
+|   |   |       39a78f101dbb4f89edc1b76fdfadc0b373e417
+|   |   |       4d516f6cea639eecb2eec10e0891a6c1fda301
+|   |   |       76f8d0ce721feb80d01d2fd91dd26613917daa
+|   |   |       86152d6700d5e69475df42ada46d1e50cede71
+|   |   |       
+|   |   +---3b
+|   |   |       ad85ce7d69879d810add0dd0c00e0b49546172
+|   |   |       
+|   |   +---3c
+|   |   |       4b9bf0b4760e6c49f2a99baa8b51026dc7dfac
+|   |   |       
+|   |   +---3d
+|   |   |       0d8807d8718b2d47f63a972217d4ad969e2ba4
+|   |   |       27a2ad524d09b2c4afba36e751a6e668f5412c
+|   |   |       2884cdc7ce4de0238761850218d9eab3b6efc7
+|   |   |       9d71d848fa5d487fd9f0673e9ea0d0505788cf
+|   |   |       
+|   |   +---3e
+|   |   |       5a04abd793c89a527abf53a8c4535e7471ca7a
+|   |   |       8560eaf6073e977d3178761eecb40d6aea2b70
+|   |   |       
+|   |   +---3f
+|   |   |       511e9b4672f9f65c1306ce87316933d0489e54
+|   |   |       8dce8cfeab14b454e4834e56559784a7070086
+|   |   |       
+|   |   +---41
+|   |   |       9c761188628284be46b4c274d5de9904e2c656
+|   |   |       a2ca50a0bf595916a12180a34138a7881107c0
+|   |   |       
+|   |   +---42
+|   |   |       0b689caf24e725078d6bd459b8caae4a708c13
+|   |   |       
+|   |   +---43
+|   |   |       2e72ccd2b08fe4031a6fd9c03ec9328cc8b2fe
+|   |   |       5930cd69145401d8cb5440337ea5a59532dbd4
+|   |   |       bd64a4ccce60b9001f1f05e378d2b5158def5e
+|   |   |       
+|   |   +---44
+|   |   |       3742e1f75ea685b40fc2eaf3880e8290c32266
+|   |   |       520a20237f99bac061bb4b5e674643107ba116
+|   |   |       
+|   |   +---45
+|   |   |       dd717ed025a64b6e823a72d59c1320e8dc1f0e
+|   |   |       
+|   |   +---46
+|   |   |       01a938c32c6f15df4b931939c76ab0174dfa7e
+|   |   |       45b6bd8d610cb084284a411360b587abee0576
+|   |   |       725e2c11c4d39decb0daf9c1f23b990fa11d8d
+|   |   |       b3e23e514e594d94161597b9353f69f1d664bb
+|   |   |       
+|   |   +---47
+|   |   |       0173ab816d4afaaa1ea5acea4a0d31f48597b8
+|   |   |       39ddfec60689514c769c56277d194e0dc76b8c
+|   |   |       
+|   |   +---48
+|   |   |       410349e937cb260626b883ca68391b634badef
+|   |   |       4db29f02905bff7e600c7b43d5fb32b7e0ef92
+|   |   |       
+|   |   +---49
+|   |   |       fc4c5169c8dea9ff41566922fa5b9d15da9824
+|   |   |       
+|   |   +---4a
+|   |   |       06d6066f5b5f7977c7fc4a0f8187aa1171680b
+|   |   |       
+|   |   +---4b
+|   |   |       481f8a2b30f83c58ba19d11ba72bf732d8a53f
+|   |   |       50d2183492c35a4cfafe468ab32c1149e62359
+|   |   |       
+|   |   +---4e
+|   |   |       17acc160162f4aa8fc44e3bae316936fef6436
+|   |   |       30471ac1fd7cf4ea0c1550dc74b7fb58d230e1
+|   |   |       5561150f795d7c9269c88cff05f572b98d2ed9
+|   |   |       
+|   |   +---4f
+|   |   |       b0068d54bfa7a2f594d7eaa2ecb6cffa08e1b0
+|   |   |       
+|   |   +---50
+|   |   |       5dddd597b7588ea5032adcf45c79a0b667adaa
+|   |   |       618f76b5df2ad084b2ab8a3c1fb7e8c2c47ca5
+|   |   |       
+|   |   +---53
+|   |   |       fcef6fc77ab43e96adf9e71696bb341b783fd0
+|   |   |       
+|   |   +---54
+|   |   |       cc2fda0844526164bcd0dd2373d8f416914f13
+|   |   |       
+|   |   +---56
+|   |   |       107955ec4d1330e0448d2dbae4091804b14143
+|   |   |       13a3451b0d90c14ef7f1a2e4f20de31c17a39a
+|   |   |       
+|   |   +---57
+|   |   |       6f74e2d6bc86117fb9de6e9eced7cfeeb4efd6
+|   |   |       8f217379834bc900f3cdfbcc4a16b2665e65ff
+|   |   |       
+|   |   +---58
+|   |   |       7323007f0bfe3f5537ba405698c9bd89ce6a22
+|   |   |       dda28a2d70def538346d4d46a4f32330b1eb10
+|   |   |       
+|   |   +---59
+|   |   |       b70d29fdedc82f818f9895f1452d11c6ed82c7
+|   |   |       bc21192059d8d42bfab92cf6351a16dbc78410
+|   |   |       
+|   |   +---5a
+|   |   |       d31054b52bcdaedcd9e4afddbf735e53c169ae
+|   |   |       
+|   |   +---5b
+|   |   |       11c0446c05ca1063c0279ee13d5b51868318f5
+|   |   |       7e0ee7eceb7578b59c4eb7643012b318e8e329
+|   |   |       
+|   |   +---5c
+|   |   |       389c4a404871fecc51af765034e28ce7d13865
+|   |   |       
+|   |   +---5d
+|   |   |       5014d0d6f0df4e73ef5d237c62d51627784851
+|   |   |       650f47ec7fc5581c4ea3e09eb3e18474ace908
+|   |   |       8d2cf38c8ab63388c5da6a6cb52f84e04f1be7
+|   |   |       9cc06fb747d75105ca73e4a8115e1cdc56ca60
+|   |   |       b9f12d1716d77d884221ea5224bb156eecf2e9
+|   |   |       
+|   |   +---5e
+|   |   |       9d619e54649f306db0fe1eaf9d8c00823b18e5
+|   |   |       
+|   |   +---5f
+|   |   |       1aa9d6cc591a25eb34a27a786b27d6dda1d2aa
+|   |   |       363fac58a4a78f08d124124df1959aa9c049b1
+|   |   |       5814b9766402616a71bfbe9df41ac44283342b
+|   |   |       
+|   |   +---60
+|   |   |       4dfb2d6c61df0b20f0c8204787e7b6117ce3eb
+|   |   |       
+|   |   +---61
+|   |   |       3e5e9f49e51fd6dafdc1af2c8d0969cd45a164
+|   |   |       43a38d8326552daa14ccc65ee9e079c91551b0
+|   |   |       
+|   |   +---62
+|   |   |       08171c41039de9e870d6238b8d4afa777f4495
+|   |   |       de355ff800f41fb0cd0f236bf8c1862df7f333
+|   |   |       
+|   |   +---63
+|   |   |       678068d810735c676bf74ea1547932f333ac2c
+|   |   |       
+|   |   +---64
+|   |   |       13040622dfa4d4cb1aef8d2aa11531b778a0b0
+|   |   |       30c84c8a2bf9fc4ef5a05558c69358856e9541
+|   |   |       
+|   |   +---65
+|   |   |       8639db1568be0e9635f0a5d98ce64806671a79
+|   |   |       9c931a7535840b83293e167593d4ef4a078275
+|   |   |       c6242594aed041a15ba59e7f8cf818b90cbe4b
+|   |   |       
+|   |   +---66
+|   |   |       160884e18f0f7cbdf608345d5addcc4a1465a6
+|   |   |       3910f67d7e642de1db623d4c7a83052430a07e
+|   |   |       99cfbe3e1b5d984b057f6acdc97706e8ff1d15
+|   |   |       efd48a8a580ecffb6b235b5e7ed2fffa733ccf
+|   |   |       
+|   |   +---67
+|   |   |       8fc5fd23a6226a978e21f48796aa1dadc7e7ad
+|   |   |       
+|   |   +---68
+|   |   |       46845850eec78c5662694262729f6f017fbc5a
+|   |   |       ffd50f446c777b35c6afe3913690ca432b4a8f
+|   |   |       
+|   |   +---6a
+|   |   |       248d65af9653548380e7bad7a21af4996d21a1
+|   |   |       bdb0f1a3001389a2f30b0efd30b19f2a9333ad
+|   |   |       d80edd3cd732a82cc7a2691e9975ba2b378ab5
+|   |   |       
+|   |   +---6b
+|   |   |       617d6a457c955af265a2cd595a6589650c24a1
+|   |   |       a398986f9f3f7f2676ac81ba549084bf3067c6
+|   |   |       d079aa1859e76782dcc9f10d515d7b4ab10ec2
+|   |   |       
+|   |   +---6c
+|   |   |       02a16a3af6dbba73217333a94c627c88fe7f7c
+|   |   |       
+|   |   +---6d
+|   |   |       214b423c725347c82fe5ec1801df92e183aaf3
+|   |   |       4828223d1b0ad9ebdad90cf63c35bc40cf5bcc
+|   |   |       94b81e3f0e7f08cb5414a1ccb57a97a9d2d534
+|   |   |       ab49d03cdf365e9a53649870f902a4f9d40436
+|   |   |       
+|   |   +---6e
+|   |   |       0dc48e12f66397ca816127685907d561109514
+|   |   |       7231dc95ac645a3ec86e27b9857e3d6d39fec0
+|   |   |       
+|   |   +---6f
+|   |   |       009dcf544ce2e920358a079829f5d0fd64b388
+|   |   |       0b7cdf1b193c9f2e6ebccc48a3868700333d34
+|   |   |       
+|   |   +---70
+|   |   |       3571738c5c0d2c40015813ff6d53e021e05f50
+|   |   |       
+|   |   +---71
+|   |   |       8a39c40927ac56c2e38b464eec756da1e693ba
+|   |   |       efa7ce9e57fb4ec334250f0653b8acdc9d0cb7
+|   |   |       
+|   |   +---72
+|   |   |       8c5b033337465fe3f01148786170f456dc5e7d
+|   |   |       
+|   |   +---73
+|   |   |       1bfa9311aefcec6b988944c0ebfbccdfbd6761
+|   |   |       335440a787ccf795cf300064d0f617bd7ec63d
+|   |   |       c57073243e6df8c5eeb6a6728580d3f75efe18
+|   |   |       
+|   |   +---74
+|   |   |       3bf3012294d030bce463e43242d292c54674b7
+|   |   |       81503fb9e9ea07f62bdf334cddcbb5cfa95ce4
+|   |   |       b3bfa12a2122f8c90fd9acf05f1fd6d0c89614
+|   |   |       ebedbb4ffc9ce64b86ff7463d66999f9ef8932
+|   |   |       
+|   |   +---75
+|   |   |       658c89a27818ae0908494f360cf4af6ded4f6d
+|   |   |       797316c60f9c249c051ac8c6a6106c54810f53
+|   |   |       aaa193b8c2d33794d83842fe89fd1ca611a215
+|   |   |       aacd2fb42d82b6a0a744e80955ea772babe4f7
+|   |   |       e89664285e98def187d8882a48f2b76cf18416
+|   |   |       
+|   |   +---76
+|   |   |       4f76d2f95e8c08f12c9c3a81151d545c968ba2
+|   |   |       a9ed6472164b0b8c3f3b03fab49460c15d9cd1
+|   |   |       b48a525a4b1c9be5280f19eabfb296de0beb7f
+|   |   |       
+|   |   +---78
+|   |   |       291d2a9c26cb2d064936d90f3ef262083b28cf
+|   |   |       
+|   |   +---7a
+|   |   |       b8bad5fd21f2811b387049a5769f7b4525f307
+|   |   |       
+|   |   +---7b
+|   |   |       51d70e94780525c49892154ccf4a9a48cd9e1d
+|   |   |       cda0255c23f6132f4331291161005fcde2e079
+|   |   |       fd5b106271c64ed470a21c10e4927c3dfb2af1
+|   |   |       
+|   |   +---7c
+|   |   |       619c3ed4e6c6312a8daee0c5fa26c9ac0980cb
+|   |   |       7b593a6f0273590fb24ca9c329038c0623cc2e
+|   |   |       d0a58b5b3632a6f8f76c7d69ab60b2544be58d
+|   |   |       
+|   |   +---7d
+|   |   |       98ac76ff3c59cd4db563fb03f465e2aa078d1f
+|   |   |       c061ea96036e24baf34c1f541e6eb098d00666
+|   |   |       c0ff17f83779a4d22de1bbefd929adf390584e
+|   |   |       e187696484e03c9729f2fa4f81ed6984551d4e
+|   |   |       
+|   |   +---7f
+|   |   |       085cfad0f66b512016550d4e878e3443bbb3da
+|   |   |       5fb0135778a0aff88517d2c399a0da48b90d9c
+|   |   |       c1e7d1da3c10deb4f6b952fa3517649ac1f66f
+|   |   |       
+|   |   +---80
+|   |   |       d55d52327c99614cc27cb9174acb2455521c4f
+|   |   |       
+|   |   +---81
+|   |   |       236d7c4a9cb473f4f5534fc809169d62ed69af
+|   |   |       7fc8f6fe0b85351e77d4ddfd5017a01d5d6f3d
+|   |   |       8044f48fa3db69a9441b2890f44ddb8e82067e
+|   |   |       d9c48be3c4a119ac4f6f152b1e09d9b732a778
+|   |   |       
+|   |   +---82
+|   |   |       01a766fc64d93c067fb6512cb08627689acf35
+|   |   |       08c4aaab43164097cdb41fbafb93ff2739c225
+|   |   |       19b438c1782636a6344968fb8da87d9347ffdb
+|   |   |       406ca79e66edff0daf8806086ccb8359edc85b
+|   |   |       8838961de22fc46da9f8724077a357ba39924b
+|   |   |       
+|   |   +---84
+|   |   |       2de0a953c255c1fc85d1e3fde07fcc8608a6e5
+|   |   |       fa246063e4b0fd6ebd8e476b766332ca699204
+|   |   |       
+|   |   +---85
+|   |   |       0a3aecf6655a89d7a586e6d21c477a499d6698
+|   |   |       3cd6d25a11b05edf7acc8c82ce3f07bd478dd8
+|   |   |       45af80791fafd274d74621c3c66c8ed6b5bf94
+|   |   |       dc01965cd66ad786423b349081d35fb375ab2d
+|   |   |       
+|   |   +---86
+|   |   |       480b8510a433c1240e6baa44b39e0e832f62ce
+|   |   |       
+|   |   +---87
+|   |   |       666615e2b90a5792551089d76ce7e4b762953d
+|   |   |       
+|   |   +---88
+|   |   |       3dda338e4d884bdc57c0c81d1bb70a19674c09
+|   |   |       a97d4aae43283762a4131bc3ce4235174a3894
+|   |   |       
+|   |   +---89
+|   |   |       63d2004d0c766749a674fa52259853ec750192
+|   |   |       b068b857b9840440c82fe461131b410f9e0330
+|   |   |       ed8f125d6a59cd2883976659cba79fdadcd4f0
+|   |   |       
+|   |   +---8a
+|   |   |       2a691ff08b18dd4614fe42b190e7275d812a45
+|   |   |       86f782f3f37bfd09060054de446594c0bf5163
+|   |   |       a9a0ecb27472c6cb769241959f0b6c8ac759a3
+|   |   |       
+|   |   +---8b
+|   |   |       0fbefbfe0d9e8a4836a840ba7ef5a416cfc2b5
+|   |   |       a63adf30c024f8c3c49bf05db360b0bd326395
+|   |   |       d6895df893b580c7e0f1632fb2fe5e0b47873d
+|   |   |       
+|   |   +---8c
+|   |   |       df624be27a975abdc8c8537a9d0c7612789bc8
+|   |   |       
+|   |   +---8d
+|   |   |       900d5ee6b44e2291d5f67144b37a62fe8fcdbe
+|   |   |       ec6f27b78493e3a9ddd6c6be5d56b7883d7dd5
+|   |   |       
+|   |   +---8e
+|   |   |       46d4d06d0058f964ad839c216a96a73c0b1445
+|   |   |       a02a689c2275c7eb2cf4fb0151377078c61973
+|   |   |       
+|   |   +---8f
+|   |   |       3f859a633d098b026c352bffb85267044fb002
+|   |   |       aa8a0f61155706fc527a83460c43754580a26d
+|   |   |       
+|   |   +---91
+|   |   |       29485aee961dcdbb7cf6269008ee7db86bd633
+|   |   |       
+|   |   +---92
+|   |   |       587cceba0bef4f6896413411642b381fd0836a
+|   |   |       af3c2faa95adf28803086d3a1b9a63759759f2
+|   |   |       e5845a5a46e404860383893ae1c8e5e32d9103
+|   |   |       
+|   |   +---93
+|   |   |       dfb6d1a5f28488e1bb70bdfa1918cd37147a99
+|   |   |       
+|   |   +---94
+|   |   |       2d46d58c672183f27f13d47207b07a78b9f09e
+|   |   |       3382e7b4870a49abba078e17645eb80722bd3e
+|   |   |       
+|   |   +---95
+|   |   |       ecdc07c1a382733d26ee6d607c3ebc04e07cff
+|   |   |       
+|   |   +---96
+|   |   |       a6e085e5b6ea31dbf015f3bc31e2724ea8bcbb
+|   |   |       
+|   |   +---97
+|   |   |       992bf516c430b2190ae11023eeadf3b74da38c
+|   |   |       e3a12b2b9e5210c648bdf7a35a2f2fb9415957
+|   |   |       
+|   |   +---98
+|   |   |       cbcb780c7f69d888c848b0c1284cc8c464eddc
+|   |   |       cd88791aafe0ce288390ba691a0aaf670ff3e1
+|   |   |       
+|   |   +---99
+|   |   |       467b80144b23542a86703d0fd0b8cdc63cae49
+|   |   |       
+|   |   +---9a
+|   |   |       a81a08bc0035e3315739d1388b9b2c8abaded4
+|   |   |       cbee5f62dae44e62bf834edcf5cf6a6fb6173d
+|   |   |       ceed96b67fb68a9c128fdb245e54b2020edff0
+|   |   |       
+|   |   +---9b
+|   |   |       4983349937f42ab927e1d85c6febae9bffdba4
+|   |   |       
+|   |   +---9c
+|   |   |       09ea38b3589bc7276a5f1bba57f0f6e5d6cf8e
+|   |   |       86ff3d9343b2f11d020d4b4445cbe32130e379
+|   |   |       d7e5901397609d420d95a74893c448ca138598
+|   |   |       e081bc0ce4c08cd25bf70f475adcae4f957a77
+|   |   |       
+|   |   +---9e
+|   |   |       40ad5eeb454dfed05d8c8580b44318bce97fc0
+|   |   |       7e89920f2645388fa0565c77c1ddc2fd38eb26
+|   |   |       
+|   |   +---9f
+|   |   |       a066805ce6ef6f9a9d5ea1adae1e414b214fde
+|   |   |       ba93dcf70ff22bf511c250e1f1f726f9758ad9
+|   |   |       
+|   |   +---a0
+|   |   |       7c06698eaaf7aae2656c907c57cabb4bacaed4
+|   |   |       d681fabf846c871566fe95098a02d58b0f6bcf
+|   |   |       
+|   |   +---a1
+|   |   |       671cebb8edbbdf3401c79bcb63bdc153565237
+|   |   |       861dd8612e397d34e32ea58cbff4a01dac50a3
+|   |   |       
+|   |   +---a2
+|   |   |       104acca9f4fd2f8ee27781eeb54fbe3d7c40a8
+|   |   |       424eb14b48174f18e43d92fc9d7574b3a0c5c5
+|   |   |       df50bc2c1dcc6dd1c3f3097b1cc8c441957d5f
+|   |   |       
+|   |   +---a3
+|   |   |       3f04f1de545d0cf2cdca56d9659006acc82c3c
+|   |   |       9b1205662853680eba9b39cf34e4d1647f0a3f
+|   |   |       ad32390c368a512a267db6b8a3c671245adbe9
+|   |   |       
+|   |   +---a4
+|   |   |       2a3aa83f209be3d3cdb03828e7c0a22e9fed0a
+|   |   |       4f2595421127d5313b624fc60927d1d0868888
+|   |   |       
+|   |   +---a5
+|   |   |       0ff761c9577f034917fb86bb7841a46a8f6cb9
+|   |   |       2d3618adb856db3361e2a33a34651e57431e60
+|   |   |       
+|   |   +---a6
+|   |   |       faa1a13b047c1e8ee1915892eaff5f3812fa05
+|   |   |       
+|   |   +---a7
+|   |   |       e981251c2a951e73b16a362468c626c560def2
+|   |   |       ea43ec9d07efe0e59e98a0d99650878eaa5b4c
+|   |   |       
+|   |   +---a8
+|   |   |       2a3bd882c53fb86bed77feb55456c98e8dbb45
+|   |   |       65e410016836122457fe3130429a7ece1bcdb6
+|   |   |       d9c88c418927e61348c51b30e2fe47d50e8feb
+|   |   |       
+|   |   +---a9
+|   |   |       8f7d23ac3796a7ee3670dd6380e0003d9f6304
+|   |   |       
+|   |   +---aa
+|   |   |       407400974bd39782741bd5c134ea18c8b38807
+|   |   |       
+|   |   +---ab
+|   |   |       21d08e239906546b49a3e80235b28437c11389
+|   |   |       c52b9e499d8ab2ed268ee29bfd01dd40def093
+|   |   |       c7209e63622a5d0cab4fc322b4a084b1d0835a
+|   |   |       
+|   |   +---ac
+|   |   |       89940956f39a25314443f6a7f2b35d00996ba5
+|   |   |       f384f3812b694e4522647238199d93311a0b2d
+|   |   |       
+|   |   +---ad
+|   |   |       119d3810381e2e298b0e77aa6b2fa6c2f3d7dc
+|   |   |       f1f9ef0f8c57416de8a9330c8aba20c707bf0a
+|   |   |       
+|   |   +---af
+|   |   |       99cc3942d8c7465aaff63a05474ccb2fa9ae05
+|   |   |       
+|   |   +---b0
+|   |   |       960288a5f8b9aa6d669e812b50b715b3074022
+|   |   |       9e82368424a56489b2ea5a0880d472e8e0dbd0
+|   |   |       9ff5a802922ca4fba79fd3df20107568da6e50
+|   |   |       c601cd7041089846c7ac202694302813bce40a
+|   |   |       
+|   |   +---b1
+|   |   |       4054a12b65ff8dbe6eaa9b502e0c863be3e5a3
+|   |   |       5bd816ace54b11c949219ffc9e2101de6feea0
+|   |   |       ced2e1690cdd13a7f6915abcda27f330e293e6
+|   |   |       
+|   |   +---b2
+|   |   |       092e0e03010343cbc46d2b61b5512161b8db1d
+|   |   |       0ac79d6477604532fe4ca9188218aac87dc894
+|   |   |       
+|   |   +---b4
+|   |   |       011e70333e029b5a4c3881ffb2507474b608bb
+|   |   |       db031d88ac6ee86cc568ca30f48139665eded5
+|   |   |       
+|   |   +---b5
+|   |   |       787fe39f8019efe22c86f03a7fa270ddfddd97
+|   |   |       dbadd57229ca48a9aba7fc92a2cd53dce2dc42
+|   |   |       
+|   |   +---b6
+|   |   |       45ee5cbf190363898ba6d0795588260a8a6b8d
+|   |   |       570660ab8ab5958793ce2c4805458cbf06a3f0
+|   |   |       5ce5dacde888fe7ed59a092a18f2c86e486edb
+|   |   |       bb898af6ce2fe54c50d215bb704e0ca5289750
+|   |   |       
+|   |   +---b7
+|   |   |       e0249442f25a90c597c1697c8137096f9fb110
+|   |   |       
+|   |   +---b9
+|   |   |       a78c601e1ab1f6128b53dcdf699f0f3375336a
+|   |   |       f081d616ee7b8ec2abc77d107a5585afcefcf0
+|   |   |       
+|   |   +---ba
+|   |   |       2d5188d0f214e7c57e5fd5b1948b63a46a76a3
+|   |   |       
+|   |   +---bb
+|   |   |       2ec132165ae15d69bb9498947142ef5fa10234
+|   |   |       68dc5a6f9f27bc3e4868a081a0cafd21e06ecd
+|   |   |       e3f6bee9f7ff246e9dbc6874b9b148f7b8cf67
+|   |   |       
+|   |   +---be
+|   |   |       04d79299c579586d22ce5ef790afe64cb0b6d9
+|   |   |       338905af42e69cb08d9559fcd6bcf880708dc3
+|   |   |       
+|   |   +---bf
+|   |   |       d981065e67884ceb61a554b09f551a8b74e6ef
+|   |   |       
+|   |   +---c0
+|   |   |       2b77d574eca4558138f42f040a7c8b38ad4067
+|   |   |       aca570e6cea9f0e2fa06599c919bef35a3a85d
+|   |   |       fb0b28ee5e2038ef73738812cc71b982afeb50
+|   |   |       
+|   |   +---c1
+|   |   |       9541485c3f01b3265a315bde36c977dae697c4
+|   |   |       d260804bc8303725e16ffbdae51c5d7a4cc9dd
+|   |   |       
+|   |   +---c2
+|   |   |       079459ae916124c8d3f570fe1b8c5f63c9b7ed
+|   |   |       47a4e059ea17e58ee152f01c7508d1b78c1829
+|   |   |       5ee533d6d5bfef3bc8b789d924afd32ad2d5dc
+|   |   |       
+|   |   +---c3
+|   |   |       0d724c12c328b3598cb82911a37ee63c3dc04e
+|   |   |       17b0e7579cd2ae01a5e6b8c81ab79af04dd59c
+|   |   |       
+|   |   +---c4
+|   |   |       9aa5b057e2e48b1833ca41b1a59ed599ff58ca
+|   |   |       
+|   |   +---c5
+|   |   |       09c581c38c2ea0a47b01b804dcfde38718cb29
+|   |   |       996ba9d44ffa444e259a2ac0239e53992422db
+|   |   |       
+|   |   +---c7
+|   |   |       759cf37660cb9c08b7dae5eb2c495d700c7b14
+|   |   |       908a26c5250816558516c43c2ae6820b787356
+|   |   |       ba7f0aa26462221f67c4c883ea60e0cd17840c
+|   |   |       
+|   |   +---c8
+|   |   |       0574ff3ac811d99e7faec8c15697a7f1928532
+|   |   |       68e1fee7cbb911de8a9685640e7b28d53ed5e1
+|   |   |       
+|   |   +---c9
+|   |   |       26fc18c1332dcd7e2dedc21c7418502cadca6b
+|   |   |       4f6a495cd093ca147aafd4996470587d6280be
+|   |   |       574db842539b06cc46f7adc614699a294154a9
+|   |   |       d07575fbe1e424a614ea3bcdbb9c81e5cf986f
+|   |   |       
+|   |   +---ca
+|   |   |       76232ff45eb1d77a6c66ea9d1f44675c29c030
+|   |   |       d76971dfa9927017e986b1a02ec8ddd5065a57
+|   |   |       
+|   |   +---cb
+|   |   |       28e976f62b7a7f9ac32d49ebb7428311fb00b2
+|   |   |       
+|   |   +---cc
+|   |   |       0fc96476904236e5f8d7b0050d70535a79e580
+|   |   |       3aa6797d40a9b8760e0e6c74146af7e71dad74
+|   |   |       7ccd13e1d6cc1370901d5af196a6f28da91374
+|   |   |       84dd7a45e79e6c7565c867b6e83fe84b52a82d
+|   |   |       
+|   |   +---cd
+|   |   |       07a8d4dea942778db116fdda7f3173c018b8df
+|   |   |       1a9cf42b31fc81b7f6040cda311afbd1c08e50
+|   |   |       
+|   |   +---cf
+|   |   |       4adda230683155aa4a59ca6b53ff1ac8e84ad9
+|   |   |       8bc7d0cd71401e955b3a06767d26284d397f53
+|   |   |       bbe730dac72e6be24b6f2614e2caff0fb2e47f
+|   |   |       
+|   |   +---d1
+|   |   |       0cdd7285d05c12ef3b8dc5e1fba0d1c714a490
+|   |   |       2d4505c4a6feb15c783ab9023de798a134f1e9
+|   |   |       e90bf7892979743f21784632d5f4ad95bdd064
+|   |   |       
+|   |   +---d3
+|   |   |       0049bf217d8f33f557a74f3aecbcc8541eaf5f
+|   |   |       5d61b7bbc0273c8308ade0a9bef05c6c40ac42
+|   |   |       9ba03e652434b00c3100f2df4dfaaf507ee9c6
+|   |   |       
+|   |   +---d4
+|   |   |       f74e0d82c4af7cba72c5be3444c868bac04714
+|   |   |       
+|   |   +---d5
+|   |   |       84d7705ec3a7a678d0529081f5dae0f8d3251f
+|   |   |       
+|   |   +---d6
+|   |   |       55b9ebd5f234a2040dc4afdb465e3ee5ed1100
+|   |   |       eed704e51eb74b7b6b4f5d0b78fa3550ecafd4
+|   |   |       
+|   |   +---d7
+|   |   |       2bdcdfedb0097c0ad4a8f1d72ce21319cbf146
+|   |   |       583f8bba7971d44fc7c998dfaef75319e026cb
+|   |   |       e635b1977b019bcbd1b14ab171526e581220d9
+|   |   |       f00722095ba4d5a19de30fb41ac7e1ca872d80
+|   |   |       
+|   |   +---d8
+|   |   |       59030b43f821a4c0cafacfe25a3ed943796ce2
+|   |   |       88b80234a3b2712f05b005bdc55960a5783071
+|   |   |       b7fb2b27b1b79349c0be6365031208e4651cf5
+|   |   |       
+|   |   +---da
+|   |   |       18989203d09c935ff0079d0a896edd747abf5a
+|   |   |       8d6bf85b0f1b599fab21c4467a7b1e37dcfe3d
+|   |   |       db922397fc35d917f859f8d432b6f82f9c5fff
+|   |   |       
+|   |   +---dd
+|   |   |       4af54a5f51bff4a2426321581b675914ab6582
+|   |   |       ce776b6cbf66de61907c66caf1388db764296f
+|   |   |       
+|   |   +---de
+|   |   |       9292b95b049db01d30a9e4fe11a79121aa9905
+|   |   |       ca7389e9609d5c0ebe712bb1b0b814e7b58aa2
+|   |   |       
+|   |   +---df
+|   |   |       25edd4e44ffced3199fcf8363ed0d65d4f875c
+|   |   |       551fb378d84a78bb8f2a0689df62709895b389
+|   |   |       76b778f5e68113d7e98622cd2e2012d0b52c42
+|   |   |       dab3e32d83e3d64a25f40c34c785aa524d5051
+|   |   |       
+|   |   +---e0
+|   |   |       56148c28af1c2257e04b499e82df1a19527f4d
+|   |   |       a7002139f35ef5ddb42710637a01cbafec5a28
+|   |   |       d59cb0502458f38006d4b157df0ec96d8a58a4
+|   |   |       
+|   |   +---e2
+|   |   |       127dc5a8e23b65649f0b62d9e13b654710e7f4
+|   |   |       6217612888506fd80a819380ac7aa28f88b6fb
+|   |   |       f99469407c85e5e2033cf1180d8f66f56d15fe
+|   |   |       
+|   |   +---e3
+|   |   |       26a87ff88141dba956bcfc38c982da7808af35
+|   |   |       
+|   |   +---e4
+|   |   |       5af4e886cb560531e82fc78ac2c544f3c83e68
+|   |   |       
+|   |   +---e5
+|   |   |       71bf443836c40a6deafbcd649a5c12f60b3d5b
+|   |   |       
+|   |   +---e6
+|   |   |       8369882c1331e48cc156111b7e152cff159f17
+|   |   |       9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+|   |   |       b02f13b4a9360f3c25ac73b76e38cb1abf1f71
+|   |   |       
+|   |   +---e8
+|   |   |       568a71328171b6e8ccb2311067081ba7467a44
+|   |   |       
+|   |   +---e9
+|   |   |       0e14bfc2efe0d68afa522a358bdf12dd7ff54b
+|   |   |       5388ca626bcb35176d5f1d4f9044d84c9ce49c
+|   |   |       5643f50c14de045a520e9fb4ec72e70d0e3669
+|   |   |       b9aa737184316a34eda48da62f660de5a57ed3
+|   |   |       f9447c0aec73cc2b9be421c399687f31afd992
+|   |   |       
+|   |   +---ea
+|   |   |       1ce95ad0cedbd47f943b26eb251c368b7870e3
+|   |   |       6315edd230ddf4760d112c16486b0bf27f9c56
+|   |   |       
+|   |   +---eb
+|   |   |       30216db421a5cf1eb1cefc512f4dab2af354e1
+|   |   |       3aeb97acd6b5c1a618605c492e4866a6f0edf6
+|   |   |       5a3cc08d134f37812691da446165eb2279b641
+|   |   |       76d9b391b0ab1df6998abbdfcb21e06e84030c
+|   |   |       7720f1a1f755f6aafb345591beca943a1f77be
+|   |   |       9b6892fea4ca55773d32708b3e8e1f0125f794
+|   |   |       ac68f9a80ffd4cce1a9a07635cca99e328ba5c
+|   |   |       
+|   |   +---ec
+|   |   |       e4090f6c7992fd01b00e9bfd4d4abdba295c0d
+|   |   |       
+|   |   +---ed
+|   |   |       b16db1ce87eb01af5a5c67ea29d943efcb6982
+|   |   |       
+|   |   +---ee
+|   |   |       4e704799b59aa90326c7a2478bf2bb8b2afbb1
+|   |   |       9f1dd77396c1b6449b19763913806e3799bc67
+|   |   |       ebf6e8744852737baa2ddab18f87b7ddb4c9e5
+|   |   |       
+|   |   +---f1
+|   |   |       675ac1a927db9f9e8975a881b1b314a47dbff6
+|   |   |       
+|   |   +---f3
+|   |   |       412fc811692626b784dd3cdf765bdf351c7349
+|   |   |       43f32fb281cf675ec94967b56af5729f4fd7bc
+|   |   |       5b6d5e15ef9a49bcae9dc1050d0e87f0f61668
+|   |   |       
+|   |   +---f4
+|   |   |       3e930dc27a8838689c38e19271060511bc6925
+|   |   |       615f050bea4c804d6b8dd4177095cacff1a840
+|   |   |       
+|   |   +---f5
+|   |   |       24a8babfe216adab9c01d37a0e489f02425306
+|   |   |       8866bf68e7dff56885ddb91cdd0bd96880ad13
+|   |   |       ced87e7f28b1828fc999901911464df40b4cbf
+|   |   |       d9fb1c3ea0c564709232ad9daa5a9f641548c7
+|   |   |       fa84fc64c6e2c754938d3a15054f0e723c13fa
+|   |   |       
+|   |   +---f6
+|   |   |       661013afd3ac044f43ec8b3443dbcf6b575869
+|   |   |       b2810a4a6cda5917dc3083227bed609d3e3f5d
+|   |   |       b8ea34a7452e8be595d5a741a2ecb963b905c1
+|   |   |       
+|   |   +---f7
+|   |   |       315fb0b8a4f9947c22e1802b23bc45eb48e19d
+|   |   |       a9f3d00316c319a77b754a883e94463e1e49c0
+|   |   |       b9615ee2b4177ad1f14c713e76819c5faff8e7
+|   |   |       
+|   |   +---f9
+|   |   |       42e3d080427d9c1213f115adfa847ef236da33
+|   |   |       722dc3d2d863cda0efbebb4082613615709910
+|   |   |       b0d20bf296b2b68ef47bd791ed1efb97d39aa4
+|   |   |       
+|   |   +---fa
+|   |   |       ef65b9c751af275c57174336f2fa94fb7ce59f
+|   |   |       
+|   |   +---fb
+|   |   |       26e480e5e8745b831472178b6099611b24d4d5
+|   |   |       c38a54ee2760fa18e6aaa7b7b6bb29bc6e8195
+|   |   |       
+|   |   +---fc
+|   |   |       057ec840dee90870dd5d6148794d227ae89f79
+|   |   |       
+|   |   +---fe
+|   |   |       e7180232c54af3e2d539325b56412c4881cb8c
+|   |   |       eea2cd8289c5942da5892aa143e1bb9a34d9f9
+|   |   |       
+|   |   +---info
+|   |   \---pack
+|   \---refs
+|       +---heads
+|       |       cd
+|       |       
+|       +---remotes
+|       |   \---origin
+|       |           cd
+|       |           
+|       \---tags
++---.kiro
+|   \---specs
+|       \---android-dev-ecosystem
+|               .config.kiro
+|               design.md
+|               requirements.md
+|               tasks.md
+|               
++---examples
+|       PreprocessorExample.adl
+|       symbol_table_demo.adl
+|       TestPreprocessor.cs
+|       
++---src
+|   +---ADLCompiler
+|   |   |   ADLCompiler.csproj
+|   |   |   CLI_README.md
+|   |   |   CommandLineOptions.cs
+|   |   |   CommandLineParser.cs
+|   |   |   CompilerDriver.cs
+|   |   |   Lexer.cs
+|   |   |   Parser.cs
+|   |   |   Program.cs
+|   |   |   
+|   |   +---bin
+|   |   |   \---Debug
+|   |   |       \---net8.0
+|   |   |               ADLCompiler.deps.json
+|   |   |               ADLCompiler.dll
+|   |   |               ADLCompiler.exe
+|   |   |               ADLCompiler.pdb
+|   |   |               ADLCompiler.runtimeconfig.json
+|   |   |               SharedUtilities.dll
+|   |   |               SharedUtilities.pdb
+|   |   |               
+|   |   +---CodeGeneration
+|   |   |       BytecodeFormat.cs
+|   |   |       BytecodeGenerator.cs
+|   |   |       MemoryManagementFormat.cs
+|   |   |       MetadataFormat.cs
+|   |   |       NativeCodeFormat.cs
+|   |   |       NativeCodeGenerator.cs
+|   |   |       OutputFormat.cs
+|   |   |       OUTPUT_FORMAT_DESIGN.md
+|   |   |       README.md
+|   |   |       ResourceFormat.cs
+|   |   |       
+|   |   +---ErrorReporting
+|   |   |       CompilerDiagnostic.cs
+|   |   |       DiagnosticReporter.cs
+|   |   |       README.md
+|   |   |       
+|   |   +---obj
+|   |   |   |   ADLCompiler.csproj.nuget.dgspec.json
+|   |   |   |   ADLCompiler.csproj.nuget.g.props
+|   |   |   |   ADLCompiler.csproj.nuget.g.targets
+|   |   |   |   project.assets.json
+|   |   |   |   project.nuget.cache
+|   |   |   |   
+|   |   |   \---Debug
+|   |   |       \---net8.0
+|   |   |           |   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+|   |   |           |   ADLCompi.2820F96B.Up2Date
+|   |   |           |   ADLCompiler.AssemblyInfo.cs
+|   |   |           |   ADLCompiler.AssemblyInfoInputs.cache
+|   |   |           |   ADLCompiler.assets.cache
+|   |   |           |   ADLCompiler.csproj.AssemblyReference.cache
+|   |   |           |   ADLCompiler.csproj.CoreCompileInputs.cache
+|   |   |           |   ADLCompiler.csproj.FileListAbsolute.txt
+|   |   |           |   ADLCompiler.dll
+|   |   |           |   ADLCompiler.GeneratedMSBuildEditorConfig.editorconfig
+|   |   |           |   ADLCompiler.genruntimeconfig.cache
+|   |   |           |   ADLCompiler.GlobalUsings.g.cs
+|   |   |           |   ADLCompiler.pdb
+|   |   |           |   apphost.exe
+|   |   |           |   
+|   |   |           +---ref
+|   |   |           |       ADLCompiler.dll
+|   |   |           |       
+|   |   |           \---refint
+|   |   |                   ADLCompiler.dll
+|   |   |                   
+|   |   +---Preprocessing
+|   |   |       LineMapping.cs
+|   |   |       MacroDefinition.cs
+|   |   |       Preprocessor.cs
+|   |   |       PreprocessorState.cs
+|   |   |       README.md
+|   |   |       
+|   |   \---SemanticAnalysis
+|   |           APICompatibilityChecker.cs
+|   |           APIDefinition.cs
+|   |           APIRegistry.cs
+|   |           API_DEFINITION_SYSTEM.md
+|   |           CoreAPILoader.cs
+|   |           DependencyAnalyzer.cs
+|   |           MemoryManagement.cs
+|   |           MemoryManagementAnalyzer.cs
+|   |           MemoryManagementCodeInserter.cs
+|   |           MEMORY_MANAGEMENT_CODE_INSERTION.md
+|   |           NDKAPILoader.cs
+|   |           NDKBinding.cs
+|   |           RaylibAPILoader.cs
+|   |           README.md
+|   |           SDKBundle.cs
+|   |           Symbol.cs
+|   |           SymbolTable.cs
+|   |           SymbolTableBuilder.cs
+|   |           TypeChecker.cs
+|   |           TypeSystem.cs
+|   |           
+|   +---AndroidIDE
+|   |   |   AndroidIDE.csproj
+|   |   |   Program.cs
+|   |   |   
+|   |   +---bin
+|   |   |   \---Debug
+|   |   |       \---net8.0
+|   |   \---obj
+|   |       |   AndroidIDE.csproj.nuget.dgspec.json
+|   |       |   AndroidIDE.csproj.nuget.g.props
+|   |       |   AndroidIDE.csproj.nuget.g.targets
+|   |       |   project.assets.json
+|   |       |   project.nuget.cache
+|   |       |   
+|   |       \---Debug
+|   |           \---net8.0
+|   |               |   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+|   |               |   AndroidIDE.AssemblyInfo.cs
+|   |               |   AndroidIDE.AssemblyInfoInputs.cache
+|   |               |   AndroidIDE.assets.cache
+|   |               |   AndroidIDE.csproj.AssemblyReference.cache
+|   |               |   AndroidIDE.csproj.FileListAbsolute.txt
+|   |               |   AndroidIDE.GeneratedMSBuildEditorConfig.editorconfig
+|   |               |   AndroidIDE.GlobalUsings.g.cs
+|   |               |   apphost.exe
+|   |               |   
+|   |               +---ref
+|   |               \---refint
+|   +---AVM
+|   |   |   AVM.csproj
+|   |   |   Program.cs
+|   |   |   
+|   |   +---bin
+|   |   |   \---Debug
+|   |   |       \---net8.0
+|   |   \---obj
+|   |       |   AVM.csproj.nuget.dgspec.json
+|   |       |   AVM.csproj.nuget.g.props
+|   |       |   AVM.csproj.nuget.g.targets
+|   |       |   project.assets.json
+|   |       |   project.nuget.cache
+|   |       |   
+|   |       \---Debug
+|   |           \---net8.0
+|   |               |   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+|   |               |   apphost.exe
+|   |               |   AVM.AssemblyInfo.cs
+|   |               |   AVM.AssemblyInfoInputs.cache
+|   |               |   AVM.assets.cache
+|   |               |   AVM.csproj.AssemblyReference.cache
+|   |               |   AVM.csproj.FileListAbsolute.txt
+|   |               |   AVM.GeneratedMSBuildEditorConfig.editorconfig
+|   |               |   AVM.GlobalUsings.g.cs
+|   |               |   
+|   |               +---ref
+|   |               \---refint
+|   +---SharedUtilities
+|   |   |   SharedUtilities.csproj
+|   |   |   
+|   |   +---bin
+|   |   |   \---Debug
+|   |   |       \---net8.0
+|   |   |               SharedUtilities.deps.json
+|   |   |               SharedUtilities.dll
+|   |   |               SharedUtilities.pdb
+|   |   |               
+|   |   +---FileSystem
+|   |   |       FileSystemManager.cs
+|   |   |       FileSystemWatcher.cs
+|   |   |       IFileSystemManager.cs
+|   |   |       IFileSystemWatcher.cs
+|   |   |       
+|   |   +---Models
+|   |   |       ADLFile.cs
+|   |   |       ASTNode.cs
+|   |   |       BuildConfiguration.cs
+|   |   |       Project.cs
+|   |   |       Token.cs
+|   |   |       
+|   |   \---obj
+|   |       |   project.assets.json
+|   |       |   project.nuget.cache
+|   |       |   SharedUtilities.csproj.nuget.dgspec.json
+|   |       |   SharedUtilities.csproj.nuget.g.props
+|   |       |   SharedUtilities.csproj.nuget.g.targets
+|   |       |   
+|   |       \---Debug
+|   |           \---net8.0
+|   |               |   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+|   |               |   SharedUtilities.AssemblyInfo.cs
+|   |               |   SharedUtilities.AssemblyInfoInputs.cache
+|   |               |   SharedUtilities.assets.cache
+|   |               |   SharedUtilities.csproj.CoreCompileInputs.cache
+|   |               |   SharedUtilities.csproj.FileListAbsolute.txt
+|   |               |   SharedUtilities.dll
+|   |               |   SharedUtilities.GeneratedMSBuildEditorConfig.editorconfig
+|   |               |   SharedUtilities.GlobalUsings.g.cs
+|   |               |   SharedUtilities.pdb
+|   |               |   
+|   |               +---ref
+|   |               |       SharedUtilities.dll
+|   |               |       
+|   |               \---refint
+|   |                       SharedUtilities.dll
+|   |                       
+|   \---Shell
+|       |   Program.cs
+|       |   Shell.csproj
+|       |   
+|       +---bin
+|       |   \---Debug
+|       |       \---net8.0
+|       \---obj
+|           |   project.assets.json
+|           |   project.nuget.cache
+|           |   Shell.csproj.nuget.dgspec.json
+|           |   Shell.csproj.nuget.g.props
+|           |   Shell.csproj.nuget.g.targets
+|           |   
+|           \---Debug
+|               \---net8.0
+|                   |   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+|                   |   apphost.exe
+|                   |   Shell.AssemblyInfo.cs
+|                   |   Shell.AssemblyInfoInputs.cache
+|                   |   Shell.assets.cache
+|                   |   Shell.csproj.AssemblyReference.cache
+|                   |   Shell.csproj.FileListAbsolute.txt
+|                   |   Shell.GeneratedMSBuildEditorConfig.editorconfig
+|                   |   Shell.GlobalUsings.g.cs
+|                   |   
+|                   +---ref
+|                   \---refint
++---tests
+|   +---ADLCompiler.Tests
+|   |   |   ADLCompiler.Tests.csproj
+|   |   |   APIDefinitionIntegrationTests.cs
+|   |   |   APIDefinitionTests.cs
+|   |   |   APIRegistryTests.cs
+|   |   |   BytecodeGeneratorIntegrationTests.cs
+|   |   |   BytecodeGeneratorTests.cs
+|   |   |   CommandLineParserTests.cs
+|   |   |   CoreAPITests.cs
+|   |   |   DependencyAnalyzerIntegrationTests.cs
+|   |   |   DependencyAnalyzerTests.cs
+|   |   |   LexerIntegrationTests.cs
+|   |   |   LexerTests.cs
+|   |   |   MemoryManagementCodeInserterTests.cs
+|   |   |   MemoryManagementIntegrationCodeGenTests.cs
+|   |   |   MemoryManagementIntegrationTests.cs
+|   |   |   MemoryManagementTests.cs
+|   |   |   NativeCodeGeneratorIntegrationTests.cs
+|   |   |   NativeCodeGeneratorTests.cs
+|   |   |   NDKAPITests.cs
+|   |   |   ParserIntegrationTests.cs
+|   |   |   ParserTests.cs
+|   |   |   PreprocessorIntegrationTests.cs
+|   |   |   PreprocessorTests.cs
+|   |   |   RaylibAPITests.cs
+|   |   |   RaylibAudioAPITests.cs
+|   |   |   RaylibDrawingAPITests.cs
+|   |   |   SDKBundleTests.cs
+|   |   |   SymbolTableIntegrationTests.cs
+|   |   |   SymbolTableTests.cs
+|   |   |   TypeCheckerIntegrationTests.cs
+|   |   |   TypeCheckerTests.cs
+|   |   |   TypeSystemTests.cs
+|   |   |   
+|   |   +---bin
+|   |   |   \---Debug
+|   |   |       \---net8.0
+|   |   |           |   ADLCompiler.deps.json
+|   |   |           |   ADLCompiler.dll
+|   |   |           |   ADLCompiler.exe
+|   |   |           |   ADLCompiler.pdb
+|   |   |           |   ADLCompiler.runtimeconfig.json
+|   |   |           |   ADLCompiler.Tests.deps.json
+|   |   |           |   ADLCompiler.Tests.dll
+|   |   |           |   ADLCompiler.Tests.pdb
+|   |   |           |   ADLCompiler.Tests.runtimeconfig.json
+|   |   |           |   CoverletSourceRootsMapping_ADLCompiler.Tests
+|   |   |           |   Microsoft.TestPlatform.CommunicationUtilities.dll
+|   |   |           |   Microsoft.TestPlatform.CoreUtilities.dll
+|   |   |           |   Microsoft.TestPlatform.CrossPlatEngine.dll
+|   |   |           |   Microsoft.TestPlatform.PlatformAbstractions.dll
+|   |   |           |   Microsoft.TestPlatform.Utilities.dll
+|   |   |           |   Microsoft.VisualStudio.CodeCoverage.Shim.dll
+|   |   |           |   Microsoft.VisualStudio.TestPlatform.Common.dll
+|   |   |           |   Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
+|   |   |           |   Newtonsoft.Json.dll
+|   |   |           |   NuGet.Frameworks.dll
+|   |   |           |   SharedUtilities.dll
+|   |   |           |   SharedUtilities.pdb
+|   |   |           |   testhost.dll
+|   |   |           |   testhost.exe
+|   |   |           |   xunit.abstractions.dll
+|   |   |           |   xunit.assert.dll
+|   |   |           |   xunit.core.dll
+|   |   |           |   xunit.execution.dotnet.dll
+|   |   |           |   xunit.runner.reporters.netcoreapp10.dll
+|   |   |           |   xunit.runner.utility.netcoreapp10.dll
+|   |   |           |   xunit.runner.visualstudio.dotnetcore.testadapter.dll
+|   |   |           |   
+|   |   |           +---cs
+|   |   |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |           |       
+|   |   |           +---de
+|   |   |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |           |       
+|   |   |           +---es
+|   |   |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |           |       
+|   |   |           +---fr
+|   |   |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |           |       
+|   |   |           +---it
+|   |   |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |           |       
+|   |   |           +---ja
+|   |   |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |           |       
+|   |   |           +---ko
+|   |   |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |           |       
+|   |   |           +---pl
+|   |   |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |           |       
+|   |   |           +---pt-BR
+|   |   |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |           |       
+|   |   |           +---ru
+|   |   |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |           |       
+|   |   |           +---tr
+|   |   |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |           |       
+|   |   |           +---zh-Hans
+|   |   |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |           |       
+|   |   |           \---zh-Hant
+|   |   |                   Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|   |   |                   Microsoft.TestPlatform.CoreUtilities.resources.dll
+|   |   |                   Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|   |   |                   Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|   |   |                   Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|   |   |                   
+|   |   +---ErrorReporting
+|   |   |       CompilerDiagnosticTests.cs
+|   |   |       DiagnosticReporterTests.cs
+|   |   |       ErrorReportingIntegrationTests.cs
+|   |   |       
+|   |   \---obj
+|   |       |   ADLCompiler.Tests.csproj.nuget.dgspec.json
+|   |       |   ADLCompiler.Tests.csproj.nuget.g.props
+|   |       |   ADLCompiler.Tests.csproj.nuget.g.targets
+|   |       |   project.assets.json
+|   |       |   project.nuget.cache
+|   |       |   
+|   |       \---Debug
+|   |           \---net8.0
+|   |               |   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+|   |               |   ADLCompi.7CB7C4D2.Up2Date
+|   |               |   ADLCompiler.Tests.AssemblyInfo.cs
+|   |               |   ADLCompiler.Tests.AssemblyInfoInputs.cache
+|   |               |   ADLCompiler.Tests.assets.cache
+|   |               |   ADLCompiler.Tests.csproj.AssemblyReference.cache
+|   |               |   ADLCompiler.Tests.csproj.CoreCompileInputs.cache
+|   |               |   ADLCompiler.Tests.csproj.FileListAbsolute.txt
+|   |               |   ADLCompiler.Tests.dll
+|   |               |   ADLCompiler.Tests.GeneratedMSBuildEditorConfig.editorconfig
+|   |               |   ADLCompiler.Tests.genruntimeconfig.cache
+|   |               |   ADLCompiler.Tests.GlobalUsings.g.cs
+|   |               |   ADLCompiler.Tests.pdb
+|   |               |   
+|   |               +---ref
+|   |               |       ADLCompiler.Tests.dll
+|   |               |       
+|   |               \---refint
+|   |                       ADLCompiler.Tests.dll
+|   |                       
+|   \---SharedUtilities.Tests
+|       |   DataModelsTests.cs
+|       |   FileSystemManagerTests.cs
+|       |   SharedUtilities.Tests.csproj
+|       |   
+|       +---bin
+|       |   \---Debug
+|       |       \---net8.0
+|       |           |   .msCoverageSourceRootsMapping_SharedUtilities.Tests
+|       |           |   Microsoft.TestPlatform.CommunicationUtilities.dll
+|       |           |   Microsoft.TestPlatform.CoreUtilities.dll
+|       |           |   Microsoft.TestPlatform.CrossPlatEngine.dll
+|       |           |   Microsoft.TestPlatform.PlatformAbstractions.dll
+|       |           |   Microsoft.TestPlatform.Utilities.dll
+|       |           |   Microsoft.VisualStudio.CodeCoverage.Shim.dll
+|       |           |   Microsoft.VisualStudio.TestPlatform.Common.dll
+|       |           |   Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
+|       |           |   Newtonsoft.Json.dll
+|       |           |   SharedUtilities.dll
+|       |           |   SharedUtilities.pdb
+|       |           |   SharedUtilities.Tests.deps.json
+|       |           |   SharedUtilities.Tests.dll
+|       |           |   SharedUtilities.Tests.pdb
+|       |           |   SharedUtilities.Tests.runtimeconfig.json
+|       |           |   testhost.dll
+|       |           |   testhost.exe
+|       |           |   xunit.abstractions.dll
+|       |           |   xunit.assert.dll
+|       |           |   xunit.core.dll
+|       |           |   xunit.execution.dotnet.dll
+|       |           |   xunit.runner.reporters.netcoreapp10.dll
+|       |           |   xunit.runner.utility.netcoreapp10.dll
+|       |           |   xunit.runner.visualstudio.testadapter.dll
+|       |           |   
+|       |           +---cs
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---de
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---es
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---fr
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---it
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---ja
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---ko
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---pl
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---pt-BR
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---ru
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---tr
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           +---zh-Hans
+|       |           |       Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |           |       Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |           |       Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |           |       
+|       |           \---zh-Hant
+|       |                   Microsoft.TestPlatform.CommunicationUtilities.resources.dll
+|       |                   Microsoft.TestPlatform.CoreUtilities.resources.dll
+|       |                   Microsoft.TestPlatform.CrossPlatEngine.resources.dll
+|       |                   Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+|       |                   Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
+|       |                   
+|       \---obj
+|           |   project.assets.json
+|           |   project.nuget.cache
+|           |   SharedUtilities.Tests.csproj.nuget.dgspec.json
+|           |   SharedUtilities.Tests.csproj.nuget.g.props
+|           |   SharedUtilities.Tests.csproj.nuget.g.targets
+|           |   
+|           \---Debug
+|               \---net8.0
+|                   |   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+|                   |   SharedUt.AF096ED3.Up2Date
+|                   |   SharedUtilities.Tests.AssemblyInfo.cs
+|                   |   SharedUtilities.Tests.AssemblyInfoInputs.cache
+|                   |   SharedUtilities.Tests.assets.cache
+|                   |   SharedUtilities.Tests.csproj.AssemblyReference.cache
+|                   |   SharedUtilities.Tests.csproj.CoreCompileInputs.cache
+|                   |   SharedUtilities.Tests.csproj.FileListAbsolute.txt
+|                   |   SharedUtilities.Tests.dll
+|                   |   SharedUtilities.Tests.GeneratedMSBuildEditorConfig.editorconfig
+|                   |   SharedUtilities.Tests.genruntimeconfig.cache
+|                   |   SharedUtilities.Tests.GlobalUsings.g.cs
+|                   |   SharedUtilities.Tests.pdb
+|                   |   
+|                   +---ref
+|                   |       SharedUtilities.Tests.dll
+|                   |       
+|                   \---refint
+|                           SharedUtilities.Tests.dll
+|                           
++---TestTypeChecker
+|   |   Program.cs
+|   |   TestTypeChecker.csproj
+|   |   
+|   +---bin
+|   |   \---Debug
+|   |       \---net8.0
+|   |               ADLCompiler.deps.json
+|   |               ADLCompiler.dll
+|   |               ADLCompiler.exe
+|   |               ADLCompiler.pdb
+|   |               ADLCompiler.runtimeconfig.json
+|   |               SharedUtilities.dll
+|   |               SharedUtilities.pdb
+|   |               TestTypeChecker.deps.json
+|   |               TestTypeChecker.dll
+|   |               TestTypeChecker.exe
+|   |               TestTypeChecker.pdb
+|   |               TestTypeChecker.runtimeconfig.json
+|   |               
+|   \---obj
+|       |   project.assets.json
+|       |   project.nuget.cache
+|       |   TestTypeChecker.csproj.nuget.dgspec.json
+|       |   TestTypeChecker.csproj.nuget.g.props
+|       |   TestTypeChecker.csproj.nuget.g.targets
+|       |   
+|       \---Debug
+|           \---net8.0
+|               |   .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+|               |   apphost.exe
+|               |   TestType.64597972.Up2Date
+|               |   TestTypeChecker.AssemblyInfo.cs
+|               |   TestTypeChecker.AssemblyInfoInputs.cache
+|               |   TestTypeChecker.assets.cache
+|               |   TestTypeChecker.csproj.AssemblyReference.cache
+|               |   TestTypeChecker.csproj.CoreCompileInputs.cache
+|               |   TestTypeChecker.csproj.FileListAbsolute.txt
+|               |   TestTypeChecker.dll
+|               |   TestTypeChecker.GeneratedMSBuildEditorConfig.editorconfig
+|               |   TestTypeChecker.genruntimeconfig.cache
+|               |   TestTypeChecker.pdb
+|               |   
+|               +---ref
+|               |       TestTypeChecker.dll
+|               |       
+|               \---refint
+|                       TestTypeChecker.dll
+|                       
+\---test_samples
+        BrokenCode.adl
+        SimpleCalculator.adl
+        

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ADLCompiler")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43bd64a4ccce60b9001f1f05e378d2b5158def5e")]
 [assembly: System.Reflection.AssemblyProductAttribute("ADLCompiler")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ADLCompiler")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
