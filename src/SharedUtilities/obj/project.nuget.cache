@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "L89rmjWep2M=",
+  "success": true,
+  "projectFilePath": "D:\\+\\ad\\androidev.adl\\src\\SharedUtilities\\SharedUtilities.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\binay\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.24\\microsoft.netcore.app.ref.8.0.24.nupkg.sha512",
+    "C:\\Users\\binay\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.24\\microsoft.windowsdesktop.app.ref.8.0.24.nupkg.sha512",
+    "C:\\Users\\binay\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.24\\microsoft.aspnetcore.app.ref.8.0.24.nupkg.sha512"
+  ],
+  "logs": []
+}

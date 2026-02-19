@@ -1,0 +1,7 @@
+// Intentionally broken code for error reporting test
+public class BrokenClass {
+    public void testMethod() {
+        int x = "hello";  // Type error: cannot assign string to int
+        undefinedVariable = 42;  // Undefined variable error
+    }
+}

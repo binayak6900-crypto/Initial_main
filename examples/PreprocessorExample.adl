@@ -1,0 +1,78 @@
+// Example demonstrating ADL preprocessor features
+
+// Define constants
+#define VERSION "1.0.0"
+#define MAX_PLAYERS 4
+#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 1080
+
+// Define function-like macros
+#define SQUARE(x) ((x) * (x))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define CLAMP(x, min, max) (MIN(MAX(x, min), max))
+
+// Platform-specific code
+#define PLATFORM_ANDROID
+
+class GameConfig {
+    String version = VERSION;
+    int maxPlayers = MAX_PLAYERS;
+    int screenWidth = SCREEN_WIDTH;
+    int screenHeight = SCREEN_HEIGHT;
+    
+    // Conditional compilation
+#ifdef PLATFORM_ANDROID
+    void initPlatform() {
+        System.out.println("Initializing Android platform");
+        setupTouchInput();
+    }
+#endif
+
+#ifdef PLATFORM_WINDOWS
+    void initPlatform() {
+        System.out.println("Initializing Windows platform");
+        setupMouseInput();
+    }
+#endif
+
+    // Using macros in code
+    int calculateArea(int width, int height) {
+        return width * height;
+    }
+    
+    int clampValue(int value) {
+        return CLAMP(value, 0, 100);
+    }
+    
+    int squareValue(int value) {
+        return SQUARE(value);
+    }
+}
+
+// Debug mode features
+#define DEBUG_MODE
+
+#ifdef DEBUG_MODE
+class DebugLogger {
+    void log(String message) {
+        System.out.println("[DEBUG] " + message);
+    }
+    
+    void logError(String message) {
+        System.err.println("[ERROR] " + message);
+    }
+}
+#endif
+
+#ifndef DEBUG_MODE
+class DebugLogger {
+    void log(String message) {
+        // No-op in release mode
+    }
+    
+    void logError(String message) {
+        // No-op in release mode
+    }
+}
+#endif

@@ -1,0 +1,11 @@
+D:\+\ad\androidev.adl\src\SharedUtilities\bin\Debug\net8.0\SharedUtilities.deps.json
+D:\+\ad\androidev.adl\src\SharedUtilities\bin\Debug\net8.0\SharedUtilities.dll
+D:\+\ad\androidev.adl\src\SharedUtilities\bin\Debug\net8.0\SharedUtilities.pdb
+D:\+\ad\androidev.adl\src\SharedUtilities\obj\Debug\net8.0\SharedUtilities.GeneratedMSBuildEditorConfig.editorconfig
+D:\+\ad\androidev.adl\src\SharedUtilities\obj\Debug\net8.0\SharedUtilities.AssemblyInfoInputs.cache
+D:\+\ad\androidev.adl\src\SharedUtilities\obj\Debug\net8.0\SharedUtilities.AssemblyInfo.cs
+D:\+\ad\androidev.adl\src\SharedUtilities\obj\Debug\net8.0\SharedUtilities.csproj.CoreCompileInputs.cache
+D:\+\ad\androidev.adl\src\SharedUtilities\obj\Debug\net8.0\SharedUtilities.dll
+D:\+\ad\androidev.adl\src\SharedUtilities\obj\Debug\net8.0\refint\SharedUtilities.dll
+D:\+\ad\androidev.adl\src\SharedUtilities\obj\Debug\net8.0\SharedUtilities.pdb
+D:\+\ad\androidev.adl\src\SharedUtilities\obj\Debug\net8.0\ref\SharedUtilities.dll
